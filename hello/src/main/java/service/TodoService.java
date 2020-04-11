@@ -1,7 +1,10 @@
 package service;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -13,6 +16,8 @@ public class TodoService {
 
 	@PersistenceContext
 	EntityManager entityManager; //This is JPA provider entity provider. 
+	
+	
 
 	public Todo createTodo(Todo todo) {
 		entityManager.persist(todo);
@@ -29,6 +34,8 @@ public class TodoService {
 	}
 
 	public List<Todo> getTodos() {
+		Logger log = Logger.getLogger(TodoService.class.getName());
+		log.log(Level.INFO,"begining of the get entitiy");
 		return entityManager.createQuery("SELECT t FROM Todo t", Todo.class).getResultList();
 	}
 
