@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.enterprise.event.Observes;
+import javax.enterprise.event.ObservesAsync;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,4 +28,8 @@ public class PaymentEvent {
     	System.out.println("Debit payment");
     }
     
+    
+    public void debitPayment2(@ObservesAsync @Debit PaymentEvent event) {
+    	System.out.println("Debit (@ObservesAsync) payment");
+    }
 }

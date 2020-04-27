@@ -3,6 +3,7 @@ package event;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.CompletionStage;
 import java.util.logging.Logger;
 
 import javax.enterprise.event.Event;
@@ -66,6 +67,16 @@ public class PaymentRest {
                 debitPayload.setValue(value);
                 debitPayload.setDatetime(datetime);
                 debitEvent.fire(debitPayload);
+                
+                CompletionStage<PaymentEvent> fireAsync = debitEvent.fireAsync(debitPayload);
+			try {
+				Thread.sleep(4000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+                System.out.println("Events were called..");
+                
                 break;
             case CREDIT:
                 PaymentEvent creditPayload = new PaymentEvent();
@@ -73,6 +84,8 @@ public class PaymentRest {
                 creditPayload.setValue(value);
                 creditPayload.setDatetime(datetime);
                 creditEvent.fire(creditPayload);
+                
+               
                 break;
             default:
                 logger.severe("Invalid payment option!");
