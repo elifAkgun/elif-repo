@@ -1,4 +1,4 @@
-package event;
+package com.elif.event;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
@@ -28,6 +28,8 @@ import lombok.Setter;
 @Path("payment")
 public class PaymentRest {
 	
+	Logger logger;
+	
 	@Inject
     @Credit
     Event<PaymentEvent> creditEvent;
@@ -35,6 +37,12 @@ public class PaymentRest {
     @Inject
     @Debit
     Event<PaymentEvent> debitEvent;
+    
+    //method injection
+    @Inject
+    public PaymentRest(Logger logger) {
+    	this.logger = logger;
+	}
 
     
     public static final int DEBIT = 1;
@@ -46,8 +54,7 @@ public class PaymentRest {
 
     private Date datetime;
     
-	@Inject
-	Logger logger;
+
 	
 	@Path("{id}")
 	@GET
@@ -58,7 +65,7 @@ public class PaymentRest {
 	}
 	
 	@Logged
-    public String pay() {
+    public void pay() {
         this.setDatetime(Calendar.getInstance().getTime());
         switch (paymentOption) {
             case DEBIT:
@@ -90,7 +97,6 @@ public class PaymentRest {
             default:
                 logger.severe("Invalid payment option!");
         }
-        return "/response.xhtml";
     }
 	
 	

@@ -1,4 +1,4 @@
-package event;
+package com.elif.event;
 
 import java.io.Serializable;
 import java.util.logging.Level;

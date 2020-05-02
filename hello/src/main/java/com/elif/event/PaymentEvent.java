@@ -1,4 +1,4 @@
-package event;
+package com.elif.event;
 
 import java.math.BigDecimal;
 import java.util.Date;
