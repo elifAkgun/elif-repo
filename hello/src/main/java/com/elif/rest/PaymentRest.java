@@ -1,4 +1,4 @@
-package com.elif.event;
+package com.elif.rest;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
@@ -16,6 +16,11 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import com.elif.event.Credit;
+import com.elif.event.Debit;
+import com.elif.event.Logged;
+import com.elif.event.PaymentEvent;
 
 import lombok.Getter;
 import lombok.Setter;
