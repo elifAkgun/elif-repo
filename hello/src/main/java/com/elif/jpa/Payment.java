@@ -42,5 +42,5 @@ public class Payment extends AbstractEntity {
 //	@ManyToOne(fetch = FetchType.LAZY)
 //	@JoinColumn(name = "bank_id")
 //	private Bank bank;
-	
+
 }
