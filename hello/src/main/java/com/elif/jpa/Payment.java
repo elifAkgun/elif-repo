@@ -39,8 +39,8 @@ public class Payment extends AbstractEntity {
 	@JoinColumn(name = "customer_id")
 	private Customer customer;
 	
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(name = "bank_id")
-//	private Bank bank;
-	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "bank_id")
+	private Bank bank;
+
 }

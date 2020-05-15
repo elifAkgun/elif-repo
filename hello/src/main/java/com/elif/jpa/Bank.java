@@ -1,6 +1,7 @@
 package com.elif.jpa;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.AttributeOverride;
@@ -11,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -33,6 +35,6 @@ public class Bank extends AbstractEntity {
         inverseJoinColumns =  @JoinColumn(name = "customer_id", referencedColumnName = "customer_id"))
 	private Set<Customer> customers= new HashSet<>();
 	
-//	@OneToMany(mappedBy = "bank", cascade = CascadeType.PERSIST)
-//	private List<Payment> payments;
+	@OneToMany(mappedBy = "bank", cascade = CascadeType.PERSIST)
+	private Set<Payment> payments;
 }
