@@ -38,4 +38,8 @@ public class Bank extends AbstractEntity {
 
 //	@OneToMany(mappedBy = "bank", cascade = CascadeType.PERSIST)
 //	private List<Payment> payments;
+<<<<<<< HEAD
+=======
+>>>>>>> branch 'master' of https://github.com/elifAkgun/javaee.git
+>>>>>>> refs/remotes/origin/master
 }
