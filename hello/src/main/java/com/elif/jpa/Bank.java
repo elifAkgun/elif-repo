@@ -38,4 +38,5 @@ public class Bank extends AbstractEntity {
 
 //	@OneToMany(mappedBy = "bank", cascade = CascadeType.PERSIST)
 //	private List<Payment> payments;
+
 }
