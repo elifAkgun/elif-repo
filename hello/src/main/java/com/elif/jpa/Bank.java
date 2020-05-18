@@ -35,6 +35,11 @@ public class Bank extends AbstractEntity {
         inverseJoinColumns =  @JoinColumn(name = "customer_id", referencedColumnName = "customer_id"))
 	private Set<Customer> customers= new HashSet<>();
 	
+<<<<<<< HEAD
 	@OneToMany(mappedBy = "bank", cascade = CascadeType.PERSIST)
 	private Set<Payment> payments;
+=======
+//	@OneToMany(mappedBy = "bank", cascade = CascadeType.PERSIST)
+//	private List<Payment> payments;
+>>>>>>> branch 'master' of https://github.com/elifAkgun/javaee.git
 }

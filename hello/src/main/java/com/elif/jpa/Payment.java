@@ -43,4 +43,5 @@ public class Payment extends AbstractEntity {
 	@JoinColumn(name = "bank_id")
 	private Bank bank;
 
+
 }
