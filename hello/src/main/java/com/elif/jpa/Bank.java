@@ -35,6 +35,7 @@ public class Bank extends AbstractEntity {
         inverseJoinColumns =  @JoinColumn(name = "customer_id", referencedColumnName = "customer_id"))
 	private Set<Customer> customers= new HashSet<>();
 	
-	@OneToMany(mappedBy = "bank", cascade = CascadeType.PERSIST)
-	private Set<Payment> payments;
+
+//	@OneToMany(mappedBy = "bank", cascade = CascadeType.PERSIST)
+//	private List<Payment> payments;
 }
