@@ -1,4 +1,4 @@
-package com.elif.jpa;
+package com.elif.entity;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,5 +16,7 @@ public abstract class AbstractEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	protected Long id;
+
+	
 
 }

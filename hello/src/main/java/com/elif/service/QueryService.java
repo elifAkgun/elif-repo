@@ -6,8 +6,8 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.ejb.Stateless;
 
-import com.elif.jpa.Bank;
-import com.elif.jpa.Customer;
+import com.elif.entity.Bank;
+import com.elif.entity.Customer;
 
 import lombok.Getter;
 import lombok.Setter;

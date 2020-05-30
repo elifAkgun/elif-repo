@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
-import com.elif.jpa.Customer;
+import com.elif.entity.Customer;
 import com.elif.service.Service;
 
 @Transactional

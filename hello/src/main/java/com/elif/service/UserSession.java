@@ -4,7 +4,7 @@ import javax.ejb.PostActivate;
 import javax.ejb.PrePassivate;
 import javax.ejb.Stateful;
 
-import com.elif.jpa.Bank;
+import com.elif.entity.Bank;
 
 import lombok.Getter;
 import lombok.NonNull;

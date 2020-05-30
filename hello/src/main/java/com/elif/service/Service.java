@@ -2,7 +2,7 @@ package com.elif.service;
 
 import java.util.List;
 
-import com.elif.jpa.AbstractEntity;
+import com.elif.entity.AbstractEntity;
 
 public interface Service<T extends AbstractEntity> {
 	

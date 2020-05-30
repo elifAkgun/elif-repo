@@ -1,4 +1,4 @@
- package com.elif.jpa;
+ package com.elif.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;

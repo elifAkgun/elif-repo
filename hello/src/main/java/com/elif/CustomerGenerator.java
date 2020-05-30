@@ -12,9 +12,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.TimeZone;
 
-import com.elif.jpa.Address;
-import com.elif.jpa.Bank;
-import com.elif.jpa.Customer;
+import com.elif.entity.Address;
+import com.elif.entity.Bank;
+import com.elif.entity.Customer;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonGenerator;
