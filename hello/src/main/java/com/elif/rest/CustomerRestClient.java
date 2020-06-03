@@ -1,21 +1,36 @@
 package com.elif.rest;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
 import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.EntityTag;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.NewCookie;
+import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import com.elif.caching.CachControlConfig;
 import com.elif.entity.Customer;
 import com.elif.service.Service;
 
@@ -28,11 +43,16 @@ public class CustomerRestClient {
 	private UriInfo uriInfo;
 
 	@Inject
-	Service<Customer> service;
+	Service<Customer> customerService;
+
+	@Inject
+	@CachControlConfig(maxAge = 20)
+	CacheControl cc;
 
 	@POST
-	public Response createCustomer(Customer customer) {
-		service.create(customer);
+	public Response createCustomer(@Valid Customer customer, @HeaderParam("Referer") String referer) {
+		customerService.save(customer);
+		System.out.println(referer);
 		URI uri = uriInfo.getAbsolutePathBuilder().path(customer.getId().toString()).build();
 		return Response.created(uri).status(Response.Status.CREATED).build();
 	}
@@ -41,27 +61,89 @@ public class CustomerRestClient {
 	@PUT
 	public Response update(@PathParam("id") long id, Customer customer) {
 
-		Customer customerCurrent = (Customer) service.find(id);
+		Customer customerCurrent = (Customer) customerService.find(id);
 
 		if (customerCurrent == null) {
 			return Response.notModified().status(400, "Customer not found!").build();
 		}
 		customer.setId(id);
-		service.update(customer);
+		customerService.save(customer);
 		return Response.ok(customer).build();
 	}
 
 	@Path("{id}")
 	@GET
-	public Response getCustomer(@PathParam("id") long id) {
-		Customer customer = (Customer) service.find(id);
-		return Response.ok(customer).build();
+	public Response getCustomer(@PathParam("id") long id, @Context Request request) {
+		Customer customer = (Customer) customerService.find(id);
+
+		if (customer == null) {
+			return Response.notModified().status(400, "Customer not found!").build();
+		}
+		
+		EntityTag entityTag = new EntityTag(Integer.toString(customer.hashCode()));
+
+		Response.ResponseBuilder responseBuilder = request.evaluatePreconditions(entityTag);
+
+		if (responseBuilder != null) {
+			responseBuilder.cacheControl(cc);
+			return responseBuilder.build();
+
+		}
+
+		responseBuilder = Response.ok(customer);
+		responseBuilder.tag(entityTag);
+		responseBuilder.cacheControl(cc);
+		return responseBuilder.build();
 	}
 
 	@GET
 	public Response listCustomers() {
-		List<Customer> customers = service.findAll();
+		List<Customer> customers = customerService.findAll();
 		return Response.ok(customers).build();
 	}
+	
+	  @POST
+	    @Path("upload") //employees/upload?id=9
+	    @Consumes({MediaType.APPLICATION_OCTET_STREAM, "image/png", "image/jpeg", "image/jpg"})
+	    @Produces(MediaType.TEXT_PLAIN)
+	    public Response uploadPicture(File picture, @QueryParam("id") @NotNull Long id) {
+
+	        Customer customer = customerService.find(id);
+
+	        try (Reader reader = new FileReader(picture)) {
+
+	        	customer.setPicture(Files.readAllBytes(Paths.get(picture.toURI())));
+	            customerService.save(customer);
+
+	            int totalsize = 0;
+	            int count = 0;
+	            final char[] buffer = new char[256];
+	            while ((count = reader.read(buffer)) != -1) {
+	                totalsize += count;
+	            }
+	            return Response.ok(totalsize).build();
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	            return Response.serverError().build();
+	        }
+	    }
+
+
+	    @GET
+	    @Path("download") //employees/download?id=9
+	    @Produces({MediaType.APPLICATION_OCTET_STREAM, "image/jpg", "image/png", "image/jpeg"})
+	    public Response getEmployeePicture(@QueryParam("id") @NotNull Long id) throws IOException {
+
+
+	        NewCookie userId = new NewCookie("userId", id.toString());
+
+	        Customer customer = customerService.find(id);
+	        if (customer != null) {
+	            return Response.ok().entity(Files.write(Paths.get("pic.png"), customer.getPicture()).toFile()).cookie(userId).build();
+	        }
+
+	        return Response.noContent().build();
+	    }
+
 
 }

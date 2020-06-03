@@ -16,14 +16,15 @@ public class CustomerServiceImpl implements Service<Customer> {
 	EntityManager entityManager; // This is JPA provider entity provider.
 
 	@Override
-	public long create(Customer t) {
-		entityManager.persist(t);
-		return t.getId();
-	}
+	public Customer save(Customer t) {
 
-	@Override
-	public Customer update(Customer t) {
-		entityManager.merge(t);
+		if (t.getId() == null) {
+			entityManager.persist(t);
+		}
+		else {
+			entityManager.merge(t);
+		}
+		
 		return t;
 	}
 

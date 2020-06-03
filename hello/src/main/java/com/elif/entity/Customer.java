@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.AttributeOverride;
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -15,12 +16,15 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import com.elif.util.LocalDateDeserializer;
 import com.elif.util.LocalDateSerializer;
@@ -38,6 +42,7 @@ import lombok.Setter;
 public class Customer extends AbstractEntity {
 
 	@Column(name = "name")
+	@Size(max = 30)
 	@NotEmpty
 	private String name;
 
@@ -66,6 +71,12 @@ public class Customer extends AbstractEntity {
 	@JoinTable(name = "customer_bank", joinColumns = @JoinColumn(name = "customer_id", referencedColumnName = "customer_id"), inverseJoinColumns = @JoinColumn(name = "bank_id", referencedColumnName = "bank_id"))
 	private Set<Bank> banks = new HashSet<>();;
 
+	
+	@Lob
+    @Basic(fetch = FetchType.LAZY)
+    private byte[] picture;
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

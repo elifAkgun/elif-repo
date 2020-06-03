@@ -19,7 +19,7 @@ public class ConstraintViolationExceptionMapper implements ExceptionMapper<Const
 
 
         for (ConstraintViolation<?> cv : exception.getConstraintViolations()) {
-            String path = cv.getPropertyPath().toString();
+        	String path = cv.getPropertyPath().toString().split("\\.")[2];
             constraintViolations.put(path, cv.getMessage());
         }
         return Response.status(Response.Status.PRECONDITION_FAILED).entity(constraintViolations).build();
