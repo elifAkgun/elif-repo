@@ -39,4 +39,12 @@ public class CustomerServiceImpl implements Service<Customer> {
 
 	}
 
+	@Override
+	public void delete(Customer t) {
+		if (!entityManager.contains(t)) {
+		    t = entityManager.merge(t);
+		}
+		entityManager.remove(t);
+	}
+
 }

@@ -12,4 +12,6 @@ public interface Service<T extends AbstractEntity> {
 	public List<T> findAll();
 
 	public T save(T t);
+	
+	public void delete(T t);
 }

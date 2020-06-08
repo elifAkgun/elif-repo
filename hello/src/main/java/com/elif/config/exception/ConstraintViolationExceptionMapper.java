@@ -1,4 +1,4 @@
-package com.elif.config;
+package com.elif.config.exception;
 
 
 import javax.validation.ConstraintViolation;

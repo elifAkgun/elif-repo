@@ -13,6 +13,7 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
@@ -45,9 +46,6 @@ public class CustomerRestClient {
 	@Inject
 	Service<Customer> customerService;
 
-	@Inject
-	@CachControlConfig(maxAge = 20)
-	CacheControl cc;
 
 	@POST
 	public Response createCustomer(@Valid Customer customer, @HeaderParam("Referer") String referer) {
@@ -84,66 +82,68 @@ public class CustomerRestClient {
 
 		Response.ResponseBuilder responseBuilder = request.evaluatePreconditions(entityTag);
 
-		if (responseBuilder != null) {
-			responseBuilder.cacheControl(cc);
-			return responseBuilder.build();
-
-		}
-
-		responseBuilder = Response.ok(customer);
-		responseBuilder.tag(entityTag);
-		responseBuilder.cacheControl(cc);
 		return responseBuilder.build();
 	}
 
 	@GET
+	@CachControlConfig(maxAge = 100, noCache = true, noStore = true)
 	public Response listCustomers() {
 		List<Customer> customers = customerService.findAll();
 		return Response.ok(customers).build();
 	}
 	
-	  @POST
-	    @Path("upload") //employees/upload?id=9
-	    @Consumes({MediaType.APPLICATION_OCTET_STREAM, "image/png", "image/jpeg", "image/jpg"})
-	    @Produces(MediaType.TEXT_PLAIN)
-	    public Response uploadPicture(File picture, @QueryParam("id") @NotNull Long id) {
+	@POST
+	@Path("upload") // employees/upload?id=9
+	@Consumes({ MediaType.APPLICATION_OCTET_STREAM, "image/png", "image/jpeg", "image/jpg" })
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response uploadPicture(File picture, @QueryParam("id") @NotNull Long id) {
 
-	        Customer customer = customerService.find(id);
+		Customer customer = customerService.find(id);
 
-	        try (Reader reader = new FileReader(picture)) {
+		try (Reader reader = new FileReader(picture)) {
 
-	        	customer.setPicture(Files.readAllBytes(Paths.get(picture.toURI())));
-	            customerService.save(customer);
+			customer.setPicture(Files.readAllBytes(Paths.get(picture.toURI())));
+			customerService.save(customer);
 
-	            int totalsize = 0;
-	            int count = 0;
-	            final char[] buffer = new char[256];
-	            while ((count = reader.read(buffer)) != -1) {
-	                totalsize += count;
-	            }
-	            return Response.ok(totalsize).build();
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	            return Response.serverError().build();
-	        }
-	    }
+			int totalsize = 0;
+			int count = 0;
+			final char[] buffer = new char[256];
+			while ((count = reader.read(buffer)) != -1) {
+				totalsize += count;
+			}
+			return Response.ok(totalsize).build();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return Response.serverError().build();
+		}
+	}
 
+	@GET
+	@Path("download") // employees/download?id=9
+	@Produces({ MediaType.APPLICATION_OCTET_STREAM, "image/jpg", "image/png", "image/jpeg" })
+	public Response getCustomerPicture(@QueryParam("id") @NotNull Long id) throws IOException {
 
-	    @GET
-	    @Path("download") //employees/download?id=9
-	    @Produces({MediaType.APPLICATION_OCTET_STREAM, "image/jpg", "image/png", "image/jpeg"})
-	    public Response getEmployeePicture(@QueryParam("id") @NotNull Long id) throws IOException {
+		NewCookie userId = new NewCookie("userId", id.toString());
 
+		Customer customer = customerService.find(id);
+		if (customer != null) {
+			return Response.ok().entity(Files.write(Paths.get("pic.png"), customer.getPicture()).toFile())
+					.cookie(userId).build();
+		}
 
-	        NewCookie userId = new NewCookie("userId", id.toString());
+		return Response.noContent().build();
+	}
+	
+	@DELETE
+	@Path("{id}")
+	public Response deleteCustomer(@PathParam("id") long id) {
+		Customer customer = (Customer) customerService.find(id);
 
-	        Customer customer = customerService.find(id);
-	        if (customer != null) {
-	            return Response.ok().entity(Files.write(Paths.get("pic.png"), customer.getPicture()).toFile()).cookie(userId).build();
-	        }
-
-	        return Response.noContent().build();
-	    }
-
-
+		if (customer == null) {
+			return Response.notModified().status(400, "Customer not found!").build();
+		}
+		
+		customerService.delete(customer);
+		return Response.ok().build();
+	}
 }
