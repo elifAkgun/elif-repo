@@ -22,7 +22,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.EntityTag;
 import javax.ws.rs.core.MediaType;
@@ -32,6 +31,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 import com.elif.caching.CachControlConfig;
+import com.elif.config.security.Secure;
 import com.elif.entity.Customer;
 import com.elif.service.Service;
 
@@ -87,6 +87,7 @@ public class CustomerRestClient {
 
 	@GET
 	@CachControlConfig(maxAge = 100, noCache = true, noStore = true)
+	@Secure
 	public Response listCustomers() {
 		List<Customer> customers = customerService.findAll();
 		return Response.ok(customers).build();
