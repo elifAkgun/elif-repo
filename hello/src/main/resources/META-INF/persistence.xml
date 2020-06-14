@@ -6,7 +6,6 @@
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
       <property name="eclipselink.deploy-on-startup" value="true" />
-      
     </properties>
   </persistence-unit>
 </persistence>
