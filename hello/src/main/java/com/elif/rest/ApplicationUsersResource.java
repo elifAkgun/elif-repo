@@ -60,7 +60,7 @@ public class ApplicationUsersResource {
                 .status(Response.Status.OK).build();
     }
 
-
+ 
     @POST
     @Path("login")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
