@@ -47,12 +47,9 @@ public class CustomerRestClient {
 
 	@Inject
 	Service<Customer> customerService;
-	
-    @Inject
-    JaxRsClient jaxRsClient;
+
 
 	@POST
-	//@Secure
 	public Response createCustomer(@Valid Customer customer, @HeaderParam("Referer") String referer) {
 		customerService.save(customer);
 		URI uri = uriInfo.getAbsolutePathBuilder().path(customer.getId().toString()).build();
@@ -62,7 +59,6 @@ public class CustomerRestClient {
 
 		JsonObjectBuilder links = Json.createObjectBuilder().add("_links", Json.createArrayBuilder().add(
 				Json.createObjectBuilder().add("_others", others.toString()).add("_self", uri.toString()).build()));
-		jaxRsClient.postEmployeeToSSE(customer);
 
 		System.out.println(referer);
         return Response.ok(links.build().toString()).status(Response.Status.CREATED).build();
