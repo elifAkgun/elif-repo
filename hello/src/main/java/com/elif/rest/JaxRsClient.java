@@ -9,15 +9,12 @@ import javax.enterprise.context.RequestScoped;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.json.JsonValue;
-import javax.json.bind.JsonbBuilder;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.elif.entity.Customer;
 
 @RequestScoped
 public class JaxRsClient {
@@ -32,6 +29,7 @@ public class JaxRsClient {
     private void init() {
         client = ClientBuilder.newBuilder().connectTimeout(7, TimeUnit.SECONDS)
                 .readTimeout(3, TimeUnit.SECONDS).build();
+//        ClientBuilder.newClient();
 
         webTarget = client.target(haveIBeenPawned);
     }
@@ -93,16 +91,8 @@ public class JaxRsClient {
         System.out.println("Breach size is " + jsonArray.size());
     }
 
-    public void postEmployeeToSSE(Customer customer) {
-        String json = JsonbBuilder.create().toJson(customer);
-
-        int status = client.target("http://localhost:8080/event/api/v1/sse-path").request(MediaType.TEXT_PLAIN)
-                .post(Entity.text(json)).getStatus();
-
-        System.out.println("Status received " + status);
-        System.out.println(json);
-
-
-    }
+   
 
 }
+
+
