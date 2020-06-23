@@ -67,7 +67,7 @@ public class Customer extends AbstractEntity {
 	@OneToMany(mappedBy = "customer")
 	private List<Payment> payments;
 
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name = "customer_bank", joinColumns = @JoinColumn(name = "customer_id", referencedColumnName = "customer_id"), inverseJoinColumns = @JoinColumn(name = "bank_id", referencedColumnName = "bank_id"))
 	private Set<Bank> banks = new HashSet<>();;
 

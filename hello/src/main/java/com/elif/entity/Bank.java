@@ -28,7 +28,7 @@ public class Bank extends AbstractEntity {
 	private String name;
 	
 	
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "customer_bank",
         joinColumns = @JoinColumn(name = "bank_id",referencedColumnName = "bank_id"),
         inverseJoinColumns =  @JoinColumn(name = "customer_id", referencedColumnName = "customer_id"))

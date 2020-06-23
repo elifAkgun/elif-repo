@@ -10,6 +10,8 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.json.Json;
+import javax.json.JsonObjectBuilder;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
@@ -45,14 +47,25 @@ public class CustomerRestClient {
 
 	@Inject
 	Service<Customer> customerService;
-
+	
+    @Inject
+    JaxRsClient jaxRsClient;
 
 	@POST
+	//@Secure
 	public Response createCustomer(@Valid Customer customer, @HeaderParam("Referer") String referer) {
 		customerService.save(customer);
-		System.out.println(referer);
 		URI uri = uriInfo.getAbsolutePathBuilder().path(customer.getId().toString()).build();
-		return Response.created(uri).status(Response.Status.CREATED).build();
+
+		URI others = uriInfo.getBaseUriBuilder().path(CustomerRestClient.class)
+				.path(CustomerRestClient.class, "listCustomers").build();
+
+		JsonObjectBuilder links = Json.createObjectBuilder().add("_links", Json.createArrayBuilder().add(
+				Json.createObjectBuilder().add("_others", others.toString()).add("_self", uri.toString()).build()));
+		jaxRsClient.postEmployeeToSSE(customer);
+
+		System.out.println(referer);
+        return Response.ok(links.build().toString()).status(Response.Status.CREATED).build();
 	}
 
 	@Path("{id}")
@@ -77,7 +90,7 @@ public class CustomerRestClient {
 		if (customer == null) {
 			return Response.notModified().status(400, "Customer not found!").build();
 		}
-		
+
 		EntityTag entityTag = new EntityTag(Integer.toString(customer.hashCode()));
 
 		Response.ResponseBuilder responseBuilder = request.evaluatePreconditions(entityTag);
@@ -88,11 +101,12 @@ public class CustomerRestClient {
 	@GET
 	@CachControlConfig(maxAge = 100, noCache = true, noStore = true)
 	@Secure
+	@Path("list")
 	public Response listCustomers() {
 		List<Customer> customers = customerService.findAll();
 		return Response.ok(customers).build();
 	}
-	
+
 	@POST
 	@Path("upload") // employees/upload?id=9
 	@Consumes({ MediaType.APPLICATION_OCTET_STREAM, "image/png", "image/jpeg", "image/jpg" })
@@ -134,7 +148,7 @@ public class CustomerRestClient {
 
 		return Response.noContent().build();
 	}
-	
+
 	@DELETE
 	@Path("{id}")
 	public Response deleteCustomer(@PathParam("id") long id) {
@@ -143,7 +157,7 @@ public class CustomerRestClient {
 		if (customer == null) {
 			return Response.notModified().status(400, "Customer not found!").build();
 		}
-		
+
 		customerService.delete(customer);
 		return Response.ok().build();
 	}
