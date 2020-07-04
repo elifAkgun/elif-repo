@@ -1,114 +1,45 @@
 package com.elif.rest;
 
-import java.util.concurrent.CompletionStage;
 import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.RequestScoped;
-import javax.json.JsonArray;
-import javax.json.JsonObject;
-import javax.json.JsonValue;
-import javax.json.bind.JsonbBuilder;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-
-import com.elif.entity.Customer;
 
 
 @RequestScoped
 public class JaxRsClient {
 
-    private Client client;
+	private Client client;
     WebTarget webTarget;
 
-    private final String haveIBeenPawned = "https://haveibeenpwned.com/api/v2/breachedaccount"; //https://haveibeenpwned.com/api/v2/breachedaccount/{account}
+    private static final String API_ENDPOINT = "https://sandbox-api.qnbfinansbank.com/v0/credit-cards"; //https://haveibeenpwned.com/api/v2/breachedaccount/{account}
 
 
     @PostConstruct
     private void init() {
         client = ClientBuilder.newBuilder().connectTimeout(7, TimeUnit.SECONDS)
                 .readTimeout(3, TimeUnit.SECONDS).build();
-//        ClientBuilder.newClient();
-
-        webTarget = client.target(haveIBeenPawned);
+        webTarget = client.target(API_ENDPOINT);
     }
 
     @PreDestroy
     private void destroy() {
         if (client != null) {
-
-            //Be sure to close the programmatic to prevent resource leakage
-
             client.close();
         }
 
     }
 
-    public int checkBreaches(String email) {
-
-        JsonArray jsonValues = webTarget.path("{account}")
-                .resolveTemplate("account", email).request(MediaType.TEXT_PLAIN).get(JsonArray.class);
-
-
-        parseJsonArray(jsonValues);
-
-
-        return jsonValues.size();
+    public String getCards(String token) {
+        return webTarget.request(MediaType.TEXT_PLAIN)
+                .header(HttpHeaders.AUTHORIZATION, token).get(String.class);
     }
-
-    public JsonArray getBreaches(String email) {
-        return webTarget.path("{account}")
-                .resolveTemplate("account", email).request(MediaType.TEXT_PLAIN).get(JsonArray.class);
-    }
-
-    public void checkBreachesRx(String email) {
-
-
-        CompletionStage<Response> responseCompletionStage = webTarget.path("{account}")
-                .resolveTemplate("account", email).request().rx().get();
-
-        responseCompletionStage.thenApply(response -> response.readEntity(JsonArray.class))
-                .thenAccept(this::parseJsonArray);
-    }
-
-    private void parseJsonArray(JsonArray jsonArray) {
-
-        for (JsonValue jsonValue : jsonArray) {
-
-            JsonObject jsonObject = jsonValue.asJsonObject();
-
-            String domain = jsonObject.getString("Domain");
-            String breachDate = jsonObject.getString("BreachDate");
-
-            System.out.println("Breach name is " + domain);
-            System.out.println("Breach date is " + breachDate);
-
-
-            System.out.println();
-
-        }
-        System.out.println("Breach size is " + jsonArray.size());
-    }
-    
-    public void postEmployeeToSSE(Customer customer) {
-        String json = JsonbBuilder.create().toJson(customer);
-
-        int status = client.target("http://localhost:8080/payroll/api/v1/sse-path").request(MediaType.TEXT_PLAIN)
-
-                .post(Entity.text(json)).getStatus();
-
-        System.out.println("Status received " + status);
-        System.out.println(json);
-
-
-    }
-
-   
 
 }
 
