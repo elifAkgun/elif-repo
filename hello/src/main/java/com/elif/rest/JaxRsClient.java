@@ -17,7 +17,7 @@ public class JaxRsClient {
 	private Client client;
 	WebTarget webTarget;
 
-	private static final String API_ENDPOINT = "https://sandbox-api.qnbfinansbank.com/v0/credit-cards"; // https://haveibeenpwned.com/api/v2/breachedaccount/{account}
+	private static final String API_ENDPOINT = "https://sandbox-api.qnbfinansbank.com/v0/credit-cards"; 
 
 	@PostConstruct
 	private void init() {
