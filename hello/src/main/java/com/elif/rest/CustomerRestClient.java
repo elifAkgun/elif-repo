@@ -47,6 +47,9 @@ public class CustomerRestClient {
 
 	@Inject
 	Service<Customer> customerService;
+	
+	 @Inject
+	 JaxRsClient jaxRsClient;
 
 
 	@POST
@@ -61,6 +64,8 @@ public class CustomerRestClient {
 				Json.createObjectBuilder().add("_others", others.toString()).add("_self", uri.toString()).build()));
 
 		System.out.println(referer);
+		jaxRsClient.postEmployeeToSSE(customer);
+		
         return Response.ok(links.build().toString()).status(Response.Status.CREATED).build();
 	}
 
