@@ -4,11 +4,8 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.TimeZone;
 
@@ -16,11 +13,7 @@ import com.elif.entity.Address;
 import com.elif.entity.Bank;
 import com.elif.entity.Customer;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
 public class CustomerGenerator {
 
@@ -56,13 +49,12 @@ public class CustomerGenerator {
 
 		customer.setPhoneNumbers(Arrays.asList("123456789", "11111111"));
 
-		// Creating Object of ObjectMapper define in Jakson Api
+		// Creating Object of ObjectMapper define in jackson Api
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.setSerializationInclusion(Include.NON_NULL);
 
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		dateFormat.setTimeZone(TimeZone.getDefault());
-		SimpleDateFormat df = new SimpleDateFormat("MM-dd-yyyy");
 		mapper.setDateFormat(dateFormat);
 		try {
 
