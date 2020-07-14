@@ -17,10 +17,32 @@ websocket.onerror = function(evt) {
 $("#button").click(function() {
 	var time = new Date().toTimeString();
 	websocket.send(message.value);
-	print("Sent at " + time + ': ' + message.value);
+	printOutGoing(message.value);
 	message.value = '';
 
 });
+
+
+function printOutGoing(message) {
+	var messageArea = document.getElementById("div_messages");
+
+	var outgoing_msg_div = document.createElement('div');
+	outgoing_msg_div.classList.add('outgoing_msg');
+	
+	
+	var sent_msg_div = document.createElement('div');
+	sent_msg_div.classList.add('sent_msg');
+	
+	var message_p = document.createElement('p');
+	message_p.style.wordWrap = "break-word";
+	message_p.innerHTML = message;
+	
+	sent_msg_div.appendChild(message_p);
+	outgoing_msg_div.appendChild(sent_msg_div);
+
+	messageArea.appendChild(outgoing_msg_div);
+}
+
 
 function printIncomming(message) {
 	var messageArea = document.getElementById("div_messages");
@@ -51,17 +73,9 @@ function printIncomming(message) {
 	received_msg_div.appendChild(received_withd_msg_div);
 
 	
-
-
-	
-	
 	incoming_msg_div.appendChild(incoming_msg_img_div);
 	incoming_msg_div.appendChild(received_msg_div);
 
 	messageArea.appendChild(incoming_msg_div);
 	
-	
-	
-//	var message = document.createElement('p');
-//	incoming_msg_div.innerHTML = message;
 }
