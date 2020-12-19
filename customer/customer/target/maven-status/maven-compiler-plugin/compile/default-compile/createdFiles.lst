@@ -1,0 +1,15 @@
+com/elif/entity/Customer.class
+com/elif/service/Service.class
+com/elif/caching/CacheControlFactory.class
+com/elif/rest/CustomerRestClient.class
+com/elif/caching/CachControlConfig.class
+com/airhacks/JAXRSConfiguration.class
+com/elif/entity/Address.class
+com/elif/entity/Bank.class
+com/elif/util/LocalDateSerializer.class
+com/elif/config/ConstraintViolationExceptionMapper.class
+com/elif/util/LocalDateDeserializer.class
+com/elif/rest/RestConfig.class
+com/elif/entity/AbstractEntity.class
+com/airhacks/ping/boundary/PingResource.class
+com/elif/service/CustomerServiceImpl.class

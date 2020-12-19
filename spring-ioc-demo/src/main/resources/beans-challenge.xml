@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean name="city" class="code.elif.bean.City">
+		<constructor-arg value="İstanbul" name="cityName"></constructor-arg>
+		<constructor-arg value="34" name="postalCode"></constructor-arg>
+		<property name="population" value="700000"></property>
+
+		<constructor-arg ref="myCityService" name="myService">
+		</constructor-arg>
+	</bean>
+
+
+
+	<bean id="myCityService" name="service1"
+		class="code.elif.service.impl.CityServiceImpl">
+	</bean>
+	<bean id="myCityService2" name="service2"
+		class="code.elif.service.impl.CityServiceImpl2">
+	</bean>
+</beans>

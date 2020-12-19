@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd"
+       default-init-method="postConstruct" default-destroy-method="preDestroy">
+
+
+    <bean id="myOrg"
+          class="code.elif.model.forXml.Organization" p:companyName="BMW" p:yearOfIncorporation="1929">
+    </bean>
+
+    <bean id="myOrganizationWithDataNoConst"
+          class="code.elif.model.forXml.OrganizationWithDataNoConst" p:companyName="BMW" p:yearOfIncorporation="1929"
+          p:dataNoConst-ref="dataWithNoConstructor">
+    </bean>
+    <bean id="dataWithNoConstructor"
+          class="code.elif.model.forXml.DataNoConst" >
+        <property name="id" value="1"></property>
+        <property name="name" value="test-data"></property>
+    </bean>
+</beans>
