@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <bean id="mySampleBeanWithSetter"
+        class="elif.code.model.simple.definition.SampleBeanWithSetter">
+        <property name="str"
+                  value="This is XML bean definition with setter"/>
+    </bean>
+
+    <bean id="mySampleBeanWithConstructor"
+        class="elif.code.model.simple.definition.SampleBeanWithConstructor">
+        <constructor-arg name="str"
+                         value="This is XML bean definition with constructor"/>
+    </bean>
+
+</beans>
+
+
+

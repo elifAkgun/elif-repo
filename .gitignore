@@ -23,7 +23,6 @@
 hs_err_pid*
 
 .project 
-*.xml
 *.xsd
 */target/*
 */.idea/*
