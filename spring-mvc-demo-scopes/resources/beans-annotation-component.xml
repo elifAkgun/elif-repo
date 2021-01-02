@@ -6,16 +6,8 @@
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
        default-init-method="postConstruct" default-destroy-method="preDestroy">
 
+    <context:component-scan base-package="code.elif.model.withAnnotation"></context:component-scan>
 
-    <bean id="myOrg"
-          class="code.elif.model.forXml.Organization"
-          factory-bean="orgFactory">
-        <constructor-arg name="companyName" value="Amazon"></constructor-arg>
-        <constructor-arg name="yearOfIncorporation" value="1994"></constructor-arg>
-        <property name="postalCode" value="75757"></property>
-        <property name="employeeCount" value="7500"></property>
-    </bean>
+    <context:property-placeholder location="organisation.properties" />
 
-    <bean id="orgFactory" class="code.elif.model.factory.OrganizationFactory"></bean>
-    
 </beans>

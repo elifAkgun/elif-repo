@@ -6,16 +6,15 @@
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
        default-init-method="postConstruct" default-destroy-method="preDestroy">
 
-
     <bean id="myOrg"
           class="code.elif.model.forXml.Organization"
-          factory-bean="orgFactory">
-        <constructor-arg name="companyName" value="Amazon"></constructor-arg>
-        <constructor-arg name="yearOfIncorporation" value="1994"></constructor-arg>
-        <property name="postalCode" value="75757"></property>
-        <property name="employeeCount" value="7500"></property>
+          factory-method="createInstanceStaticWay">
+        <constructor-arg value="${company.name}" name="companyName"></constructor-arg>
+        <constructor-arg value="${company.year}" name="yearOfIncorporation"></constructor-arg>
+        <property value="${company.postcode}" name="postalCode"></property>
+        <property value="${company.employee.count}" name="employeeCount" ></property>
     </bean>
 
-    <bean id="orgFactory" class="code.elif.model.factory.OrganizationFactory"></bean>
-    
+    <context:property-placeholder location="organisation.properties"></context:property-placeholder>
+
 </beans>
