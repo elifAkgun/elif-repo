@@ -9,7 +9,7 @@ public class MainAnnotationBeanDefinition {
 
     public static void main(String[] args) {
 
-        ApplicationContext app = new ClassPathXmlApplicationContext("app-context-annotation-simple.xml");
+        ApplicationContext app = new ClassPathXmlApplicationContext("asd.xml");
 
         SampleBeanCompAnnotation s = (SampleBeanCompAnnotation) app.getBean("mySampleBeanCompAnnotation");
 
