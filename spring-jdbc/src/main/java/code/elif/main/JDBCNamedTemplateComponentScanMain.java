@@ -1,17 +1,31 @@
 package code.elif.main;
 
 import code.elif.dao.OrganizationDao;
+import code.elif.dao.impl.OrganizationDaoImplNamedParameterTemplate;
 import code.elif.model.Organization;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-public class JDBCTemplateClassicComponentScanMain {
+@Component
+public class JDBCNamedTemplateComponentScanMain {
+
+
+    private static OrganizationDao orgDao;
+
+
+    public JDBCNamedTemplateComponentScanMain(@Qualifier("organizationDaoImplNamedParameterTemplate") OrganizationDao orgDao) {
+        this.orgDao = orgDao;
+    }
+
 
     public static void main(String[] args) {
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("beans-cp-component-scan.xml");
-        OrganizationDao orgDao = (OrganizationDao) applicationContext.getBean("orgDaoComp");
-
+        OrganizationDao orgDao = (OrganizationDao) applicationContext.getBean(OrganizationDaoImplNamedParameterTemplate.class);
 
         createDataForOrganization(orgDao);
 
@@ -28,8 +42,6 @@ public class JDBCTemplateClassicComponentScanMain {
         printOrganizations(orgDao.getAllOrganisations());
 
         orgDao.cleanUp();
-
-       applicationContext.close();
     }
 
     private static void createDataForOrganization(OrganizationDao orgDao) {
