@@ -25,23 +25,37 @@ public class OrganizationDaoImpl implements OrganizationDao {
         return organizationList;
     }
 
-    public Integer createOrganization(Organization organization) {
-        return null;
+    public Boolean createOrganization(Organization organization) {
+        String sqlQuery = "INSERT INTO organization (company_name, year_of_incorporation, postal_code, employee_count, slogan) " +
+                "VALUES(?, ?, ?, ?, ?)";
+        Object[] args = new Object[] { organization.getCompanyName(), organization.getYearOfIncorporation(), organization.getPostalCode(),
+                organization.getEmployeeCount(), organization.getSlogan()};
+        return jdbcTemplate.update(sqlQuery, args) == 1;
     }
 
     public Organization getOrganization(Integer id) {
-        return null;
+        String sql = "SELECT * FROM organization WHERE id=?";
+        Object[] args =new Object[] {id};
+        Organization organization = jdbcTemplate.queryForObject(sql, new OrganizationRowMapper(),args);
+        return organization;
     }
 
-    public Boolean deleteOrganization(Organization organization) {
-        return null;
+    public void deleteOrganization(Organization organization) {
+        String sql = "delete from organization where id = ?";
+        jdbcTemplate.update(sql, organization.getId());
     }
 
     public Organization updateOrganization(Organization organization) {
-        return null;
+       String sql = "UPDATE organization set company_name=?, year_of_incorporation=?," +
+               " postal_code=?, employee_count=?, slogan=? where id =?";
+        Object[] args = new Object[] { organization.getCompanyName(), organization.getYearOfIncorporation(), organization.getPostalCode(),
+                organization.getEmployeeCount(), organization.getSlogan(),organization.getId()};
+        jdbcTemplate.update(sql, args);
+        return organization;
     }
 
     public void cleanUp() {
-
+        String sqlQuery = "TRUNCATE TABLE organization ";
+        jdbcTemplate.execute(sqlQuery);
     }
 }

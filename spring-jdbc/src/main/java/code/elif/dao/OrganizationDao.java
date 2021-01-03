@@ -11,11 +11,11 @@ public interface OrganizationDao {
 
     public List<Organization> getAllOrganisations();
 
-    public Integer createOrganization(Organization organization);
+    public Boolean createOrganization(Organization organization);
 
     public Organization getOrganization(Integer id);
 
-    public Boolean deleteOrganization(Organization organization);
+    public void deleteOrganization(Organization organization);
 
     public Organization updateOrganization(Organization organization);
 
