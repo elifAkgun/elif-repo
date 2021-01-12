@@ -41,7 +41,7 @@ public class JDBCNamedTemplateComponentScanMain {
 
         printOrganizations(orgDao.getAllOrganisations());
 
-        orgDao.cleanUp();
+
     }
 
     private static void createDataForOrganization(OrganizationDao orgDao) {

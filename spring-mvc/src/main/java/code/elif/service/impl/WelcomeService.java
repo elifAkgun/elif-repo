@@ -1,5 +1,6 @@
-package code.elif.service;
+package code.elif.service.impl;
 
+import code.elif.service.GenericWelcomeService;
 import org.springframework.stereotype.Service;
 
 @Service
