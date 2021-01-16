@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("organizations")
 public class OrganizationController {
 
     private OrganizationService organizationService;
@@ -20,7 +19,7 @@ public class OrganizationController {
         this.organizationService = organizationService;
     }
 
-    @RequestMapping("list")
+    @RequestMapping("organization-list")
     public String listOrganizations(Model model){
         List<Organization> allOrganisations = organizationService.getAllOrganisations();
         model.addAttribute("allOrganisations",allOrganisations);

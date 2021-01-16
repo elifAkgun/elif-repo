@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/welcome")
 public class WelcomeController {
 
     @Qualifier("welcomeService")
@@ -19,9 +18,8 @@ public class WelcomeController {
         this.welcomeService = welcomeService;
     }
 
-    @RequestMapping(value = "welcome")
-    public String doWelcome(Model model){
-        model.addAttribute("myInfo", welcomeService.sayHello("Elif"));
-        return "welcomeNew";
+    @RequestMapping(value = "jndi-example")
+    public String organisationJNDI(){
+       return "jndi-example";
     }
 }

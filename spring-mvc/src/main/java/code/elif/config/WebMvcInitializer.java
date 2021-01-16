@@ -18,8 +18,10 @@ public class WebMvcInitializer implements WebApplicationInitializer {
 
         // Create and register the DispatcherServlet
         DispatcherServlet servlet = new DispatcherServlet(context);
-        ServletRegistration.Dynamic registration = servletContext.addServlet("dispatcher", servlet);
+        ServletRegistration.Dynamic registration = servletContext.addServlet(" ", servlet);
         registration.addMapping("/");
         registration.setLoadOnStartup(1);
     }
+
+
 }

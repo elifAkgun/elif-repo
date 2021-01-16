@@ -7,14 +7,20 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 <html>
 <head>
     <title>Organizations</title>
 </head>
 <body>
+
     <c:forEach var="organization" items="${allOrganisations}">
-        <c:out value="${organization}"></c:out>
+        Id: ${organization.id}<br/>
+        Name:  ${organization.companyName}<br/>
+        Employee Count:  ${organization.employeeCount}<br/>
+        Postal Code:  ${organization.postalCode}<br/>
+        Slogan: ${organization.slogan}<br/>
+        Year Of Incorporation: ${organization.yearOfIncorporation}<br/><br/>
     </c:forEach>
 </body>
 </html>

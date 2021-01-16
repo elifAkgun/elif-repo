@@ -16,7 +16,6 @@ public class DataSourceConfig {
         dataSource.setPassword("d*vUser123");
         dataSource.setUrl("jdbc:mysql://localhost:3306/spring_db?useSSL=false");
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-
         return dataSource;
     }
 }
