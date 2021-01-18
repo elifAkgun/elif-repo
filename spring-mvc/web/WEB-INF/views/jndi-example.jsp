@@ -25,8 +25,6 @@
         Emp Count: ${row.employee_count} <br/>
         Slogan: ${row.slogan} <br/><br/>
     </c:forEach>
-
-
-
+    <c:out value="${greeting}"></c:out>
 </body>
 </html>

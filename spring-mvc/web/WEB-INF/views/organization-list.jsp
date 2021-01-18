@@ -22,5 +22,7 @@
         Slogan: ${organization.slogan}<br/>
         Year Of Incorporation: ${organization.yearOfIncorporation}<br/><br/>
     </c:forEach>
+
+    <c:out value="${greeting}"></c:out>
 </body>
 </html>

@@ -14,5 +14,6 @@
              <li> <a href="${contextPath}/organization-list"> Organisation list using JDBC</a></li>
              <li> <a href="${contextPath}/jndi-example">Organisation list using JNDI</a></li>
         </ul>
+        <c:out value="${greeting}"></c:out>
     </body>
 </html>

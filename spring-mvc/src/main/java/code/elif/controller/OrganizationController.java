@@ -25,4 +25,9 @@ public class OrganizationController {
         model.addAttribute("allOrganisations",allOrganisations);
         return "organization-list";
     }
+
+    @RequestMapping(value = "jndi-example")
+    public String organisationJNDI(){
+        return "jndi-example";
+    }
 }
