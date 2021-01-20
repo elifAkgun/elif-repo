@@ -25,7 +25,7 @@ public class OrganizationController {
 
     @RequestMapping("organization-list")
     public String listOrganizations(Model model){
-        logger.info("organization-list controller is called");
+        logger.debug("organization-list controller is called");
         List<Organization> allOrganisations = organizationService.getAllOrganisations();
         model.addAttribute("allOrganisations",allOrganisations);
         logger.info("organization-list view is returning");
@@ -34,7 +34,7 @@ public class OrganizationController {
 
     @RequestMapping(value = "jndi-example")
     public String organisationJNDI(){
-        logger.info("jndi-example controller is called");
+        logger.debug("jndi-example controller is called");
         logger.info("jndi-example view is returning");
         return "jndi-example";
     }
