@@ -1,4 +1,4 @@
-package code.elif.dao.impl;
+package code.elif.dao.impl.rowMapper;
 
 import code.elif.model.Organization;
 import org.springframework.jdbc.core.RowMapper;

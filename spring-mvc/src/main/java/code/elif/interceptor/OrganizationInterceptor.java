@@ -37,7 +37,5 @@ public class OrganizationInterceptor implements HandlerInterceptor {
         logger.info("afterCompletionTime : " + afterCompletionTime);
         long totalExecutionTime = afterCompletionTime - preHandleTime;
         logger.info("totalExecutionTime : " + totalExecutionTime);
-
-
     }
 }

@@ -20,6 +20,7 @@ import javax.sql.DataSource;
 @EnableWebMvc //<mvc:annotation-driven>
 //This class is used instead of spring-mvc-servlet.xml
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
+
     @Bean
     public DataSource dataSource() {
         final JndiDataSourceLookup dsLookup = new JndiDataSourceLookup();

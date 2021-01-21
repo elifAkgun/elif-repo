@@ -1,6 +1,7 @@
 package code.elif.dao.impl;
 
 import code.elif.dao.OrganizationDao;
+import code.elif.dao.impl.rowMapper.OrganizationRowMapper;
 import code.elif.model.Organization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
