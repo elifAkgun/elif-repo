@@ -1,6 +1,5 @@
 package code.elif.service.impl;
 
-import code.elif.dao.PersonDao;
 import code.elif.dao.impl.PersonDaoImpl;
 import code.elif.model.Person;
 import code.elif.service.PersonService;
@@ -35,12 +34,17 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public void deletePerson(Person person) {
-        personDaoImpl.deletePerson(person);
+    public void deletePerson(Integer personId) {
+        personDaoImpl.deletePerson(personId);
     }
 
     @Override
     public Person updatePerson(Person person) {
         return personDaoImpl.updatePerson(person);
+    }
+
+    @Override
+    public List<Person> searchPersons(String theSearchName) {
+        return personDaoImpl.searchPersons(theSearchName);
     }
 }

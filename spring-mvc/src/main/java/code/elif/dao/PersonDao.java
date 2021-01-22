@@ -15,7 +15,9 @@ public interface PersonDao {
 
     public Person getPerson(Integer id);
 
-    public void deletePerson(Person Person);
+    public void deletePerson(Integer id);
 
     public Person updatePerson(Person Person);
+
+    List<Person> searchPersons(String theSearchName);
 }

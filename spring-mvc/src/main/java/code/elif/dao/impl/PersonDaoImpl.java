@@ -5,20 +5,25 @@ import code.elif.dao.impl.rowMapper.PersonRowMapper;
 import code.elif.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-import javax.xml.crypto.Data;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository("personDaoComp")
 public class PersonDaoImpl implements PersonDao {
 
     private JdbcTemplate jdbcTemplate;
 
+    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
     @Autowired
     public void setDataSource(DataSource dataSource) {
         jdbcTemplate= new JdbcTemplate(dataSource);
+        namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
     }
 
     @Override
@@ -29,8 +34,7 @@ public class PersonDaoImpl implements PersonDao {
     @Override
     public Boolean createPerson(Person person) {
         Object[] args = {person.getName(),person.getSurName(),person.getBirthDate() };
-        return  jdbcTemplate.update("INSERT INTO person ('id', 'name', 'sur_name', 'birth_date')" +
-                " VALUES (?,?,?)",args)==1;
+        return  jdbcTemplate.update("INSERT INTO person (name, sur_name, birth_date) VALUES (?,?,?)",args)==1;
     }
 
     @Override
@@ -41,11 +45,10 @@ public class PersonDaoImpl implements PersonDao {
         return person;
     }
 
-    @Override
-    public void deletePerson(Person person) {
+    public void deletePerson(Integer id) {
         String sql = "DELETE FROM person WHERE id=?";
-        Object[] args =new Object[] {person.getId()};
-        jdbcTemplate.queryForObject(sql, new PersonRowMapper(),args);
+        Object[] args =new Object[] {id};
+        jdbcTemplate.update(sql,args);
     }
 
     @Override
@@ -53,5 +56,13 @@ public class PersonDaoImpl implements PersonDao {
         Object[] args = {person.getName(),person.getSurName(),person.getBirthDate() };
         jdbcTemplate.update("UPDATE SET name=?, sur_name=?, birth_date=? WHERE id=?",args);
         return person;
+    }
+
+    @Override
+    public List<Person> searchPersons(String theSearchName) {
+        String sql = "SELECT * FROM person where name like :name";
+        Map<String,Object> params = new HashMap<>();
+        params.put("name", theSearchName+"%");
+        return namedParameterJdbcTemplate.query(sql,params,new PersonRowMapper());
     }
 }
