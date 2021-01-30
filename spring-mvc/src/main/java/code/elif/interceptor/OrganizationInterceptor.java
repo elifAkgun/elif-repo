@@ -36,6 +36,6 @@ public class OrganizationInterceptor implements HandlerInterceptor {
         afterCompletionTime = System.currentTimeMillis();
         logger.info("afterCompletionTime : " + afterCompletionTime);
         long totalExecutionTime = afterCompletionTime - preHandleTime;
-        logger.info("totalExecutionTime : " + totalExecutionTime);
+        logger.info("totalExecutionTime : " + totalExecutionTime + " ms");
     }
 }
