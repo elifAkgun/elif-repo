@@ -31,7 +31,7 @@
         </br>
         <div class="container">
             <form:form action="savePerson" modelAttribute="person"
-                       method="POST">
+                       method="POST" acceptCharset="UTF-8">
                 <h3>Save Customer</h3>
 
                 <form:hidden path="id"/>
