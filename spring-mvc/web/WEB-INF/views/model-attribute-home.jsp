@@ -49,11 +49,17 @@
             </div>
         </div>
         <div class="d-flex justify-content-center">
-            <div class="d-flex flex-column">
-                <div class="p-2">
-                    <c:out value="modelAndView"/> = <c:out value="${organizationModelAndView}"/><br/>
-                </div>
+        <div class="d-flex flex-column">
+            <div class="p-2">
+                <c:out value="modelAndView"/> = <c:out value="${organizationModelAndView}"/><br/>
             </div>
         </div>
+        <div class="d-flex flex-column">
+            <div class="p-2">
+                <c:out value=""/> = <c:out value="${organizationModelAndView}"/><br/>
+            </div>
+        </div>
+
+    </div>
     </body>
 </html>

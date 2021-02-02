@@ -23,28 +23,38 @@
                 crossorigin="anonymous"></script>
 
         <div class="d-flex justify-content-center">
+            <c:if test="${param!=null}">
+                <c:forEach var="testParameter" items="${param}">
+                    <div class="d-flex flex-column">
+                        <div class="p-2">
+                            Request Param: <c:out value=" ${testParameter.key}"/> = <c:out
+                                value="${testParameter.value}"/><br/>
+                        </div>
+                    </div>
+                </c:forEach>
+            </c:if>
+        </div>
 
-            <c:forEach var="testParameter" items="${param}">
-                <div class="d-flex flex-column">
-                    <div class="p-2">
-                        <c:out value=" ${testParameter.key}"/> = <c:out value="${testParameter.value}"/>
-                    </div>
-                </div>
-            </c:forEach>
-        </div>
-        <div class="d-flex justify-content-center">
-                <div class="d-flex flex-column">
-                    <div class="p-2">
-                        <c:out value="test"/> = <c:out value="${test}"/>
-                    </div>
-                </div>
-        </div>
         <div class="d-flex justify-content-center">
             <div class="d-flex flex-column">
                 <div class="p-2">
-                    <c:out value="model"/> = <c:out value="${model}"/>
+                    <c:if test="${test!=null}">
+                        Model Param: <c:out value="Test"/> = <c:out value="${test}"/><br/>
+                    </c:if>
+                    <c:if test="${test2!=null}">
+                        Model Param: <c:out value="Test"/> = <c:out value="${test2}"/><br/>
+                    </c:if>
                 </div>
             </div>
         </div>
+        <c:if test="${test4!=null}">
+            <div class="d-flex justify-content-center">
+                <div class="d-flex flex-column">
+                    <div class="p-2">
+                        Model Param: <c:out value="Person"/> = <c:out value="${test4}"/><br/>
+                    </div>
+                </div>
+            </div>
+        </c:if>
     </body>
 </html>

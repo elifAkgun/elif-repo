@@ -10,6 +10,7 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @RequiredArgsConstructor
+@ToString
 @Component("person")
 public class Person {
 
