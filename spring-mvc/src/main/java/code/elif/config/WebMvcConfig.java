@@ -1,16 +1,15 @@
 package code.elif.config;
 
-import code.elif.interceptor.OrganizationInterceptor;
+import code.elif.interceptor.PersonInterceptor;
+import code.elif.interceptor.VisitorInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.lookup.JndiDataSourceLookup;
-import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
@@ -58,6 +57,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new OrganizationInterceptor());
+        registry.addInterceptor(new PersonInterceptor()).addPathPatterns("/person/**");
+        registry.addInterceptor(new VisitorInterceptor()).addPathPatterns("/visitor/**");
+
     }
 }

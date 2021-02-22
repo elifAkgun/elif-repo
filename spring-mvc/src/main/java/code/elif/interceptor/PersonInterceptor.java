@@ -2,17 +2,15 @@ package code.elif.interceptor;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.servlet.HandlerAdapter;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class OrganizationInterceptor implements HandlerInterceptor {
+public class PersonInterceptor implements HandlerInterceptor {
 
-    private  static Logger logger = LoggerFactory.getLogger(OrganizationInterceptor.class);
+    private  static Logger logger = LoggerFactory.getLogger(PersonInterceptor.class);
 
     long preHandleTime =0;
     long postHandleTime =0;
