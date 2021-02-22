@@ -5,6 +5,7 @@
         <title>Visitor Count</title>
     </head>
     <body>
-        <c:out value="${count}"></c:out>
+        You are the <c:out value="${id}"></c:out> number of person in our system!</br>
+        Total count is <c:out value="${count}"></c:out> !</br>
     </body>
 </html>

@@ -36,6 +36,11 @@
                         <a class="btn btn-primary" href="${contextPath}/person/list" role="button">Persons</a>
                     </div>
                 </div>
+                <div class="p-2">
+                    <div class="d-flex justify-content-around">
+                        <a class="btn btn-primary" href="${contextPath}/session/visitorId" role="button">Visitor Count</a>
+                    </div>
+                </div>
             </div>
         </div>
         </div>
