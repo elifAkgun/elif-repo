@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 
@@ -30,7 +31,21 @@
                 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
                 <div class="p-2">
                     <div class="d-flex justify-content-around">
-                        <a class="btn btn-primary" href="${contextPath}/visitorRegister/visitorFormPage" role="button">Visitor Time</a>
+                        <form:form action="visitor" modelAttribute="visitorData">
+                            <table>
+                                <tr>
+                                    <td><form:label path="name">Name</form:label></td>
+                                    <td><form:input path="name"/></td>
+                                </tr>
+                                <tr>
+                                    <td><form:label path="email">Email</form:label></td>
+                                    <td><form:input path="email"/></td>
+                                </tr>
+                                <tr>
+                                    <td align="center"><input type="submit" value="Submit"/></td>
+                                </tr>
+                            </table>
+                        </form:form>
                     </div>
                 </div>
             </div>
