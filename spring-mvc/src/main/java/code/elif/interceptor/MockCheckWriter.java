@@ -1,4 +1,5 @@
 package code.elif.interceptor;
 
-public class MockCheckWriter {
+public class
+MockCheckWriter {
 }

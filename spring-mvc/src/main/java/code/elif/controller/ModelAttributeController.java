@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
+@RequestMapping("/test")
 public class ModelAttributeController {
 
     Logger logger = LoggerFactory.getLogger(ModelAttributeController.class);

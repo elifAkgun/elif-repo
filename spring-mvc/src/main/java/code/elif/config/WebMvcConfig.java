@@ -2,9 +2,11 @@ package code.elif.config;
 
 import code.elif.interceptor.PersonInterceptor;
 import code.elif.interceptor.VisitorInterceptor;
+import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.lookup.JndiDataSourceLookup;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -39,16 +41,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     }
 
 
-
-
-//    @Bean
-//    public RequestMappingHandlerMapping requestMappingHandlerMapping(){
-//        RequestMappingHandlerMapping rmhm = new RequestMappingHandlerMapping();
-//        rmhm.setUseSuffixPatternMatch(false);
-//        rmhm.setUseTrailingSlashMatch(false);
-//        return rmhm;
-//    }
-
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("home");
@@ -61,4 +53,12 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         registry.addInterceptor(new VisitorInterceptor()).addPathPatterns("/visitorRegister/**");
 
     }
+
+    @Bean("orgProperties")
+    public PropertiesFactoryBean mapper() {
+        PropertiesFactoryBean propertiesFactoryBean = new PropertiesFactoryBean();
+        propertiesFactoryBean.setLocation(new ClassPathResource("organization-resources.properties"));
+        return propertiesFactoryBean;
+    }
+
 }

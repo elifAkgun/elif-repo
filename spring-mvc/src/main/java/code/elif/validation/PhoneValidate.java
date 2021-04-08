@@ -1,5 +1,4 @@
 package code.elif.validation;
-
 import code.elif.validation.implementation.PhoneNumberValidation;
 
 import javax.validation.Constraint;

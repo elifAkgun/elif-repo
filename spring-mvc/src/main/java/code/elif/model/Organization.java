@@ -3,6 +3,8 @@ package code.elif.model;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+
 @Getter
 @Setter
 @ToString
@@ -21,4 +23,10 @@ public class Organization {
     private int employeeCount;
     @NonNull
     private String slogan;
+    @NonNull
+    private ArrayList<String> benefits;
+    @NonNull
+    private String city;
+    @NonNull
+    private Integer managerCount;
 }

@@ -2,51 +2,67 @@ package code.elif.interceptor;
 
 public class PrimeGenerator {
 
+    private static boolean[] crossedOut;
+    private static int result[];
+
     public static int[] generatePrimes(int maxValue) {
 
-        if (maxValue >= 2) { //geçerli koşul
-            int s = maxValue + 1; // array boyutu
-            boolean[] f = new boolean[s];
-            int i;
+        if (maxValue < 2) {
+            return new int[0];
 
-            //array'in tüm elemanlarını true setle
-            for (i = 0; i < s; i++) {
-                f[i] = true;
+        } else {
+            uncrossIntegersUpTo(maxValue);
+            crossOutMultiples();
+            putUncrossedIntegersToResult();
+            return result;
+        }
+    }
+    private static void uncrossIntegersUpTo(int maxValue) {
+        crossedOut = new boolean[maxValue + 1];
+    }
+
+    private static void crossOutMultiples() {
+        int maxPrimeFactor = determineIterationLimit();
+        for (int i = 2; i <= maxPrimeFactor; i++) {
+            if (notCrossed(i)) {
+                crossOutMultiplesOf(i);
             }
+        }
+    }
 
-            //asal sayı olmayanlardan kurtul
-            f[0] = f[1] = false;
+    private static void crossOutMultiplesOf(int i) {
+        for (int multiple = 2 * i;
+             multiple < crossedOut.length;
+             multiple += i) {
+            crossedOut[multiple] = true;
+        }
+    }
 
-            //diğer sayıları ele
-            int j;
-            for (i = 2; i < Math.sqrt(s) + 1; i++) {
-                if (f[i]) {
-                    // eğer i çaprazlanmamışsa katlarını geç
-                    for (j = 2 * i; j < s; j += i) {
-                        f[j] = false; //katlı sayı asal değil.
-                    }
-                }
-            }
+    private static boolean notCrossed(int i) {
+        return crossedOut[i] == false;
+    }
 
-            //kaç asal sayı var
-            int count = 0;
-            for (i = 0; i < s; i++) {
-                if (f[i])
-                    count++;
-            }
+    private static void putUncrossedIntegersToResult() {
 
-            int[] primes = new int[count];
+        result = new int[numberOfUnCrossedIntegers()];
 
-            //asal sayıları diziye yerleştir
-            for (i = 0, j = 0; i < s; i++) {
-                //asal bir sayı ise
-                if (f[i])
-                    primes[j++] = i;
-            }
-            return primes;
+        for (int i = 2, j = 0; i < crossedOut.length; i++) {
+            if (notCrossed(i))
+                result[j++] = i;
+        }
+    }
 
+    private static int numberOfUnCrossedIntegers() {
+        int count = 0;
+        for (int i = 2; i < crossedOut.length; i++) {
+            if (notCrossed(i))
+                count++;
+        }
+        return count;
+    }
 
-        } else // maxValue<2
-            return new int[0]; //boş dizi dön
+    private static int determineIterationLimit() {
+        double maxPrimeFactor = Math.sqrt(crossedOut.length) ;
+        return (int) maxPrimeFactor;
     }
 }

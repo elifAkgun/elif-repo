@@ -30,8 +30,17 @@
                 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
                 <div class="p-2">
                     <div class="d-flex justify-content-around">
-                        <a class="btn btn-primary" href="${contextPath}/visitorRegister/visitorFormPage" role="button">Visitor Time</a>
+                        <a class="btn btn-primary" href="${contextPath}/visitorRegister/visitorFormPage" role="button">Business System</a>
                     </div>
+                    </br>
+                    <div class="d-flex justify-content-around">
+                        <a class="btn btn-primary" href="${contextPath}/formTagsDemo/home" role="button">Visitor Form Page</a>
+                    </div>
+                    </br>
+                    <div class="d-flex justify-content-around">
+                        <a class="btn btn-primary" href="${contextPath}/validationDemo/home" role="button">Validation Form Page</a>
+                    </div>
+                    </br>
                 </div>
             </div>
         </div>
