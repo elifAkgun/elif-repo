@@ -1,4 +1,4 @@
-package code.elif;
+package code.elif.threads.multithread;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,9 +22,8 @@ public class Main {
         threads.add(hackerThread2);
         threads.add(policeThread);
 
-        for (Thread t : threads) {
-            t.start();
-        }
+        MultiExecutor multiExecutor = new MultiExecutor(threads);
+        multiExecutor.executeAll();
 
         System.out.println(vault.password + " is the password...");
 
