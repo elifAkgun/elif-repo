@@ -4,20 +4,19 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.*;
-import static org.mockito.Matchers.anyLong;
+import static org.junit.Assert.assertEquals;
 import static org.powermock.api.mockito.PowerMockito.when;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({ UtilityClass.class})
+@PrepareForTest({UtilityClass.class})
 public class SystemUnderTestPowerMockTest {
 
     @Mock
@@ -27,19 +26,16 @@ public class SystemUnderTestPowerMockTest {
     SystemUnderTest systemUnderTest;
 
     @Test
-    public void methodUsingAnArrayListConstructor() {
-
-        List<Integer> stats = Arrays.asList(1,2,3);
+    public void methodCallingAStaticMethod() {
+        List<Integer> stats = Arrays.asList(1, 2, 3);
         when(dependency.retrieveAllStats()).thenReturn(stats);
 
         PowerMockito.mockStatic(UtilityClass.class);
-        when(UtilityClass.staticMethod(5)).thenReturn(150);
+        when(UtilityClass.staticMethod(1 + 2 + 3)).thenReturn(150);
 
-        systemUnderTest.methodCallingAStaticMethod();
+        int result = systemUnderTest.methodCallingAStaticMethod();
 
-    }
-
-    @Test
-    public void methodCallingAStaticMethod() {
+        assertEquals(150, result);
+        PowerMockito.verifyStatic(Mockito.times(1));
     }
 }

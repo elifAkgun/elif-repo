@@ -11,7 +11,7 @@ public class IndustrialProduct extends GenericProduct {
     @Override
     public int calculatePrice() {
         Random random = new Random();
-        int price = random.nextInt(priceRandomizer);
+        int price = random.nextInt(priceRandomizer)*5;
         return price;
     }
 
