@@ -1,7 +1,4 @@
 package code.elif.threads.deadlock;
-
-import code.elif.threads.multithread.Main;
-
 import java.util.Random;
 
 public class Main11 {
