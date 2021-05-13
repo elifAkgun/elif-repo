@@ -24,8 +24,8 @@ public class Main6 {
 
         System.out.println("started....");
 
-        reColorMultiThread(originalImage, coloredImage, 16);
-
+        reColorMultiThread(originalImage, coloredImage, 32);
+       // reColorSingleThread(originalImage, coloredImage, 0, 0);
         System.out.println("image process...." + (System.currentTimeMillis() - startTimeMillis));
 
         File output = new File(ORIGINAL_IMAGE_OUT);
