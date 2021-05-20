@@ -1,6 +1,8 @@
-package code.elif.threads.resourcesharing;
+package code.elif.threads.atomic;
 
-public class Main9 {
+import java.util.concurrent.atomic.AtomicInteger;
+
+public class Main16 {
 
     public static void main(String[] args) throws InterruptedException {
         InventoryCounter inventoryCounter = new InventoryCounter();
@@ -29,26 +31,17 @@ public class Main9 {
 
 class InventoryCounter {
 
-    private int count;
-    private Object lock = new Object();
+    private AtomicInteger countAtomic = new AtomicInteger(0);
 
     public void incrementCount() {
-        synchronized (lock) {
-            count++;
-        }
+        countAtomic.incrementAndGet();
     }
 
     public void decrementCount() {
-        synchronized (lock) {
-            count--;
-        }
+        countAtomic.decrementAndGet();
     }
 
     public int getCount() {
-        synchronized (lock) {
-            return count;
-        }
-
+      return countAtomic.get();
     }
 }
-
