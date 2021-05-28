@@ -54,4 +54,8 @@ workspace.xml
 /*/npm-debug.log*
 /*/yarn-debug.log*
 /*/yarn-error.log*
-/*/.mvn/
+*/.mvn/
+*/.idea/*
+.idea/*
+*/*/mvnw
+*/*/.mvn/
