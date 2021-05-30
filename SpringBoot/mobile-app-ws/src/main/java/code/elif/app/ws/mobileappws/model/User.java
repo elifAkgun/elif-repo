@@ -5,12 +5,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
-    private Integer id;
+
+    @NotNull(message = "id cannot null")
+    private String id;
+    @NotNull(message = "name cannot null")
     private String name;
+    @NotNull(message = "lastName cannot null")
     private String lastName;
 }
