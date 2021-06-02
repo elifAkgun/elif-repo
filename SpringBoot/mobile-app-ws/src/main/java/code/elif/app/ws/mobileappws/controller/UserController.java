@@ -1,9 +1,10 @@
 package code.elif.app.ws.mobileappws.controller;
 
 import code.elif.app.ws.mobileappws.exception.UserException;
-import code.elif.app.ws.mobileappws.model.User;
+import code.elif.app.ws.mobileappws.model.UserDTO;
 import code.elif.app.ws.mobileappws.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,23 +17,31 @@ import java.util.*;
 @RequestMapping("users")
 public class UserController {
 
-    private UserService userService;
+    private final UserService userService;
+
+    private final Environment environment;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, Environment environment) {
         this.userService = userService;
+        this.environment = environment;
+    }
+
+    @GetMapping("/status/check")
+    public String statusCheck() {
+        return "Working... on : " + environment.getProperty("local.server.port");
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> getUsers(@RequestParam(value = "page", required = false) Integer page,
+    public ResponseEntity<List<UserDTO>> getUsers(@RequestParam(value = "page", required = false) Integer page,
                                                @RequestParam(value = "order", defaultValue = "desc") String order) {
-        List<User> list = userService.getUsers();
+        List<UserDTO> list = userService.getUsers();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @GetMapping(value = "/{userId}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<User> getUser(@PathVariable(name = "userId") String userId) {
-        User user = userService.getUser(userId);
+    public ResponseEntity<UserDTO> getUser(@PathVariable(name = "userId") String userId) {
+        UserDTO user = userService.getUser(userId);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
@@ -40,8 +49,8 @@ public class UserController {
                             MediaType.APPLICATION_XML_VALUE},
                 consumes = {MediaType.APPLICATION_JSON_VALUE,
                     MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
-        User createdUser= userService.createUser(user);
+    public ResponseEntity<UserDTO> createUser(@Valid @RequestBody UserDTO user) {
+        UserDTO createdUser= userService.createUser(user);
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
 
@@ -49,9 +58,9 @@ public class UserController {
             MediaType.APPLICATION_XML_VALUE},
             consumes = {MediaType.APPLICATION_JSON_VALUE,
                     MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<User> updateUser(@PathVariable String userId,@Valid @RequestBody User user) {
-        updateUser(userId,user);
-        return new ResponseEntity<>(user,HttpStatus.ACCEPTED);
+    public ResponseEntity<UserDTO> updateUser(@PathVariable String userId,@Valid @RequestBody UserDTO user) {
+        UserDTO userDTO = userService.updateUser(userId, user);
+        return new ResponseEntity<>(userDTO,HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping(path ="/{userId}")

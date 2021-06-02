@@ -1,15 +1,17 @@
 package code.elif.app.ws.mobileappws.service;
 
-import code.elif.app.ws.mobileappws.model.User;
+import code.elif.app.ws.mobileappws.model.UserDTO;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
-public interface UserService {
+public interface UserService extends UserDetailsService {
 
-    public List<User> getUsers();
-    public User getUser(String userId);
+    public List<UserDTO> getUsers();
+    public UserDTO getUser(String userId);
+    public UserDTO getUserByEmail(String email);
     public String deleteUser(String userId);
-    public User createUser(User user);
-    public User updateUser(String userId, User user);
+    public UserDTO createUser(UserDTO user);
+    public UserDTO updateUser(String userId, UserDTO user);
 
 }
