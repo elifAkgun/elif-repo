@@ -2,6 +2,7 @@ package code.elif.app.ws.mobileappws;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.context.properties.ConfigurationPropertiesBeans;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,4 +20,5 @@ public class MobileAppWsApplication {
 	public BCryptPasswordEncoder getBCryptPasswordEncoder(){
 		return new BCryptPasswordEncoder();
 	}
+
 }
