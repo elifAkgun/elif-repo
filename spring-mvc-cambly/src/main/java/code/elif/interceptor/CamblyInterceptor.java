@@ -1,7 +1,7 @@
 package code.elif.interceptor;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.sun.org.slf4j.internal.Logger;
+import com.sun.org.slf4j.internal.LoggerFactory;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,21 +19,21 @@ public class CamblyInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         preHandleTime = System.currentTimeMillis();
-        logger.info("preHandleTime : " + preHandleTime);
+        logger.error("preHandleTime : " + preHandleTime);
         return true;
     }
 
     @Override
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
         postHandleTime = System.currentTimeMillis();
-        logger.info("postHandleTime : " + postHandleTime);
+        logger.debug("postHandleTime :  " + postHandleTime);
     }
 
     @Override
     public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
         afterCompletionTime = System.currentTimeMillis();
-        logger.info("afterCompletionTime : " + afterCompletionTime);
+        logger.debug("afterCompletionTime : " + afterCompletionTime);
         long totalExecutionTime = afterCompletionTime - preHandleTime;
-        logger.info("totalExecutionTime : " + totalExecutionTime);
+        logger.debug("totalExecutionTime : " + totalExecutionTime);
     }
 }

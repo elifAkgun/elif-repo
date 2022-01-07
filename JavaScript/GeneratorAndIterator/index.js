@@ -5,9 +5,7 @@ const readline = require('readline').createInterface({
   output: process.stdout,
   prompt: 'enter command > ',
 });
-
 readline.prompt();
-
 readline.on('line', async line => {
   switch (line.trim()) {
     case 'list vegan foods':

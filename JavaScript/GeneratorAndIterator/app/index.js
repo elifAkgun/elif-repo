@@ -22,6 +22,8 @@ function myIterator(start, finish){
 
 const mySampleIterator = myIterator(0,10);
 
+console.log(typeof mySampleIterator)
+
 for (let value, result ; (result = mySampleIterator.next()) && !result.done;   ) 
     console.log(result.value);
 
