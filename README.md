@@ -1,3 +1,3 @@
 # elif-repo
-This repo is a combination all kind of codes.
+This repo is a combination of all kind of codes.
 I will arrange it as soon as possible...
