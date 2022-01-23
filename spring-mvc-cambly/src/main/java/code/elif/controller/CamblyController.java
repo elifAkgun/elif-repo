@@ -1,11 +1,7 @@
 package code.elif.controller;
 
-import code.elif.interceptor.CamblyInterceptor;
 import code.elif.model.Cambly;
 import code.elif.service.CamblyService;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +13,6 @@ import java.util.List;
 public class CamblyController {
 
     private final CamblyService camblyService;
-
-    private static Logger log = LogManager.getLogger();
 
     public CamblyController(CamblyService camblyService) {
         this.camblyService = camblyService;
@@ -67,12 +61,7 @@ public class CamblyController {
         List<Cambly> theCamblys = camblyService.searchCamblys(theSearchName);
         // add the camblys to the model
         theModel.addAttribute("camblyList", theCamblys);
-        log.error("message {}", theSearchName);
         return "list-cambly";
     }
 
-
-    public static void main(String[] args) {
-        System.out.println(9*9+0*0);
-    }
 }
