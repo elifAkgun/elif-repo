@@ -9,17 +9,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class ServiceShape {
 
-    private Shape shape;
-
     @Autowired
-    public ServiceShape(@Qualifier("circle") Shape shape){
-        this.shape = shape;
-    }
+    private Shape triangle;
 
-    @Loggable
-    public Shape findShape() {
-        System.out.println("Inside find shape");
-        return shape;
+    public void getShapeName() {
+        triangle.getName();
     }
-
 }

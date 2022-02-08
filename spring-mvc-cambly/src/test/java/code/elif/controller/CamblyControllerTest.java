@@ -20,6 +20,7 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -28,8 +29,6 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standal
 @ExtendWith(MockitoExtension.class)
 public class CamblyControllerTest {
 
-    @Autowired
-    MockMvc mockMvc;
 
     @Mock
     CamblyServiceImpl camblyService;
@@ -55,7 +54,8 @@ public class CamblyControllerTest {
         MvcResult mvcResult = mockMvc.perform(get("/cambly/list")
                 .accept(APPLICATION_JSON)).andReturn();
 
-        Assertions.assertEquals("list-cambly",mvcResult.getModelAndView().getViewName());
+        Assertions.assertEquals("list-cambly",
+                mvcResult.getModelAndView().getViewName());
 
     }
 
@@ -83,6 +83,8 @@ public class CamblyControllerTest {
                 .accept(APPLICATION_JSON)).andReturn();
 
         Assertions.assertEquals(camblies,mvcResult.getModelAndView().getModel().get("camblyList"));
+
+        verify(camblyService).getAllCamblys();
 
     }
 

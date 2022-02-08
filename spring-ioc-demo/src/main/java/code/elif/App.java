@@ -15,7 +15,7 @@ public class App {
 		ApplicationContext applicationContext = new FileSystemXmlApplicationContext("beans-challenge.xml");
 
 		City city = (City) applicationContext.getBean("city");
-		city.getCityName();
+		city.getMyInfo();
 
 		((FileSystemXmlApplicationContext) applicationContext).close();
 

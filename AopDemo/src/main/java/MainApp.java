@@ -11,10 +11,6 @@ public class MainApp {
 
         ServiceShape serviceShape = ctx.getBean(ServiceShape.class);
 
-        Shape shape = serviceShape.findShape();
-
-        shape.getName();
-
-        serviceShape.findShape();
+        serviceShape.getShapeName();
     }
 }

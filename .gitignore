@@ -60,4 +60,7 @@ workspace.xml
 .idea/*
 */*/mvnw
 */*/.mvn/
+*/.classpath
+*/.project
+*.settings
 SpringBoot/ApiConfigServer/src/main/resources/application.properties
