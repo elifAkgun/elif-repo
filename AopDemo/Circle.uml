@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>mypackage.model.Circle</OriginalElement>
+  <nodes>
+    <node x="0.0" y="104.0">mypackage.model.Circle</node>
+    <node x="0.0" y="344.0">MainApp</node>
+    <node x="83.5" y="0.0">mypackage.model.Shape</node>
+    <node x="167.0" y="104.0">mypackage.model.Triangle</node>
+    <node x="0.0" y="203.0">mypackage.ServiceShape</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="mypackage.model.Triangle" target="mypackage.model.Shape">
+      <point x="0.0" y="-27.0" />
+      <point x="240.5" y="79.0" />
+      <point x="193.75" y="79.0" />
+      <point x="36.75" y="27.0" />
+    </edge>
+    <edge source="mypackage.model.Circle" target="mypackage.model.Shape">
+      <point x="0.0" y="-27.0" />
+      <point x="73.5" y="79.0" />
+      <point x="120.25" y="79.0" />
+      <point x="-36.75" y="27.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="157.0" y="199.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+    <Category>Methods</Category>
+    <Category>Fields</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
