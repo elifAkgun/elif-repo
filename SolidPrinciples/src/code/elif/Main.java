@@ -1,23 +1,20 @@
 package code.elif;
 
-import code.elif.app.*;
-import code.elif.app.shapes.Circle;
-import code.elif.app.shapes.Rectangle;
-import code.elif.app.shapes.Square;
-import code.elif.app.shapes.Triangle;
+import code.elif.app.AreaCalculator;
+import code.elif.app.Shape;
+import code.elif.app.ShapeService;
 
-import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 public class Main {
 
-    public static void main(String[] args) {
-        ArrayList<Shape> shapes = new ArrayList<>();
 
-        shapes.add(new Circle(3));
-        shapes.add(new Square(4));
-        shapes.add(new Triangle(8, 15, 17));
-        shapes.add(new Rectangle(4,4));
+
+    public static void main(String[] args) {
+
+        ShapeService shapeService = new ShapeService();
+        List<Shape> shapes = shapeService.getShapes();
 
         for (Shape s : shapes) {
             s.draw();
