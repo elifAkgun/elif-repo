@@ -3,6 +3,7 @@ package code.elif;
 import code.elif.app.Shape;
 import code.elif.app.ShapeService;
 
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.TreeSet;
@@ -67,13 +68,17 @@ public class Main {
 
         Predicate<Shape> p = s -> s.getArea() > 10;
         System.out.println("List only if area greater than 10...");
-        for (Shape s : shapeTree) {
-            if(p.test(s)) {
-                s.draw(s.getEdges());
-                System.out.println("Area : " + s.getArea() + "\n");
+
+        Predicate<Collection> p2 = c -> c.isEmpty();
+        if (!p2.test(shapeTree)) {
+            System.out.println("ShapesTree are not empty...");
+            for (Shape s : shapeTree) {
+                if (p.test(s)) {
+                    s.draw(s.getEdges());
+                    System.out.println("Area : " + s.getArea() + "\n");
+                }
             }
         }
-
 
     }
 }
