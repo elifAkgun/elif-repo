@@ -16,7 +16,7 @@ public class ShapeService {
         shapes.add(new Circle(3));
         shapes.add(new Square(4));
         shapes.add(new Triangle(8, 15, 17));
-        shapes.add(new Rectangle(2,4));
+        shapes.add(new Rectangle(2, 4));
         return shapes;
     }
 }

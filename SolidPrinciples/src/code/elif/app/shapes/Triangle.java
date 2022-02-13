@@ -15,15 +15,15 @@ public class Triangle implements Shape, Comparable<Shape> {
     private double y;
     private double z;
 
-    public Triangle(double edge1, double edge2, double edge3){
-        this.x =edge1;
-        this.y =edge2;
-        this.z =edge3;
+    public Triangle(double edge1, double edge2, double edge3) {
+        this.x = edge1;
+        this.y = edge2;
+        this.z = edge3;
     }
 
     @Override
     public List<Double> getEdges() {
-        return Arrays.asList(x,y,z);
+        return Arrays.asList(x, y, z);
     }
 
     @Override

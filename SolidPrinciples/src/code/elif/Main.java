@@ -3,10 +3,11 @@ package code.elif;
 import code.elif.app.Shape;
 import code.elif.app.ShapeService;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
+import java.util.TreeSet;
 
 public class Main {
-
 
 
     public static void main(String[] args) {
@@ -67,7 +68,6 @@ public class Main {
             s.draw(s.getEdges());
             System.out.println("Area : " + s.getArea() + "\n");
         }
-
 
 
     }

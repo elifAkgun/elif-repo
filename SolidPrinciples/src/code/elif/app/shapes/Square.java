@@ -1,7 +1,6 @@
 package code.elif.app.shapes;
 
 import code.elif.app.Shape;
-import sun.security.provider.SHA;
 
 import java.util.Arrays;
 import java.util.List;
@@ -12,7 +11,7 @@ public class Square implements Shape, Comparable<Shape> {
 
     private double edge;
 
-    public Square(double edge){
+    public Square(double edge) {
         this.edge = edge;
     }
 
@@ -23,7 +22,7 @@ public class Square implements Shape, Comparable<Shape> {
 
     @Override
     public double getArea() {
-        return Math.round(edge*edge);
+        return Math.round(edge * edge);
     }
 
     @Override

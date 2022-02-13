@@ -7,7 +7,7 @@ import java.util.List;
 
 import static java.lang.Double.compare;
 
-public class Rectangle implements Shape,Comparable<Shape> {
+public class Rectangle implements Shape, Comparable<Shape> {
     private double edge1;
     private double edge2;
 
@@ -18,12 +18,12 @@ public class Rectangle implements Shape,Comparable<Shape> {
 
     @Override
     public double getArea() {
-        return Math.round(edge1*edge2);
+        return Math.round(edge1 * edge2);
     }
 
     @Override
     public List<Double> getEdges() {
-        return Arrays.asList(edge1,edge2);
+        return Arrays.asList(edge1, edge2);
     }
 
     @Override
