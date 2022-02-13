@@ -19,7 +19,7 @@ public class Main {
 
 
         for (Shape s : shapes) {
-            s.draw();
+            s.draw(s.getEdges());
             System.out.println(s.getArea());
         }
  /*
