@@ -1,22 +1,33 @@
 package code.elif.app.shapes;
 
 import code.elif.app.Shape;
+import sun.security.provider.SHA;
 
-public class Square implements Shape {
+import java.util.Arrays;
+import java.util.List;
 
-    private int edge;
+import static java.lang.Double.compare;
 
-    public Square(int edge){
+public class Square implements Shape, Comparable<Shape> {
+
+    private double edge;
+
+    public Square(double edge){
         this.edge = edge;
     }
 
     @Override
-    public void draw() {
-        System.out.println("Square is drawing... Edge: " + this.edge);
+    public List<Double> getEdges() {
+        return Arrays.asList(edge);
     }
 
     @Override
     public double getArea() {
         return Math.round(edge*edge);
+    }
+
+    @Override
+    public int compareTo(Shape t) {
+        return compare(this.getArea(), t.getArea());
     }
 }

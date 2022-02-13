@@ -1,11 +1,9 @@
 package code.elif;
 
-import code.elif.app.AreaCalculator;
 import code.elif.app.Shape;
 import code.elif.app.ShapeService;
 
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class Main {
 
@@ -14,13 +12,16 @@ public class Main {
     public static void main(String[] args) {
 
         ShapeService shapeService = new ShapeService();
+
+
         List<Shape> shapes = shapeService.getShapes();
+
 
         for (Shape s : shapes) {
             s.draw();
             System.out.println(s.getArea());
         }
-
+ /*
         Comparator<Shape> comparator = Comparator.comparingDouble(AreaCalculator::getArea);
         Comparator<Shape> comparator2 = (s1, s2) -> s1.getArea() > s2.getArea() ? -1
                 : s1.getArea() > s2.getArea() ? 1 : 0;
@@ -38,6 +39,36 @@ public class Main {
         for (Shape s : shapes) {
             s.draw();
         }
+
+        TreeMap<Integer, Shape> shapeTree = new TreeMap<>();
+
+        for (Shape s : shapes) {
+            shapeTree.put((int) s.getArea(), s);
+        }
+
+        for (Map.Entry<Integer, Shape> entry : shapeTree.entrySet()) {
+            System.out.println(entry.getKey());
+        }
+
+        */
+        System.out.println();
+        System.out.println("******************\n");
+
+        Comparator<Shape> comparator = (s1, s2) -> s1.getArea() > s2.getArea() ? -1
+                : s2.getArea() > s1.getArea() ? 1 : 0;
+
+        TreeSet<Shape> shapeTree = new TreeSet<>(comparator);
+
+        for (Shape s : shapes) {
+            shapeTree.add(s);
+        }
+
+        for (Shape s : shapeTree) {
+            s.draw(s.getEdges());
+            System.out.println("Area : " + s.getArea() + "\n");
+        }
+
+
 
     }
 }

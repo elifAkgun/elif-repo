@@ -2,22 +2,32 @@ package code.elif.app.shapes;
 
 import code.elif.app.Shape;
 
-public class Rectangle implements Shape {
-    private int edge1;
-    private int edge2;
+import java.util.Arrays;
+import java.util.List;
 
-    public Rectangle(int edge1, int edge2) {
+import static java.lang.Double.compare;
+
+public class Rectangle implements Shape,Comparable<Shape> {
+    private double edge1;
+    private double edge2;
+
+    public Rectangle(double edge1, double edge2) {
         this.edge1 = edge1;
         this.edge2 = edge2;
     }
 
     @Override
-    public void draw() {
-        System.out.println("Rectangle is drawing... edge1 : " + this.edge1 + " edge2 : " + this.edge2 );
+    public double getArea() {
+        return Math.round(edge1*edge2);
     }
 
     @Override
-    public double getArea() {
-        return Math.round(edge1*edge2);
+    public List<Double> getEdges() {
+        return Arrays.asList(edge1,edge2);
+    }
+
+    @Override
+    public int compareTo(Shape r) {
+        return compare(this.getArea(), r.getArea());
     }
 }
