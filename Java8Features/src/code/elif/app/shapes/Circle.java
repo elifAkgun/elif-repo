@@ -24,8 +24,8 @@ public class Circle implements Shape, Shape2 {
     }
 
     @Override
-    public void draw(List<Double> edges) {
-        Shape2.super.draw(edges);
+    public void draw() {
+        Shape2.super.draw();
     }
 
 

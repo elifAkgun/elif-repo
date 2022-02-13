@@ -6,6 +6,7 @@ import code.elif.app.ShapeService;
 import java.util.Comparator;
 import java.util.List;
 import java.util.TreeSet;
+import java.util.function.Predicate;
 
 public class Main {
 
@@ -64,9 +65,13 @@ public class Main {
             shapeTree.add(s);
         }
 
+        Predicate<Shape> p = s -> s.getArea() > 10;
+        System.out.println("List only if area greater than 10...");
         for (Shape s : shapeTree) {
-            s.draw(s.getEdges());
-            System.out.println("Area : " + s.getArea() + "\n");
+            if(p.test(s)) {
+                s.draw(s.getEdges());
+                System.out.println("Area : " + s.getArea() + "\n");
+            }
         }
 
 
