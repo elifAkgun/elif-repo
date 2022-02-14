@@ -1,8 +1,13 @@
-package code.elif.app.number;
+package code.elif.app.predicate;
 
 import java.util.function.Predicate;
 
-public class PredicateTest {
+/**
+ * This class is used for examples of predicate usage.
+ * In this example, we covered predicate joining.
+ */
+
+public class PredicateIntegerTest {
     public static void main(String[] args) {
 
         int[] x = {0, 5, 10, 15, 20, 25, 30};
