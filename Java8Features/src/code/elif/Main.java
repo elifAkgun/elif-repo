@@ -70,6 +70,7 @@ public class Main {
         System.out.println("List only if area greater than 10...");
 
         Predicate<Collection> p2 = c -> c.isEmpty();
+
         if (!p2.test(shapeTree)) {
             System.out.println("ShapesTree are not empty...");
             for (Shape s : shapeTree) {
@@ -79,6 +80,5 @@ public class Main {
                 }
             }
         }
-
     }
 }
