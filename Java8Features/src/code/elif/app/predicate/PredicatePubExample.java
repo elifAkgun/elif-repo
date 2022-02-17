@@ -14,7 +14,7 @@ public class PredicatePubExample {
 
         Person [] people = {person1,person2,person3,person4};
 
-        Predicate<Person> isEnteredPub = (person -> (person.age>18 && person.hasGirlFriend));
+        Predicate<Person> isEnteredPub = (person -> (person.age>=18 && person.hasGirlFriend));
 
         System.out.println("Pub allowed list:");
         for (Person p :people) {
