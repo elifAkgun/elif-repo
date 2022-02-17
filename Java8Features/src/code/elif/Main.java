@@ -3,10 +3,7 @@ package code.elif;
 import code.elif.app.Shape;
 import code.elif.app.ShapeService;
 
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.function.Predicate;
 
 public class Main {
@@ -60,6 +57,8 @@ public class Main {
         Comparator<Shape> comparator = (s1, s2) -> s1.getArea() > s2.getArea() ? -1
                 : s2.getArea() > s1.getArea() ? 1 : 0;
 
+
+
         TreeSet<Shape> shapeTree = new TreeSet<>(comparator);
 
         for (Shape s : shapes) {
@@ -82,3 +81,8 @@ public class Main {
         }
     }
 }
+
+
+
+
+
