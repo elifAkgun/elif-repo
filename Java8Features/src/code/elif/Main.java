@@ -8,76 +8,49 @@ import java.util.function.Predicate;
 
 public class Main {
 
-
     public static void main(String[] args) {
 
         ShapeService shapeService = new ShapeService();
 
-
-        List<Shape> shapes = shapeService.getShapes();
-
-
-        for (Shape s : shapes) {
-            s.draw(s.getEdges());
-            System.out.println(s.getArea());
-        }
- /*
-        Comparator<Shape> comparator = Comparator.comparingDouble(AreaCalculator::getArea);
-        Comparator<Shape> comparator2 = (s1, s2) -> s1.getArea() > s2.getArea() ? -1
+        Comparator<Shape> comparator = (s1, s2) -> s1.getArea() > s2.getArea() ? -1
                 : s1.getArea() > s2.getArea() ? 1 : 0;
 
+        System.out.println("Shapes are adding into List....\n");
+        List<Shape> shapes = (List) shapeService.getShapes(new ArrayList());
+        drawAllShapes(shapes);
+
+        System.out.println("\nShapes are sorting desc....\n");
         shapes.sort(comparator);
+        drawAllShapes(shapes);
 
-        System.out.println("Shapes are sorting asc....");
+        System.out.println("\n*****************\nShapes are adding into TreeMap from List....\n");
+        TreeMap<Integer, Shape> shapeTreeMap = new TreeMap<>();
         for (Shape s : shapes) {
-            s.draw();
+            shapeTreeMap.put((int) s.getArea(), s);
+        }
+        for (Map.Entry<Integer, Shape> entry : shapeTreeMap.entrySet()) {
+            entry.getValue().draw(entry.getValue().getEdges());
         }
 
-        shapes.sort(comparator2);
+        System.out.println("\n******************\nShapes are getting into TreeSet....");
+        TreeSet<Shape> shapeTreeSet = (TreeSet<Shape>) shapeService.getShapes(new TreeSet<>(comparator));
 
-        System.out.println("\nShapes are sorting desc....");
-        for (Shape s : shapes) {
-            s.draw();
-        }
+        Predicate<Shape> greaterThanTen = s -> s.getArea() > 10;
+        System.out.println("List if only area is greater than 10...");
 
-        TreeMap<Integer, Shape> shapeTree = new TreeMap<>();
-
-        for (Shape s : shapes) {
-            shapeTree.put((int) s.getArea(), s);
-        }
-
-        for (Map.Entry<Integer, Shape> entry : shapeTree.entrySet()) {
-            System.out.println(entry.getKey());
-        }
-
-        */
-        System.out.println();
-        System.out.println("******************\n");
-
-        Comparator<Shape> comparator = (s1, s2) -> s1.getArea() > s2.getArea() ? -1
-                : s2.getArea() > s1.getArea() ? 1 : 0;
-
-
-
-        TreeSet<Shape> shapeTree = new TreeSet<>(comparator);
-
-        for (Shape s : shapes) {
-            shapeTree.add(s);
-        }
-
-        Predicate<Shape> p = s -> s.getArea() > 10;
-        System.out.println("List only if area greater than 10...");
-
-        Predicate<Collection> p2 = c -> c.isEmpty();
-
-        if (!p2.test(shapeTree)) {
-            System.out.println("ShapesTree are not empty...");
-            for (Shape s : shapeTree) {
-                if (p.test(s)) {
+        Predicate<Collection> isCollectionEmpty = c -> c.isEmpty();
+        if (!isCollectionEmpty.test(shapeTreeSet)) {
+            for (Shape s : shapeTreeSet) {
+                if (greaterThanTen.test(s)) {
                     s.draw(s.getEdges());
-                    System.out.println("Area : " + s.getArea() + "\n");
                 }
             }
+        }
+    }
+
+    private static void drawAllShapes(List<Shape> shapes) {
+        for (Shape s : shapes) {
+            s.draw(s.getEdges());
         }
     }
 }
