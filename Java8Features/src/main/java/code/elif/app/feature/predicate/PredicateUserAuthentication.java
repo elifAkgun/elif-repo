@@ -1,9 +1,8 @@
-package code.elif.app.predicate;
+package code.elif.app.feature.predicate;
 
-import java.io.Console;
+import code.elif.app.feature.model.User;
+
 import java.util.Scanner;
-import java.util.function.Predicate;
-
 
 
 public class PredicateUserAuthentication {
@@ -29,20 +28,7 @@ public class PredicateUserAuthentication {
         }
     }
 
-    static class User {
-        private String userName;
-        private String password;
 
-        public User(String userName, String password){
-            this.userName = userName;
-            this.password = password;
-        }
-
-        public boolean isValidCredentials(User user) {
-            Predicate<User> p1 = (u) -> u.userName.equals(this.userName) && u.password.equals(this.password) ;
-            return p1.test(user);
-        }
-    }
 }
 
 

@@ -1,4 +1,4 @@
-package code.elif.app.predicate;
+package code.elif.app.feature.predicate;
 
 import java.util.Objects;
 import java.util.function.Predicate;
