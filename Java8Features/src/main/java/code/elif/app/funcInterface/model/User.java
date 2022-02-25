@@ -1,4 +1,4 @@
-package code.elif.app.feature.model;
+package code.elif.app.funcInterface.model;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,6 +1,6 @@
-package code.elif.app.feature.predicate;
+package code.elif.app.funcInterface.predicate;
 
-import code.elif.app.feature.model.User;
+import code.elif.app.funcInterface.model.User;
 
 import java.util.Scanner;
 

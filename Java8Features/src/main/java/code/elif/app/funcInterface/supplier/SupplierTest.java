@@ -1,4 +1,4 @@
-package code.elif.app.feature.supplier;
+package code.elif.app.funcInterface.supplier;
 
 import java.util.Random;
 import java.util.function.Supplier;

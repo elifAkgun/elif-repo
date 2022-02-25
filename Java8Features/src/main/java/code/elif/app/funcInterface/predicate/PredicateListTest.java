@@ -1,4 +1,4 @@
-package code.elif.app.feature.predicate;
+package code.elif.app.funcInterface.predicate;
 
 import java.util.ArrayList;
 import java.util.Iterator;

@@ -1,4 +1,4 @@
-package code.elif.app.feature.function;
+package code.elif.app.funcInterface.function;
 
 import java.util.function.Function;
 

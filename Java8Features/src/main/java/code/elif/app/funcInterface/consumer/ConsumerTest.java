@@ -1,6 +1,6 @@
-package code.elif.app.feature.consumer;
+package code.elif.app.funcInterface.consumer;
 
-import code.elif.app.feature.model.User;
+import code.elif.app.funcInterface.model.User;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.function.Consumer;
