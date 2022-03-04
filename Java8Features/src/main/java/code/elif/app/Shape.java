@@ -8,10 +8,10 @@ public interface Shape extends Comparable<Shape> {
 
     List<Double> getEdges();
 
-    default void draw(List<Double> edges) {
+    default void draw() {
         System.out.println(this.getClass().getSimpleName() + " is drawing...  Area:" + getArea());
-        for (int i = 0; i < edges.size(); i++) {
-            System.out.print(" Edge" + (i+1) + " : " + edges.get(i));
+        for (int i = 0; i <  getEdges().size(); i++) {
+            System.out.print(" Edge" + (i+1) + " : " +  getEdges().get(i));
         }
 
         System.out.println();

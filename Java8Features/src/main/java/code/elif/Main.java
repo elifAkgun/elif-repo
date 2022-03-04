@@ -29,7 +29,7 @@ public class Main {
             shapeTreeMap.put((int) s.getArea(), s);
         }
         for (Map.Entry<Integer, Shape> entry : shapeTreeMap.entrySet()) {
-            entry.getValue().draw(entry.getValue().getEdges());
+            entry.getValue().draw();
         }
 
         System.out.println("\n******************\nShapes are getting into TreeSet....");
@@ -42,7 +42,7 @@ public class Main {
         if (!isCollectionEmpty.test(shapeTreeSet)) {
             for (Shape s : shapeTreeSet) {
                 if (greaterThanTen.test(s)) {
-                    s.draw(s.getEdges());
+                    s.draw();
                 }
             }
         }
@@ -50,7 +50,7 @@ public class Main {
 
     private static void drawAllShapes(List<Shape> shapes) {
         for (Shape s : shapes) {
-            s.draw(s.getEdges());
+            s.draw();
         }
     }
 }
