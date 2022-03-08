@@ -11,9 +11,20 @@ import java.util.stream.Collectors;
 
 public class StreamTest {
 
+    static ShapeService shapeService = new ShapeService();
+    static List<Shape>  shapeList = (List<Shape>) shapeService.getShapes(new ArrayList());
+
     public static void main(String[] args) {
       //  runFilterExample();
-        runMapExample();
+      //  runMapExample();
+        processByCount();
+    }
+
+    private static void processByCount() {
+       long count = shapeList.stream()
+                .filter(s -> s.getArea() > 50)
+                .count();
+        System.out.println("Only " + count + " shape(s) founded in the list.");
     }
 
     private static void runMapExample() {
@@ -25,7 +36,6 @@ public class StreamTest {
     }
 
     private static void runFilterExample() {
-        ShapeService shapeService = new ShapeService();
         List<Shape> shapeList = (List<Shape>) shapeService.getShapes(new ArrayList());
 
         List<Shape> collectedList = shapeList.stream()
