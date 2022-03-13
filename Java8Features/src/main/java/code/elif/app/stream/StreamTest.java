@@ -12,13 +12,29 @@ public class StreamTest {
 
     static ShapeService shapeService;
     static List<Shape> shapeList;
-    static List<Integer> list = Arrays.asList(0, 5, 10, 15, 20, 25);
+    static List<Integer> list = Arrays.asList(10, 15, 25, 20, 5, 0);
 
     public static void main(String[] args) {
         //  runFilterExample();
         //  runMapExample();
         // processByCount();
-        processBySorted();
+      //  processBySorted();
+      //  processByMaxAndMin();
+        processByForeach();
+
+    }
+
+    private static void processByForeach() {
+        list.stream().forEach(s->System.out.println( + s));
+    }
+
+    private static void processByMaxAndMin() {
+        Integer min = list.stream().min((a,b)-> a>b ? 1:-1).get();
+        Integer max = list.stream().max((a,b)-> a>b ? 1:-1).get();
+
+        System.out.println("Min value for list : " + min);
+        System.out.println("Max value for list : " + max);
+
     }
 
     private static void processBySorted() {
