@@ -15,5 +15,15 @@ public class DateAndTimeApiTest {
 
         LocalDateTime dateTime = LocalDateTime.now();
         System.out.println(dateTime);
+
+        System.out.println("Day of Year is : " +  date.getDayOfYear());
+        System.out.println("Day of Month is : " +  date.getDayOfMonth());
+        System.out.println("Day of Week is : " +  date.getDayOfWeek());
+
+        System.out.println("Month is : " +  date.getMonth());
+        System.out.println("Month value is : " +  date.getMonthValue());
+
+        System.out.println("Year is : " +  date.getYear());
+
     }
 }
