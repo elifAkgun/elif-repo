@@ -1,4 +1,4 @@
-package code.elif;
+package code.elif.app;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -40,13 +40,13 @@ public class Java8LambdaExpTest {
     public static int operate(int a, int b, MathOperation mathOps) {
         return mathOps.operation(a, b);
     }
-}
 
+
+}
 
 interface MathOperation {
     int operation(int a, int b);
 }
-
 interface GreetingService {
     void sayMessage(String message);
 }
@@ -58,11 +58,11 @@ class MessageTest {
     public static void main(String args[]) {
         String saluteText = "Hello! ";
         name = "Jane";
-        GreetingService greetService1 = (name) -> {
-            //saluteText = "Hi!!"; //Variable used in lambda expression should be final or effectively final
+        GreetingService greetService = (name) -> {
+           // saluteText = "Hi!!"; //Error: java: local variables referenced from a lambda expression must be final or effectively final
             System.out.println(saluteText + name );
         };
-        greetService1.sayMessage("John");
+        greetService.sayMessage("John");
     }
 }
 
@@ -108,6 +108,16 @@ class AnonymousClassTest {
         Thread t2 = new Thread(r2);
         t2.start();
 
+    }
+}
+
+class LambdaExpressionWithThreadTest {
+
+    public static void main(String[] args) {
+        Thread t = new Thread(() -> {
+            System.out.println("This is run method lambda expression");
+        });
+        t.start();
     }
 }
 
