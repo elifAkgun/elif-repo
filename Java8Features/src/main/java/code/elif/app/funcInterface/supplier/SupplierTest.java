@@ -14,7 +14,7 @@ public class SupplierTest {
     //1,3,5,7 characters must be uppercase letter
     private static void generateRandomPassword() {
         Supplier<String> supplierPassword = () -> {
-            String password1 = "";
+            String password = "";
             String symbols = "ABCDEFGHIJKLMNOPRSTUVWXYZ@#$";
 
             Supplier<Integer> supplierInt = () -> (int) (Math.random() * 10);
@@ -26,13 +26,13 @@ public class SupplierTest {
 
             for (int i = 1; i < 9; i++) {
                 if (i % 2 == 0) {
-                    password1 += supplierInt.get();
+                    password += supplierInt.get();
                 } else {
-                    password1 += supplierChar.get();
+                    password += supplierChar.get();
                 }
 
             }
-            return password1;
+            return password;
         };
 
         String password = supplierPassword.get();
