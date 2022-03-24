@@ -7,10 +7,24 @@ public class FunctionTest {
     public static void main(String[] args) {
       //  getGivenStringLengthWithFunction();
       //  removeWhiteSpacesFromGivenStringWithFunction();
-       // getGivenStringWhiteSpaceCountFunction2();
-       // combineTwoFunction2();
-        functionIdentityMethod();
+        //  getGivenStringWhiteSpaceCountFunction2();
+       // combineTwoFunction();
+        //  functionIdentityMethod();
 
+
+        int index = 0;
+        StringBuilder builder = new StringBuilder("Hello");
+        updateValue(index,builder);
+
+        System.out.println(builder.insert(0," Message:").toString());
+        System.out.println("counter: " + index );
+
+
+    }
+
+    private static void updateValue(int index, StringBuilder builder) {
+        index++;
+        builder.append(" world");
     }
 
     private static void getGivenStringLengthWithFunction() {

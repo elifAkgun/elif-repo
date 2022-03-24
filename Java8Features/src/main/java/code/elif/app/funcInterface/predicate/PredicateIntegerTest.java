@@ -31,3 +31,17 @@ public class PredicateIntegerTest {
         System.out.println();
     }
 }
+
+class PredicateBasicTest {
+    public static void main(String[] args) {
+
+        Predicate<Integer> graterThan10 = i -> i > 10;
+        Integer number = 7;
+
+        if (graterThan10.test(number)) {
+            System.out.print("Number is grater than 10");
+        } else {
+            System.out.print("Number is NOT grater than 10");
+        }
+    }
+}
