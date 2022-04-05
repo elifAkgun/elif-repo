@@ -1,7 +1,7 @@
 package code.elif;
 
-import code.elif.app.Shape;
-import code.elif.app.ShapeService;
+import code.elif.app.model.Shape;
+import code.elif.app.service.ShapeService;
 
 import java.util.*;
 import java.util.function.Predicate;
