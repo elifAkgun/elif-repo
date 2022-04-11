@@ -1,7 +1,12 @@
 package code.elif.app.model;
 
+import lombok.Getter;
+import lombok.ToString;
+
 import java.time.LocalDate;
 
+@Getter
+@ToString
 public class Employee {
     Integer id;
     String name;
@@ -14,6 +19,7 @@ public class Employee {
     public Employee(Integer id, String name, LocalDate startDate) {
         this.id = id;
         this.name = name;
-        System.out.println("Employee id: " + id + ", name: " + name + "startDate: " + startDate);
+        this.startDate = startDate;
+        System.out.println("Created Employee id: " + id + ", name: " + name + " startDate: " + startDate);
     }
 }
