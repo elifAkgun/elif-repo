@@ -15,14 +15,22 @@ public class StreamTest {
     static List<Integer> list = Arrays.asList(10, 15, 25, 20, 5, 0);
 
     public static void main(String[] args) {
-        //  runFilterExample();
-        //  runMapExample();
+        //filterExample();
+        // filterShapeExample();
+        // mapExample();
         // processByCount();
-        //  processBySorted();
-        //  processByMaxAndMin();
-        processByForeach();
-
+        // processBySorted();
+        // processByMaxAndMin();
+        // processByForeach();
+        streamCountExample();
     }
+
+private static void filterExample() {
+    List<Integer> list = Arrays.asList(10, 15, 25, 20, 5, 0);
+    List<Integer> collectedList = list.stream().filter(i -> i % 2 == 0)
+            .collect(Collectors.toList());
+    System.out.println(collectedList);
+}
 
     private static void processByForeach() {
         list.stream().forEach(s -> System.out.println(+s));
@@ -55,6 +63,14 @@ public class StreamTest {
         System.out.println("Only " + count + " shape(s) founded in the list.");
     }
 
+    private static void streamCountExample() {
+        List<Integer> list = Arrays.asList(10, 15, 25, 20, 5, 0);
+        long count = list.stream()
+                .filter(s -> s > 15)
+                .count();
+        System.out.println("Only " + count + " item(s) founded in the list.");
+    }
+
     private static void runMapExample() {
         shapeService = new ShapeService();
         shapeList = (List<Shape>) shapeService.getShapes(new ArrayList());
@@ -64,7 +80,7 @@ public class StreamTest {
         }
     }
 
-    private static void runFilterExample() {
+    private static void filterShapeExample() {
         shapeList = (List<Shape>) shapeService.getShapes(new ArrayList());
 
         List<Shape> shapeList = (List<Shape>) shapeService.getShapes(new ArrayList());
