@@ -7,7 +7,7 @@ import java.util.List;
 
 import static java.lang.Double.compare;
 
-public class Square implements Shape, Comparable<Shape> {
+public class Square implements Shape {
 
     private double edge;
 

@@ -9,7 +9,7 @@ import static java.lang.Double.compare;
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 
-public class Triangle implements Shape, Comparable<Shape> {
+public class Triangle implements Shape {
 
     private double x;
     private double y;

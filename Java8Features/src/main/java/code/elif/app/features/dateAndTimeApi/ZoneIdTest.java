@@ -14,9 +14,5 @@ public class ZoneIdTest {
         ZonedDateTime zonedDateTimeLA = ZonedDateTime.now(zone2);
         System.out.println(zonedDateTimeLA);
         System.out.println(zonedDateTimeLA.toLocalDateTime());
-
-
-        Comparator<Integer> comparable = (a, b) -> (a < b) ? 1 : -1;
-        System.out.println(comparable.compare(10,20));
     }
 }

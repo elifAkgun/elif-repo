@@ -7,9 +7,14 @@ import code.elif.app.model.shapes.Rectangle;
 import code.elif.app.model.shapes.Square;
 import code.elif.app.model.shapes.Triangle;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class ShapeService {
+
+    public Collection<Shape> getShapes() {
+       return getShapes(new ArrayList());
+    }
 
     public Collection<Shape> getShapes(Collection collection) {
         Collection<Shape> shapes = collection;

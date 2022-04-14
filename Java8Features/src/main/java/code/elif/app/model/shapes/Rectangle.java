@@ -7,7 +7,7 @@ import java.util.List;
 
 import static java.lang.Double.compare;
 
-public class Rectangle implements Shape, Comparable<Shape> {
+public class Rectangle implements Shape {
     private double edge1;
     private double edge2;
 
