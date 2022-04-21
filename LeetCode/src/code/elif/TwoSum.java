@@ -2,7 +2,7 @@ package code.elif;
 
 import java.util.HashMap;
 
-public class LeetCodeExample {
+public class TwoSum {
     public static void main(String[] args) {
         int[] nums = {2,4,11,3};
         int target = 6;
