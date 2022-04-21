@@ -1,8 +1,6 @@
 package code.elif;
 
 import java.util.HashMap;
-import java.util.hashMap;
-import java.util.Map;
 
 public class LeetCodeExample {
     public static void main(String[] args) {
