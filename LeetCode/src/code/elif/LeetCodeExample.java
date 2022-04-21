@@ -1,5 +1,6 @@
 package code.elif;
 
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 
@@ -17,29 +18,19 @@ public class LeetCodeExample {
 
     public static int[] twoSum(int[] nums, int target) {
         int[] output = new int[2];
-        Hashtable<Integer, Integer> hashtable = new Hashtable<>();
-
-        //initialize hashtable
-        for (int i = 0; i < nums.length; i++) {
-            hashtable.put(i, nums[i]);
-        }
+        HashMap<Integer, Integer> hashtable = new HashMap<>();
 
         for (int i = 0; i < nums.length; i++) {
             int second = target - nums[i];
 
-            if (hashtable.containsValue(second)) {
+            if (hashtable.containsKey(second)) {
                 output[0] = i;
-
-                for (Map.Entry entry : hashtable.entrySet()) {
-                    if (second == (Integer) entry.getValue() && i != (Integer) entry.getKey()) {
-                        output[1] = (Integer) entry.getKey();
-                        return output; //breaking because its one to one map
-                    }
-                }
-
+                output[1] = hashtable.get(second);
+                return output;
             }
-        }
 
+            hashtable.put(nums[i], i);
+        }
         return output;
 
     }
