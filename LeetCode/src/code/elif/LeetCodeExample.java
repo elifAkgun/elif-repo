@@ -1,7 +1,7 @@
 package code.elif;
 
 import java.util.HashMap;
-import java.util.Hashtable;
+import java.util.hashMap;
 import java.util.Map;
 
 public class LeetCodeExample {
@@ -18,18 +18,18 @@ public class LeetCodeExample {
 
     public static int[] twoSum(int[] nums, int target) {
         int[] output = new int[2];
-        HashMap<Integer, Integer> hashtable = new HashMap<>();
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
 
         for (int i = 0; i < nums.length; i++) {
             int second = target - nums[i];
 
-            if (hashtable.containsKey(second)) {
+            if (hashMap.containsKey(second)) {
                 output[0] = i;
-                output[1] = hashtable.get(second);
+                output[1] = hashMap.get(second);
                 return output;
             }
 
-            hashtable.put(nums[i], i);
+            hashMap.put(nums[i], i);
         }
         return output;
 
