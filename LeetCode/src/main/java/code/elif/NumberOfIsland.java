@@ -36,6 +36,6 @@ public class NumberOfIsland {
         searchLand(input, i, j + 1);
         searchLand(input, i - 1, j);
         searchLand(input, i + 1, j );
-        return 1;
+        return 1; 
     }
 }
