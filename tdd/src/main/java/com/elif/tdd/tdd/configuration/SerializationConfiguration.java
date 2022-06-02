@@ -14,7 +14,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 
 
 @Configuration
-public class SerilizationConfiguration {
+public class SerializationConfiguration {
 
 	@Bean
 	public Module springDataPageModule () {
