@@ -6,12 +6,17 @@ import code.elif.unit.model.land.LandUnit;
 import code.elif.unit.model.naval.NavalUnit;
 
 public class Client {
+    private GameUnitFactory gameUnitFactory;
+
+    public Client(GameUnitFactory gameUnitFactory) {
+        this.gameUnitFactory = gameUnitFactory;
+    }
 
     public static void main(String[] args) {
-        GameUnitFactory gameUnitFactory = new IndustrialUnitGameAbstractFactory();
+        Client client = new Client(new IndustrialUnitGameAbstractFactory());
 
-        LandUnit landUnit = gameUnitFactory.createLandUnit();
-        NavalUnit navalUnit = gameUnitFactory.createNavalUnit();
+        LandUnit landUnit = client.gameUnitFactory.createLandUnit();
+        NavalUnit navalUnit = client.gameUnitFactory.createNavalUnit();
 
         landUnit.attack();
         navalUnit.sail();
