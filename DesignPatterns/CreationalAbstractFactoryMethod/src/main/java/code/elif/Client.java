@@ -2,6 +2,7 @@ package code.elif;
 
 import code.elif.unit.factory.GameUnitFactory;
 import code.elif.unit.factory.IndustrialUnitGameAbstractFactory;
+import code.elif.unit.factory.MedievalUnitGameAbstractFactory;
 import code.elif.unit.model.land.LandUnit;
 import code.elif.unit.model.naval.NavalUnit;
 
@@ -16,9 +17,8 @@ public class Client {
     }
 
     public static void main(String[] args) {
-
-        Client client = new Client(new IndustrialUnitGameAbstractFactory());
-
+       // Client client = new Client(new IndustrialUnitGameAbstractFactory());
+        Client client = new Client(new MedievalUnitGameAbstractFactory());
         client.landUnit.attack();
         client.navalUnit.sail();
     }

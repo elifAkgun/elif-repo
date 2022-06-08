@@ -1,5 +1,11 @@
 package code.elif.unit.model.land;
 
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public abstract class LandUnit {
     int coordinateX, coordinateY;
 
