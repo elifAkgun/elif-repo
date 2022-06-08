@@ -8,9 +8,6 @@
     <artifactId>CreationalProxy</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
-    <modules>
-        <module>CreationalAbstractFactoryMethod</module>
-    </modules>
 
     <dependencies>
         <dependency>
