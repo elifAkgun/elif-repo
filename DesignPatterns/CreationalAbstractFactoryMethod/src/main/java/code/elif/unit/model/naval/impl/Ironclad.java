@@ -5,10 +5,10 @@ import code.elif.unit.model.naval.NavalUnit;
 public class Ironclad extends NavalUnit {
 
     public void sail() {
-        System.out.println("Galley is sailing...");
+        System.out.println("Ironclad is sailing...");
     }
 
     public void sendFrigate() {
-        System.out.println("Galley is sending frigate...");
+        System.out.println("Ironclad is sending frigate...");
     }
 }
