@@ -17,8 +17,8 @@ public class Client {
                 ? "They are not in the same reference"
                 : "Two objects are equal");
 
-        LazySingletonWithInnerClass lazyInner1 = LazySingletonWithInnerClass.getInstance();
-        LazySingletonWithInnerClass lazyInner2 = LazySingletonWithInnerClass.getInstance();
+        LazySingletonWithInitializationHolder lazyInner1 = LazySingletonWithInitializationHolder.getInstance();
+        LazySingletonWithInitializationHolder lazyInner2 = LazySingletonWithInitializationHolder.getInstance();
 
         System.out.println(lazyInner1 != lazyInner2
                 ? "They are not in the same reference"
