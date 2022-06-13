@@ -1,8 +1,13 @@
 package code.elif;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * An existing class used in our system
  */
+@Getter
+@Setter
 public class Employee {
 
 	private String fullName;
@@ -11,28 +16,4 @@ public class Employee {
 	
 	private String officeLocation;
 
-	public String getFullName() {
-		return fullName;
-	}
-
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
-	}
-
-	public String getJobTitle() {
-		return jobTitle;
-	}
-
-	public void setJobTitle(String jobTitle) {
-		this.jobTitle = jobTitle;
-	}
-
-	public String getOfficeLocation() {
-		return officeLocation;
-	}
-
-	public void setOfficeLocation(String officeLocation) {
-		this.officeLocation = officeLocation;
-	}
-	
 }

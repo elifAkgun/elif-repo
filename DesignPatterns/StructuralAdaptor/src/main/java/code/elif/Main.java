@@ -25,8 +25,8 @@ public class Main {
 	}
 
 	private static void populateEmployeeData(Employee employee) {
-		employee.setFullName("Elliot Alderson");
+		employee.setFullName("Allen Michail");
 		employee.setJobTitle("Security Engineer");
-		employee.setOfficeLocation("Allsafe Cybersecurity, New York City, New York");
+		employee.setOfficeLocation("CodeElif Software, London");
 	}
 }
