@@ -1,21 +1,38 @@
 package code.elif.config;
 
+import lombok.ToString;
 import org.apache.commons.dbcp.BasicDataSource;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 import javax.sql.DataSource;
 
 @Configuration
+@PropertySource("classpath:organization.properties")
+@ToString
 public class DataSourceConfig {
+
+    @Value( "${jdbc.url}" )
+    private String jdbcUrl;
+
+    @Value( "${jdbc.username}" )
+    private String username;
+
+    @Value( "${jdbc.password}" )
+    private String password;
+
+    @Value( "${jdbc.classname}" )
+    private String classname;
 
     @Bean(name = "dataSource")
     public DataSource getDataSource() {
         BasicDataSource dataSource = new BasicDataSource();
-        dataSource.setUsername("devuser");
-        dataSource.setPassword("d*vUser123");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/cambly?useSSL=false");
-        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        dataSource.setUsername(username);
+        dataSource.setPassword(password);
+        dataSource.setUrl(jdbcUrl);
+        dataSource.setDriverClassName(classname);
         return dataSource;
     }
 }

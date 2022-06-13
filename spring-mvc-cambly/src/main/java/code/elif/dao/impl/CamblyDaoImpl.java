@@ -28,6 +28,7 @@ public class CamblyDaoImpl implements CamblyDao {
 
     @Override
     public List<Cambly> getAllCamblys() {
+        System.out.println();
         return jdbcTemplate.query("SELECT * FROM cambly", new CamblyRowMapper());
     }
 

@@ -8,12 +8,20 @@ public class Main {
 		populateEmployeeData(employeeClassAdapter);
 
 		BusinessCardDesigner businessCardDesigner = new BusinessCardDesigner();
-		String designCard = businessCardDesigner.designCard(employeeClassAdapter);
-		System.out.println(designCard);
+		String designCard1 = businessCardDesigner.designCard(employeeClassAdapter);
+		System.out.println(designCard1);
 
 
 		/** Using Object Adapter **/
-		
+
+		Employee employee = new Employee();
+		populateEmployeeData(employee);
+
+		EmployeeObjectAdapter employeeObjectAdapter = new EmployeeObjectAdapter(employee);
+
+		String designCard2 = businessCardDesigner.designCard(employeeObjectAdapter);
+		System.out.println(designCard2);
+
 	}
 
 	private static void populateEmployeeData(Employee employee) {

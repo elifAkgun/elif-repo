@@ -26,6 +26,7 @@ hs_err_pid*
 .project 
 *.xsd
 */target/*
+*/*/target/*
 */.idea/*
 .DS_Store
 workspace.xml

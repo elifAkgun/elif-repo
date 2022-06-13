@@ -1,0 +1,8 @@
+<thlogic>
+    <attr sel="#headId" th:replace="~{fragments/head:: headFragment}"></attr>
+    <attr sel="#resultMessage" th:text="${__${T(code.elif.util.AttributeNames).RESULT_MESSAGE}__}"></attr>
+    <attr sel="#footer"  th:replace="~{fragments/footer::footerFragment}"></attr>
+    <attr sel="#reset"  th:href="@{__${T(code.elif.util.GameMappings).RESET}__}" th:text="#{game.play.again}"></attr>
+    <attr sel="#home"   th:href="@{__${T(code.elif.util.GameMappings).HOME}__}" th:text="#{game.home}"></attr>
+    <attr sel="#gameOver"   th:text="#{game.over}"></attr>
+</thlogic>

@@ -20,13 +20,13 @@ import javax.sql.DataSource;
 //This class is used instead of spring-mvc-servlet.xml
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
-    @Bean
-    public DataSource dataSource() {
-        final JndiDataSourceLookup dsLookup = new JndiDataSourceLookup();
-        dsLookup.setResourceRef(true);
-        DataSource dataSource = dsLookup.getDataSource("jdbc/cambly");
-        return dataSource;
-    }
+//    @Bean
+//    public DataSource dataSource() {
+//        final JndiDataSourceLookup dsLookup = new JndiDataSourceLookup();
+//        dsLookup.setResourceRef(true);
+//        DataSource dataSource = dsLookup.getDataSource("jdbc/cambly");
+//        return dataSource;
+//    }
 
     @Bean
     public UrlBasedViewResolver urlBasedViewResolver(){

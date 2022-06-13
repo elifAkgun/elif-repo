@@ -43,7 +43,8 @@ public class UserController {
 	@GetMapping("/users") 
 	Page<UserVM> getUsers(@CurrentUser User loggedInUser,Pageable page)
 	{
-		return service.getUsers(loggedInUser,page).map(UserVM::new);
+		Page<UserVM> map = service.getUsers(loggedInUser, page).map(UserVM::new);
+		return map;
 	}
 	
 	@ExceptionHandler({MethodArgumentNotValidException.class})

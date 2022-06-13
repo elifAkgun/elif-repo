@@ -1,4 +1,4 @@
-package code.elif.controller.config;
+package config;
 
 import lombok.ToString;
 import org.apache.commons.dbcp.BasicDataSource;

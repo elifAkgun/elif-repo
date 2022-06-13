@@ -29,12 +29,6 @@
         <div class="d-flex justify-content-center">
             <h1>List Todos</h1>
         </div>
-        <div class="container">
-            <button type="button" class="btn btn-success"
-                    onclick="window.location.href='showFormForAdd';return false;">Add
-                New Record
-            </button>
-        </div>
         <br>
         <div class="container">
             <table class="table">
@@ -50,7 +44,7 @@
                         <tr>
                             <td>${todo.header}</td>
                             <td>${todo.body}</td>
-                            <td>${todo.date}</td>
+                            <td>${todo.localDate}</td>
                         </tr>
                     </c:forEach>
                 </tbody>
