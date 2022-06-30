@@ -4,11 +4,13 @@ public class Client {
 
 	public static void main(String[] args) throws InterruptedException {
 
-		Command command = new AddMemberCommand("jane@code-elif.com",
+		Command addMemberCommand = new AddMemberCommand("jane@code-elif.com",
 				"coder", new EWSService());
-		command.execute();
+		addMemberCommand.execute();
 
-		
+		Command removeMemberCommand = new RemoveMemberCommand("jane@code-elif.com",
+				"coder", new EWSService());
+		removeMemberCommand.execute();
 	}
 
 }
