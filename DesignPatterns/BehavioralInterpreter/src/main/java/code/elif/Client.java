@@ -2,9 +2,10 @@ package code.elif;
 
 public class Client {
 
+	private static final User user = new User("Jane", "ADMIN");
+	private static final Report report = new Report("Banking Report", "ADMIN");
+
 	public static void main(String[] args) {
-		Report report = new Report("Banking Report", "ADMIN");
-		User user = new User("Jane", "ADMIN");
 
 		ExpressionBuilder expressionBuilder =
 				new ExpressionBuilder();
