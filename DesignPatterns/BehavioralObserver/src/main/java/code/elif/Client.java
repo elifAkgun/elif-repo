@@ -8,7 +8,6 @@ public class Client {
         PriceObserver priceObserver = new PriceObserver();
         order.attach(priceObserver);
 
-
         QuantityObserver quantityObserver = new QuantityObserver();
         order.attach(quantityObserver);
 
