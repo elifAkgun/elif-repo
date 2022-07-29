@@ -1,11 +1,19 @@
 package code.elif;
 
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
+@Getter
+@Setter
 public class Order {
 
+    @NonNull
     private String id;
 
     private LocalDate date;
@@ -19,28 +27,9 @@ public class Order {
         date = LocalDate.now();
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public Map<String, Double> getItems() {
-        return items;
-    }
-
     public void addItem(String name, double price) {
         items.put(name, price);
-        total+= price;
+        total += price;
     }
 
-    public double getTotal() {
-        return total;
-    }
-
-    public void setTotal(double total) {
-        this.total = total;
-    }
 }
