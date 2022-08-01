@@ -21,7 +21,6 @@ public class TextPrinter extends OrderPrinter {
                         + "\tPrice\t" + entry.getValue() + "\n"));
 
         return formattedItems.toString();
-
     }
 
     @Override
