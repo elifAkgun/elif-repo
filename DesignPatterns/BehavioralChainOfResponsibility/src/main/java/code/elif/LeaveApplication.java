@@ -4,15 +4,12 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 //Represents a request in our chain of responsibility
+
 public class LeaveApplication {
 
-    public enum Type {Sick, PTO, LOP}
+    public enum Type {Sick, PTO, LOP};
 
-    ;
-
-    public enum Status {Pending, Approved, Rejected}
-
-    ;
+    public enum Status {Pending, Approved, Rejected};
 
     private Type type;
 
@@ -35,24 +32,8 @@ public class LeaveApplication {
         return type;
     }
 
-    public LocalDate getFrom() {
-        return from;
-    }
-
-    public LocalDate getTo() {
-        return to;
-    }
-
     public long getNoOfDays() {
         return ChronoUnit.DAYS.between(from, to);
-    }
-
-    public String getProcessedBy() {
-        return processedBy;
-    }
-
-    public Status getStatus() {
-        return status;
     }
 
     public void approve(String approverName) {
@@ -60,53 +41,9 @@ public class LeaveApplication {
         this.processedBy = approverName;
     }
 
-    public void reject(String approverName) {
-        this.status = Status.Rejected;
-        this.processedBy = approverName;
-    }
-
-    public static Builder getBuilder() {
-        return new Builder();
-    }
-
     @Override
     public String toString() {
         return type + " leave for " + getNoOfDays() + " day(s) " + status
                 + " by " + processedBy;
-    }
-
-    public static class Builder {
-        private Type type;
-        private LocalDate from;
-        private LocalDate to;
-        private LeaveApplication application;
-
-        private Builder() {
-
-        }
-
-        public Builder withType(Type type) {
-            this.type = type;
-            return this;
-        }
-
-        public Builder from(LocalDate from) {
-            this.from = from;
-            return this;
-        }
-
-        public Builder to(LocalDate to) {
-            this.to = to;
-            return this;
-        }
-
-        public LeaveApplication build() {
-            this.application = new LeaveApplication(type, from, to);
-            return this.application;
-        }
-
-        public LeaveApplication getApplication() {
-            return application;
-        }
     }
 }
