@@ -1,8 +1,13 @@
 package code.elif.employee;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Collection;
 import java.util.Collections;
 
+@Getter
+@Setter
 public abstract class AbstractEmployee implements Employee {
 
 	private int performanceRating;
@@ -18,29 +23,9 @@ public abstract class AbstractEmployee implements Employee {
 		employeeId = employeeIdCounter++;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	@Override
-	public int getPerformanceRating() {
-		return performanceRating;
-	}
-
-	@Override
-	public void setPerformanceRating(int rating) {
-		performanceRating = rating;
-	}
-
 	@Override
 	public Collection<Employee> getDirectReports() {
 		return Collections.emptyList();
 	}
-
-	@Override
-	public int getEmployeeId() {
-		return employeeId;
-	}
-
 
 }
