@@ -1,9 +1,15 @@
 package code.elif;
 
 import javafx.geometry.Point2D;
+import lombok.Getter;
+import lombok.Setter;
+
 //concrete reusable
+
 public class Bitmap implements Image {
 
+    @Getter
+    @Setter
     private Point2D location;
 
     private String name;
@@ -15,16 +21,6 @@ public class Bitmap implements Image {
     @Override
     public void draw() {
         System.out.println("Drawing "+name+" @ "+location);
-    }
-
-    @Override
-    public Point2D getLocation() {
-        return location;
-    }
-
-    @Override
-    public void setLocation(Point2D location) {
-        this.location = location;
     }
 
     @Override

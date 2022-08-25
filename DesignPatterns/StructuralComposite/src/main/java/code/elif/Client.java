@@ -4,15 +4,16 @@ public class Client {
 
 
     public static void main(String[] args) {
-        File treeOne = createTreeOne();
+        File treeOne = createTreeOneFile();
         treeOne.ls();
         System.out.println("********");
-        File treeTwo = createTreeTwo();
+        File treeTwo = createTreeWithDirectory();
         treeTwo.ls();
+
     }
 
     //Client builds tree using leaf and composites
-    private static File createTreeOne() {
+    private static File createTreeWithDirectory() {
         File file1 = new BinaryFile("File1", 1000);
         Directory dir1 = new Directory("dir1");
         dir1.addFile(file1);
@@ -25,7 +26,7 @@ public class Client {
         return dir2;
     }
 
-    private static File createTreeTwo() {
+    private static File createTreeOneFile() {
         return new BinaryFile("Another file", 200);
     }
 }

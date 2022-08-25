@@ -9,9 +9,8 @@ public class Client {
 
     public static void main(String[] args) {
         Employee vicePresident = buildOrganization();
-        AppraisalVisitor visitor = new AppraisalVisitor();
+        Visitor visitor = new PrintVisitor();
 		visitOrgStructure(vicePresident,visitor);
-		System.out.println(visitor.getRatings());
     }
 
     private static void visitOrgStructure(Employee employee, Visitor visitor) {

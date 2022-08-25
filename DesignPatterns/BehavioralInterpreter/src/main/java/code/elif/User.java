@@ -1,9 +1,12 @@
 package code.elif;
 
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
+@Getter
 public class User {
 
 	private List<String> permissions;
@@ -15,13 +18,4 @@ public class User {
 		this.permissions = new ArrayList<>();
 		Stream.of(permissions).forEach(e->this.permissions.add(e.toLowerCase()));
 	}
-
-	public List<String> getPermissions() {
-		return permissions;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-	
 }

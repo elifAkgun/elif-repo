@@ -1,5 +1,8 @@
 package code.elif;
 
+import lombok.Getter;
+
+@Getter
 public class Report {
 
     private String name;
@@ -10,13 +13,4 @@ public class Report {
         this.name = name;
         this.permission = permissions;
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getPermission() {
-        return permission;
-    }
-
 }

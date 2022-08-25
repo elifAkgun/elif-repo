@@ -1,12 +1,11 @@
 package code.elif.dynamic;
 
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
-
-
 import code.elif.BitmapImage;
 import code.elif.Image;
 import javafx.geometry.Point2D;
+
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
 
 //Implement invocation handler. Your "proxy" code goes here.
 public class ImageInvocationHandler implements InvocationHandler {
@@ -55,11 +54,7 @@ public class ImageInvocationHandler implements InvocationHandler {
 	}
 
 	private Point2D handleGetLocation() {
-		if(image != null) {
-			return image.getLocation();
-		} else {
-			return this.location;
-		}
+		return (image != null) ? image.getLocation() : this.location;
 	}
 
 	private Object handleSetLocation(Object[] args) {
