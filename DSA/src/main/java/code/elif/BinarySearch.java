@@ -1,5 +1,6 @@
 package code.elif;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class BinarySearch {
@@ -10,6 +11,12 @@ public class BinarySearch {
 
         Random random = new Random();
         int number = random.nextInt(N);
+
+
+        ArrayList<Integer> integers = new ArrayList<Integer>();
+
+        System.out.println(  integers.toArray().length);
+
 
         int first = 0;
         int last = N;
