@@ -42,7 +42,7 @@ class CircleSingleLinkedListTest {
         circleSingleLinkedList.deleteNode(2);
         circleSingleLinkedList.deleteNode(1);
         circleSingleLinkedList.deleteNode(0);
-        Assertions.assertEquals(null, circleSingleLinkedList.getHead());
+        Assertions.assertNull(circleSingleLinkedList.getHead());
     }
 
     @Test
@@ -89,61 +89,12 @@ class CircleSingleLinkedListTest {
         Assertions.assertEquals("LinkedList does not contain any node.",
                 thrown.getMessage());
     }
-    /*
-    @Test
-    void addNode_whenMultipleNodeAddedInternally_HeadRemainsSame() {
-        Assertions.assertEquals(firstNode, circleSingleLinkedList.getHead());
-    }
-
-    @Test
-    void search_givenNode() {
-        Assertions.assertEquals(1, circleSingleLinkedList.search(20));
-    }
-
-    @Test
-    void delete() {
-        circleSingleLinkedList.deleteNode(1);
-        Assertions.assertEquals(-1, circleSingleLinkedList.search(20));
-    }
-
-    @Test
-    void delete_firstNode() {
-        circleSingleLinkedList.deleteNode(0);
-        Assertions.assertEquals(-1, circleSingleLinkedList.search(10));
-    }
-
-    @Test
-    void delete_lastNode() {
-        circleSingleLinkedList.deleteNode(2);
-        Assertions.assertEquals(-1, circleSingleLinkedList.search(30));
-    }
-
-    @Test
-    void delete_internalNode() {
-        circleSingleLinkedList.deleteNode(1);
-        Assertions.assertEquals(-1, circleSingleLinkedList.search(20));
-    }
-
-    @Test
-    void delete_whenDeleteLastNode_thenTailChangedWithNewTail() {
-        circleSingleLinkedList.deleteNode(2);
-        Assertions.assertEquals(secondNode.value, circleSingleLinkedList.getTail().value);
-    }
-
-    @Test
-    void delete_whenDeleteFirstNode_thenHeadChangedWithNewNode() {
-        circleSingleLinkedList.deleteNode(0);
-        Assertions.assertEquals(secondNode.value, circleSingleLinkedList.getHead().value);
-    }
 
     @Test
     void deleteLinkedList_whenDeleteLinkedListThenHeadAndTailWillBeNull() {
         circleSingleLinkedList.deleteLinkedList();
-        Assertions.assertEquals(null, circleSingleLinkedList.getHead());
-        Assertions.assertEquals(null, circleSingleLinkedList.getTail());
+        Assertions.assertNull(circleSingleLinkedList.getHead());
+        Assertions.assertNull(circleSingleLinkedList.getTail());
     }
-
-
-    */
 
 }
