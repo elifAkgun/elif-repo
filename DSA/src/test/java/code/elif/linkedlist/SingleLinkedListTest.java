@@ -1,4 +1,4 @@
-package code.elif.linkedList;
+package code.elif.linkedlist;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

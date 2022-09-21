@@ -13,7 +13,7 @@ public class BinarySearch {
         int number = random.nextInt(N);
 
 
-        ArrayList<Integer> integers = new ArrayList<Integer>();
+        ArrayList<Integer> integers = new ArrayList<>();
 
         System.out.println(  integers.toArray().length);
 

@@ -1,9 +1,9 @@
-package code.elif.linkedList;
+package code.elif.linkedlist;
 
 public class DoubleLinkedList<T> {
 
-    private DoubleNode head;
-    private DoubleNode tail;
+    private DoubleNode<T> head;
+    private DoubleNode<T> tail;
 
     public DoubleLinkedList(T value) {
         DoubleNode<T> blankNode = new DoubleNode<>(null,
@@ -22,18 +22,14 @@ public class DoubleLinkedList<T> {
             tail.nextNode = newNode;
             tail = newNode;
         } else {
-            int location = 0;
+            int location = 1;
             DoubleNode<T> tempNode = head;
-            while (location < position && tempNode.nextNode != null) {
+            while (location < position) {
                 tempNode = tempNode.nextNode;
                 location++;
             }
 
             DoubleNode<T> newNode = new DoubleNode<>(tempNode, value, tempNode.nextNode);
-            if (tempNode.nextNode != null) {
-                tempNode.nextNode.previousNode = newNode;
-            }
-
             tempNode.nextNode = newNode;
 
             if (newNode.nextNode == null) {
@@ -44,13 +40,32 @@ public class DoubleLinkedList<T> {
         return true;
     }
 
-    
 
-    public DoubleNode getHead() {
+    public DoubleNode<T> getHead() {
         return head;
     }
 
-    public DoubleNode getTail() {
+    public DoubleNode<T> getTail() {
         return tail;
+    }
+
+    public void deleteNode(int index) {
+        //delete node
+    }
+
+    public int search(T i) {
+        int index = 0;
+
+        DoubleNode<T> node = head;
+        while (node != null) {
+            if (node.value.equals(i)) {
+                return index;
+            }
+            index++;
+            node = node.nextNode;
+        }
+
+
+        return -1;
     }
 }

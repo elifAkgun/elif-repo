@@ -6,7 +6,7 @@ public class DuplicateExample {
 
     public static void main(String[] args) {
 
-        int array[] = {0, 10, 20, 30, 40, 20, 60, 70, 30};
+        int [] array = {0, 10, 20, 30, 40, 20, 60, 70, 30};
 
         Arrays.sort(array);
 

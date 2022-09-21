@@ -1,10 +1,10 @@
-package code.elif.linkedList;
+package code.elif.linkedlist;
 
 
 public class LinkedListDemo {
 
     public static void main(String[] args) {
-        SingleLinkedList<Integer> singleLinkedList = new SingleLinkedList<Integer>();
+        SingleLinkedList<Integer> singleLinkedList = new SingleLinkedList<>();
         singleLinkedList.addNode(10, 0);
         singleLinkedList.addNode(20, 1);
         singleLinkedList.addNode(30, 2);

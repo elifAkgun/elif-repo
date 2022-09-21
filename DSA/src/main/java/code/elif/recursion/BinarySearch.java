@@ -3,7 +3,7 @@ package code.elif.recursion;
 public class BinarySearch {
 
     public static void main(String[] args) {
-        int a[] = {10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110};
+        int [] a = {10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110};
         System.out.println(findIndex(120, a, 0, a.length));
     }
 

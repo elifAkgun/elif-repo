@@ -1,4 +1,4 @@
-package code.elif.linkedList;
+package code.elif.linkedlist;
 
 import java.util.Objects;
 
@@ -11,6 +11,13 @@ public class Node<T> {
     public Node(T value, Node<T> nextNodeReference) {
         this.value = value;
         this.nextNode = nextNodeReference;
+    }
+
+    public Node() {
+    }
+
+    public Node(T value) {
+
     }
 
     @Override

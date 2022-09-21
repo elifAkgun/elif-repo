@@ -2,10 +2,8 @@ package code.elif.array;
 
 public class ReverseArray {
 
-    private static final int N = 10;
-
     public static void main(String[] args) {
-        int array[] = {0, 10, 20, 30, 40, 50, 60, 70,80};
+        int [] array = {0, 10, 20, 30, 40, 50, 60, 70,80};
 
         reverse(array, array.length);
 

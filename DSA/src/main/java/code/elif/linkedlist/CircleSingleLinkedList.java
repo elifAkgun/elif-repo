@@ -1,4 +1,4 @@
-package code.elif.linkedList;
+package code.elif.linkedlist;
 
 public class CircleSingleLinkedList<T> {
     private Node<T> head;
@@ -23,7 +23,7 @@ public class CircleSingleLinkedList<T> {
             }
 
         } else if (position.equals(-1)) { // last position
-            Node<T> newNode = new Node<T>(value, head);
+            Node<T> newNode = new Node<>(value, head);
             tail.nextNode = newNode;
             tail = newNode;
         } else {
@@ -33,7 +33,7 @@ public class CircleSingleLinkedList<T> {
                 tempNode = tempNode.nextNode;
                 location++;
             }
-            tempNode.nextNode = new Node<T>(value, tempNode.nextNode);
+            tempNode.nextNode = new Node<>(value, tempNode.nextNode);
             if (tempNode.nextNode.nextNode == head) {
                 tail = tempNode.nextNode;
             }
@@ -61,7 +61,7 @@ public class CircleSingleLinkedList<T> {
 
 
         } else if (position == -1) {
-            Node tempNode = head;
+            Node<T> tempNode = head;
             while (tempNode.nextNode.nextNode != head) {
                 tempNode = tempNode.nextNode;
             }
@@ -81,11 +81,11 @@ public class CircleSingleLinkedList<T> {
         }
     }
 
-    public void traverse(T value) {
+    public void traverse() {
         if (head == null) {
             throw new IllegalStateException("LinkedList does not contain any node.");
         }
-        Node tempNode = head;
+        Node<T> tempNode = head;
         while (tempNode.nextNode != tail) {
             System.out.println(tempNode);
             tempNode = tempNode.nextNode;
@@ -96,7 +96,7 @@ public class CircleSingleLinkedList<T> {
         if (head == null) {
             throw new IllegalStateException("LinkedList does not contain any node.");
         }
-        Node tempNode = head;
+        Node<T> tempNode = head;
         int index = 0;
         while (tempNode.nextNode != head) {
             if (tempNode.value.equals(value)) {

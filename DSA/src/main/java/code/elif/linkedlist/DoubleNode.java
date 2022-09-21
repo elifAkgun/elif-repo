@@ -1,4 +1,4 @@
-package code.elif.linkedList;
+package code.elif.linkedlist;
 
 import java.util.Objects;
 

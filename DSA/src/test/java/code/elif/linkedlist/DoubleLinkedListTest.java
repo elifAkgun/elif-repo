@@ -1,4 +1,4 @@
-package code.elif.linkedList;
+package code.elif.linkedlist;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,13 +14,13 @@ class DoubleLinkedListTest {
     }
 
     @Test
-    public void initializeDoubleLinkedList() {
+    void initializeDoubleLinkedList() {
         assertEquals(10, doubleLinkedList.getHead().value);
         assertEquals(10, doubleLinkedList.getTail().value);
     }
 
     @Test
-    public void addNode_addNewNodeAsFirstNode() {
+    void addNode_addNewNodeAsFirstNode() {
         doubleLinkedList.addNode(0, 11);
         assertEquals(11, doubleLinkedList.getHead().value);
         assertEquals(10, doubleLinkedList.getHead().nextNode.value);
@@ -28,14 +28,15 @@ class DoubleLinkedListTest {
     }
 
     @Test
-    public void addNode_addNewNodeAsLastNode() {
+    void addNode_addNewNodeAsLastNode() {
         doubleLinkedList.addNode(-1, 11);
         assertEquals(11, doubleLinkedList.getTail().value);
         assertEquals(10, doubleLinkedList.getTail().previousNode.value);
         assertEquals(11, doubleLinkedList.getTail().previousNode.nextNode.value);
     }
+
     @Test
-    public void addNode_addNewNodeAsInternalNode() {
+    void addNode_addNewNodeAsInternalNode() {
         doubleLinkedList.addNode(1, 11);
         doubleLinkedList.addNode(2, 12);
         assertEquals(10, doubleLinkedList.getHead().value);
@@ -45,4 +46,32 @@ class DoubleLinkedListTest {
         assertEquals(11, doubleLinkedList.getTail().previousNode.value);
         assertEquals(10, doubleLinkedList.getTail().previousNode.previousNode.value);
     }
+
+    @Test
+    void searchNode_nonExistValue() {
+        doubleLinkedList.addNode(1, 11);
+        assertEquals(-1, doubleLinkedList.search(1));
+    }
+
+    @Test
+    void searchNode_ExistValue() {
+        doubleLinkedList.addNode(1, 11);
+        assertEquals(1, doubleLinkedList.search(11));
+    }
+
+    @Test
+    void searchNode_AfterMultipleAddition() {
+        doubleLinkedList.addNode(1, 11);
+        doubleLinkedList.addNode(1, 8);
+        doubleLinkedList.addNode(1, 9);
+        assertEquals(3, doubleLinkedList.search(11));
+    }
+
+    @Test
+    void deleteNode() {
+        doubleLinkedList.addNode(1, 11);
+        doubleLinkedList.deleteNode(1);
+        assertEquals(-1, doubleLinkedList.search(1));
+    }
+
 }
