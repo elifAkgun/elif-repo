@@ -1,6 +1,8 @@
 package code.elif.linkedlist;
 
-public class DoubleLinkedList<T> {
+import code.elif.linkedlist.node.DoubleNode;
+
+public class DoubleLinkedList<T> implements LinkedList<T> {
 
     private DoubleNode<T> head;
     private DoubleNode<T> tail;
@@ -12,7 +14,7 @@ public class DoubleLinkedList<T> {
         tail = blankNode;
     }
 
-    public boolean addNode(int position, T value) {
+    public void addNode(int position, T value) {
         if (position == 0) {
             DoubleNode<T> newNode = new DoubleNode<>(null, value, head);
             head.previousNode = newNode;
@@ -37,20 +39,47 @@ public class DoubleLinkedList<T> {
             }
 
         }
-        return true;
     }
 
+    public void deleteNode(int position) {
+        if (position == 0) {
+            head = head.nextNode;
+            head.previousNode = null;
+        } else if (position == -1) {
+            tail = tail.previousNode;
+            tail.nextNode = null;
+        } else {
+            int index = 0;
+            DoubleNode<T> tempNode = head;
+            while (index != position && tempNode.nextNode != null) {
+                tempNode = tempNode.nextNode;
+                index++;
+            }
+            if(tempNode.previousNode != null) {
+                tempNode.previousNode.nextNode = tempNode.nextNode;
+            } else {
+                head = tempNode.nextNode;
+            }
 
-    public DoubleNode<T> getHead() {
-        return head;
-    }
-
-    public DoubleNode<T> getTail() {
-        return tail;
-    }
-
-    public void deleteNode(int index) {
+            if(tempNode.nextNode != null) {
+                tempNode.nextNode.previousNode = tempNode.previousNode;
+            } else {
+                tail = tempNode.previousNode;
+            }
+        }
         //delete node
+    }
+
+    @Override
+    public void traverse() {
+        if (head == null) {
+            throw new IllegalStateException("LinkedList does not contain any node.");
+        }
+        DoubleNode<T> tempNode = head;
+        while (tempNode.nextNode != tail) {
+            System.out.println(tempNode);
+            tempNode = tempNode.nextNode;
+        }
     }
 
     public int search(T i) {
@@ -64,8 +93,21 @@ public class DoubleLinkedList<T> {
             index++;
             node = node.nextNode;
         }
-
-
         return -1;
     }
+
+    @Override
+    public void deleteLinkedList() {
+        head = null;
+        tail = null;
+    }
+
+    public DoubleNode<T> getHead() {
+        return head;
+    }
+
+    public DoubleNode<T> getTail() {
+        return tail;
+    }
+
 }

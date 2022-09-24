@@ -1,5 +1,6 @@
 package code.elif.linkedlist;
 
+import code.elif.linkedlist.node.Node;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,33 +9,26 @@ import org.junit.jupiter.api.Test;
 class SingleLinkedListTest {
 
     private static SingleLinkedList<Integer> singleLinkedList;
-    private static Node<Integer> thirdNode;
-    private static Node<Integer> secondNode;
-    private static Node<Integer> firstNode;
 
     @BeforeEach
     void init() {
         singleLinkedList = new SingleLinkedList<Integer>();
 
-        thirdNode = new Node<>(30, null);
-        secondNode = new Node<>(20, thirdNode);
-        firstNode = new Node<>(10, secondNode);
-
-        singleLinkedList.addNode(firstNode, 0);
-        singleLinkedList.addNode(secondNode, 1);
-        singleLinkedList.addNode(thirdNode, 2);
+        singleLinkedList.addNode(0, 10);
+        singleLinkedList.addNode(1, 20);
+        singleLinkedList.addNode(2, 30);
     }
 
     @Test
     void addNode() {
-        Assertions.assertEquals(firstNode, singleLinkedList.getHead());
-        Assertions.assertEquals(thirdNode, singleLinkedList.getTail());
+        Assertions.assertEquals(10, singleLinkedList.getHead().value);
+        Assertions.assertEquals(30, singleLinkedList.getTail().value);
 
     }
 
     @Test
     void addNode_asAFirstElement() {
-        singleLinkedList.addNode(1,0);
+        singleLinkedList.addNode(0,1);
         Assertions.assertEquals(1, singleLinkedList.getHead().value);
         Assertions.assertEquals(10, singleLinkedList.getHead().nextNode.value);
     }
@@ -42,14 +36,9 @@ class SingleLinkedListTest {
     @Test
     void addNode_hasOneNodeListAddAsAFirstElement() {
         singleLinkedList.deleteNode(0);
-        singleLinkedList.addNode(1,0);
+        singleLinkedList.addNode(0,1);
         Assertions.assertEquals(1, singleLinkedList.getHead().value);
-        Assertions.assertEquals(secondNode.value, singleLinkedList.getHead().nextNode.value);
-    }
-
-    @Test
-    void addNode_whenMultipleNodeAddedInternally_HeadRemainsSame() {
-        Assertions.assertEquals(firstNode, singleLinkedList.getHead());
+        Assertions.assertEquals(20, singleLinkedList.getHead().nextNode.value);
     }
 
     @Test
@@ -84,13 +73,13 @@ class SingleLinkedListTest {
     @Test
     void delete_whenDeleteLastNode_thenTailChangedWithNewTail() {
         singleLinkedList.deleteNode(2);
-        Assertions.assertEquals(secondNode.value, singleLinkedList.getTail().value);
+        Assertions.assertEquals(20, singleLinkedList.getTail().value);
     }
 
     @Test
     void delete_whenDeleteFirstNode_thenHeadChangedWithNewNode() {
         singleLinkedList.deleteNode(0);
-        Assertions.assertEquals(secondNode.value, singleLinkedList.getHead().value);
+        Assertions.assertEquals(20, singleLinkedList.getHead().value);
     }
 
     @Test

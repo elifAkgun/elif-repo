@@ -1,12 +1,12 @@
-package code.elif.linkedlist;
+package code.elif.linkedlist.node;
 
 import java.util.Objects;
 
 public class DoubleNode<T> {
 
-    DoubleNode<T> previousNode;
-    T value;
-    DoubleNode<T> nextNode;
+    public DoubleNode<T> previousNode;
+    public T value;
+    public DoubleNode<T> nextNode;
 
     public DoubleNode(DoubleNode<T> previousNode, T value, DoubleNode<T> nextNode) {
         this.previousNode = previousNode;

@@ -1,9 +1,11 @@
 package code.elif.linkedlist;
 
+import code.elif.linkedlist.node.Node;
+
 import java.util.HashSet;
 import java.util.Set;
 
-public class SingleLinkedList<T> {
+public class SingleLinkedList<T> implements LinkedList<T> {
 
     private Node<T> head;
     private Node<T> tail;
@@ -13,15 +15,11 @@ public class SingleLinkedList<T> {
         this.tail = null;
     }
 
-    public void addNode(Node<T> node, Integer position) {
-        addNode(node.value, position);
-    }
-
-    public void addNode(T value, Integer position) {
-        if (position.equals(0)) {
+    public void addNode(int position,T value) {
+        if (position == 0) {
             Node<T> newNode = new Node<>(value, head);
             this.head = newNode;
-        } else if (position.equals(-1)) { // last position
+        } else if (position == -1) { // last position
             Node<T> newNode = new Node<>(value, null);
             tail.nextNode = newNode;
             tail = newNode;
@@ -41,10 +39,10 @@ public class SingleLinkedList<T> {
         }
     }
 
-    public boolean deleteNode(int position) {
-        if (position == 0) {
+    public void deleteNode(int position) {
+        if (position ==0) {
             head = head.nextNode;
-        } else if (position == -1) {
+        } else if (position == -1) { // last position
             Node<T> tempNode = head;
             while (tempNode.nextNode.nextNode != null) {
                 tempNode = tempNode.nextNode;
@@ -63,7 +61,19 @@ public class SingleLinkedList<T> {
                 tail = tempNode;
             }
         }
-        return true;
+
+    }
+
+    @Override
+    public void traverse() {
+        if (head == null) {
+            throw new IllegalStateException("LinkedList does not contain any node.");
+        }
+        Node<T> tempNode = head;
+        while (tempNode.nextNode != tail) {
+            System.out.println(tempNode);
+            tempNode = tempNode.nextNode;
+        }
     }
 
     public int search(T value) {
@@ -109,107 +119,5 @@ public class SingleLinkedList<T> {
 
     public Node<T> getTail() {
         return tail;
-    }
-}
-
-
-
-class Solution {
-
-    //Definition for singly-linked list.
-    static class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode() {
-        }
-
-        ListNode(int val) {
-            this.val = val;
-        }
-
-        ListNode(int val, ListNode next) {
-            this.val = val;
-            this.next = next;
-        }
-    }
-
-
-    public static void main(String[] args) {
-        ListNode listNode1 = new ListNode(1);
-        ListNode listNode2 = new ListNode(2);
-
-        mergeTwoLists(listNode1, listNode2);
-
-        reverseList(new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5))))));
-
-    }
-
-
-    public static ListNode reverseList(ListNode head) {
-
-            ListNode cursor;
-            ListNode tail = head;
-            ListNode listNode = head.next;
-            tail.next = null;
-
-            while(listNode.next !=null ){
-                cursor = listNode;
-                listNode = listNode.next;
-                cursor.next = tail;
-                tail = cursor;
-            }
-
-            listNode.next = tail;
-
-            return listNode;
-
-        }
-
-    public static ListNode mergeTwoLists(ListNode list1, ListNode list2) {
-        ListNode mergedList = new ListNode();
-        ListNode tail = mergedList;
-
-        if (list1 == null && list2 == null) {
-            return tail;
-        }
-
-        while (list1 != null || list2 != null) {
-            if (list1 == null) {
-                tail.next = list2;
-                mergedList.next = mergedList;
-                return tail;
-            }
-            if (list2 == null) {
-                tail.next = list1;
-                mergedList.next = mergedList;
-                return tail;
-            }
-
-            if (list1.val == list2.val) {
-                tail.next = new ListNode(list1.val, new ListNode(list2.val));
-                list1 = list1.next;
-                list2 = list2.next;
-                tail = tail.next.next;
-            } else if (list1.val < list2.val) {
-                tail.next = new ListNode(list1.val);
-                tail = tail.next;
-                list1 = list1.next;
-            } else {
-                tail.next = new ListNode(list2.val);
-                tail = tail.next;
-                list2 = list2.next;
-            }
-        }
-        return mergedList;
-    }
-
-    public static ListNode detectCycle(ListNode head) {
-        Set<Integer> set = new HashSet<>();
-        while(!set.contains(head.val)){
-            set.add(head.val);
-            head = head.next;
-        }
-        return head;
     }
 }

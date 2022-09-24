@@ -1,11 +1,11 @@
-package code.elif.linkedlist;
+package code.elif.linkedlist.node;
 
 import java.util.Objects;
 
 public class Node<T> {
 
-    T value;
-    Node<T> nextNode;
+    public T value;
+    public Node<T> nextNode;
 
 
     public Node(T value, Node<T> nextNodeReference) {
