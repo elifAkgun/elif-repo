@@ -1,45 +1,45 @@
 package code.elif.linkedlist;
 
-import code.elif.linkedlist.node.Node;
+import code.elif.linkedlist.node.SingleNode;
 
-public class CircularSingleLinkedList<T> implements LinkedList<T>{
-    private Node<T> head;
-    private Node<T> tail;
+public class CircularSingleLinkedList<T> implements LinkedList<T> {
+    private SingleNode<T> head;
+    private SingleNode<T> tail;
 
     public CircularSingleLinkedList(T value) {
-        Node<T> blankNode = new Node<>(value, null);
-        blankNode.nextNode = blankNode;
-        this.head = blankNode;
-        this.tail = blankNode;
-        this.tail.nextNode = head;
+        SingleNode<T> blankSingleNode = new SingleNode<>(value, null);
+        blankSingleNode.nextSingleNode = blankSingleNode;
+        this.head = blankSingleNode;
+        this.tail = blankSingleNode;
+        this.tail.nextSingleNode = head;
     }
 
     @Override
-    public void addNode(int position ,T value) {
-        if (position ==0) {
-            Node<T> newNode = new Node<>(value, head);
-            this.head = newNode;
+    public void addNode(int position, T value) {
+        if (position == 0) {
+            SingleNode<T> newSingleNode = new SingleNode<>(value, head);
+            this.head = newSingleNode;
             if (this.tail != null) {
-                this.tail.nextNode = head;
+                this.tail.nextSingleNode = head;
             } else {
-                this.tail = head.nextNode;
+                this.tail = head.nextSingleNode;
             }
 
         } else if (position == -1) { // last position
-            Node<T> newNode = new Node<>(value, head);
-            tail.nextNode = newNode;
-            tail = newNode;
+            SingleNode<T> newSingleNode = new SingleNode<>(value, head);
+            tail.nextSingleNode = newSingleNode;
+            tail = newSingleNode;
         } else {
             int location = 0;
-            Node<T> tempNode = head;
+            SingleNode<T> tempSingleNode = head;
             while (location < position - 1) {
-                tempNode = tempNode.nextNode;
+                tempSingleNode = tempSingleNode.nextSingleNode;
                 location++;
             }
-            Node<T> newNode = new Node<>(value, tempNode.nextNode);
-            tempNode.nextNode = newNode;
-            if (tempNode.nextNode.nextNode == head) {
-                tail = tempNode.nextNode;
+            SingleNode<T> newSingleNode = new SingleNode<>(value, tempSingleNode.nextSingleNode);
+            tempSingleNode.nextSingleNode = newSingleNode;
+            if (tempSingleNode.nextSingleNode.nextSingleNode == head) {
+                tail = tempSingleNode.nextSingleNode;
             }
         }
     }
@@ -47,33 +47,32 @@ public class CircularSingleLinkedList<T> implements LinkedList<T>{
     @Override
     public void deleteNode(int position) {
         if (position == 0) {
-            head = head.nextNode;
-            tail.nextNode = head;
+            head = head.nextSingleNode;
+            tail.nextSingleNode = head;
 
-            if (head.nextNode == head) {
-                head.nextNode = null;
+            if (head.nextSingleNode == head) {
+                head.nextSingleNode = null;
                 head = null;
                 tail = null;
             }
 
-
         } else if (position == -1) {
-            Node<T> tempNode = head;
-            while (tempNode.nextNode.nextNode != head) {
-                tempNode = tempNode.nextNode;
+            SingleNode<T> tempSingleNode = head;
+            while (tempSingleNode.nextSingleNode.nextSingleNode != head) {
+                tempSingleNode = tempSingleNode.nextSingleNode;
             }
-            tempNode.nextNode = null;
-            tail = tempNode;
+            tempSingleNode.nextSingleNode = null;
+            tail = tempSingleNode;
         } else {
             int location = 0;
-            Node<T> tempNode = head;
-            while (location < position - 1 && tempNode.nextNode != head) {
-                tempNode = tempNode.nextNode;
+            SingleNode<T> tempSingleNode = head;
+            while (location < position - 1 && tempSingleNode.nextSingleNode != head) {
+                tempSingleNode = tempSingleNode.nextSingleNode;
                 location++;
             }
-            tempNode.nextNode = tempNode.nextNode.nextNode;
-            if (tempNode.nextNode == head) {
-                tail = tempNode;
+            tempSingleNode.nextSingleNode = tempSingleNode.nextSingleNode.nextSingleNode;
+            if (tempSingleNode.nextSingleNode == head) {
+                tail = tempSingleNode;
             }
         }
     }
@@ -83,10 +82,10 @@ public class CircularSingleLinkedList<T> implements LinkedList<T>{
         if (head == null) {
             throw new IllegalStateException("LinkedList does not contain any node.");
         }
-        Node<T> tempNode = head;
-        while (tempNode.nextNode != tail) {
-            System.out.println(tempNode);
-            tempNode = tempNode.nextNode;
+        SingleNode<T> tempSingleNode = head;
+        while (tempSingleNode.nextSingleNode != head) {
+            System.out.println(tempSingleNode);
+            tempSingleNode = tempSingleNode.nextSingleNode;
         }
     }
 
@@ -95,13 +94,13 @@ public class CircularSingleLinkedList<T> implements LinkedList<T>{
         if (head == null) {
             throw new IllegalStateException("LinkedList does not contain any node.");
         }
-        Node<T> tempNode = head;
+        SingleNode<T> tempSingleNode = head;
         int index = 0;
-        while (tempNode.nextNode != head) {
-            if (tempNode.value.equals(value)) {
+        while (tempSingleNode.nextSingleNode != head) {
+            if (tempSingleNode.value.equals(value)) {
                 return index;
             }
-            tempNode = tempNode.nextNode;
+            tempSingleNode = tempSingleNode.nextSingleNode;
             index++;
         }
         return -1;
@@ -110,15 +109,15 @@ public class CircularSingleLinkedList<T> implements LinkedList<T>{
     @Override
     public void deleteLinkedList() {
         head = null;
-        tail.nextNode = null;
         tail = null;
     }
 
-    public Node<T> getHead() {
+    public SingleNode<T> getHead() {
         return head;
     }
 
-    public Node<T> getTail() {
+    public SingleNode<T> getTail() {
         return tail;
     }
+
 }

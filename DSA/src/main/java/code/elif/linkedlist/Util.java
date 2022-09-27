@@ -1,35 +1,35 @@
 package code.elif.linkedlist;
 
-import code.elif.linkedlist.node.Node;
+import code.elif.linkedlist.node.SingleNode;
 
 import java.util.HashSet;
 import java.util.Set;
 
 public class Util<T extends Comparable> {
 
-    public Node<T> reverseList(Node<T> head) {
+    public SingleNode<T> reverseList(SingleNode<T> head) {
 
-        Node<T> cursor;
-        Node<T> tail = head;
-        Node<T> listNode = head.nextNode;
-        tail.nextNode = null;
+        SingleNode<T> cursor;
+        SingleNode<T> tail = head;
+        SingleNode<T> listSingleNode = head.nextSingleNode;
+        tail.nextSingleNode = null;
 
-        while(listNode.nextNode !=null ){
-            cursor = listNode;
-            listNode = listNode.nextNode;
-            cursor.nextNode = tail;
+        while(listSingleNode.nextSingleNode !=null ){
+            cursor = listSingleNode;
+            listSingleNode = listSingleNode.nextSingleNode;
+            cursor.nextSingleNode = tail;
             tail = cursor;
         }
 
-        listNode.nextNode = tail;
+        listSingleNode.nextSingleNode = tail;
 
-        return listNode;
+        return listSingleNode;
 
     }
 
-    public Node<T> mergeTwoLists(Node<T> list1, Node<T> list2) {
-        Node<T> mergedList = new Node<T>();
-        Node<T> tail = mergedList;
+    public SingleNode<T> mergeTwoLists(SingleNode<T> list1, SingleNode<T> list2) {
+        SingleNode<T> mergedList = new SingleNode<T>();
+        SingleNode<T> tail = mergedList;
 
         if (list1 == null && list2 == null) {
             return tail;
@@ -37,39 +37,39 @@ public class Util<T extends Comparable> {
 
         while (list1 != null || list2 != null) {
             if (list1 == null) {
-                tail.nextNode = list2;
-                mergedList.nextNode = mergedList;
+                tail.nextSingleNode = list2;
+                mergedList.nextSingleNode = mergedList;
                 return tail;
             }
             if (list2 == null) {
-                tail.nextNode = list1;
-                mergedList.nextNode = mergedList;
+                tail.nextSingleNode = list1;
+                mergedList.nextSingleNode = mergedList;
                 return tail;
             }
 
             if (list1.value == list2.value) {
-                tail.nextNode = new Node<>(list1.value, new Node<>(list2.value));
-                list1 = list1.nextNode;
-                list2 = list2.nextNode;
-                tail = tail.nextNode.nextNode;
+                tail.nextSingleNode = new SingleNode<>(list1.value, new SingleNode<>(list2.value));
+                list1 = list1.nextSingleNode;
+                list2 = list2.nextSingleNode;
+                tail = tail.nextSingleNode.nextSingleNode;
             } else if (list1.value.compareTo(list2.value)<0) {
-                tail.nextNode = new Node<>(list1.value);
-                tail = tail.nextNode;
-                list1 = list1.nextNode;
+                tail.nextSingleNode = new SingleNode<>(list1.value);
+                tail = tail.nextSingleNode;
+                list1 = list1.nextSingleNode;
             } else {
-                tail.nextNode = new Node<>(list2.value);
-                tail = tail.nextNode;
-                list2 = list2.nextNode;
+                tail.nextSingleNode = new SingleNode<>(list2.value);
+                tail = tail.nextSingleNode;
+                list2 = list2.nextSingleNode;
             }
         }
         return mergedList;
     }
 
-    public Node<T> detectCycle(Node<T> head) {
+    public SingleNode<T> detectCycle(SingleNode<T> head) {
         Set<T> set = new HashSet<>();
         while(!set.contains(head.value)){
             set.add(head.value);
-            head = head.nextNode;
+            head = head.nextSingleNode;
         }
         return head;
     }

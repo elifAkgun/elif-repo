@@ -2,7 +2,7 @@ package code.elif.linkedlist.node;
 
 import java.util.Objects;
 
-public class DoubleNode<T> {
+public class DoubleNode<T> implements Node<T>{
 
     public DoubleNode<T> previousNode;
     public T value;
@@ -27,5 +27,10 @@ public class DoubleNode<T> {
     @Override
     public int hashCode() {
         return Objects.hash(previousNode, value, nextNode);
+    }
+
+    @Override
+    public T getValue() {
+        return value;
     }
 }

@@ -1,6 +1,7 @@
 package code.elif.linkedlist;
 
 import code.elif.linkedlist.node.DoubleNode;
+import code.elif.linkedlist.node.Node;
 
 public class DoubleLinkedList<T> implements LinkedList<T> {
 
@@ -55,13 +56,13 @@ public class DoubleLinkedList<T> implements LinkedList<T> {
                 tempNode = tempNode.nextNode;
                 index++;
             }
-            if(tempNode.previousNode != null) {
+            if (tempNode.previousNode != null) {
                 tempNode.previousNode.nextNode = tempNode.nextNode;
             } else {
                 head = tempNode.nextNode;
             }
 
-            if(tempNode.nextNode != null) {
+            if (tempNode.nextNode != null) {
                 tempNode.nextNode.previousNode = tempNode.previousNode;
             } else {
                 tail = tempNode.previousNode;
@@ -77,7 +78,7 @@ public class DoubleLinkedList<T> implements LinkedList<T> {
         }
         DoubleNode<T> tempNode = head;
         while (tempNode.nextNode != tail) {
-            System.out.println(tempNode);
+            System.out.println(tempNode.value);
             tempNode = tempNode.nextNode;
         }
     }
@@ -96,10 +97,28 @@ public class DoubleLinkedList<T> implements LinkedList<T> {
         return -1;
     }
 
+    public void traverseFromLast() {
+        if (head == null) {
+            throw new IllegalStateException("LinkedList does not contain any node.");
+        }
+        DoubleNode<T> tempNode = tail;
+        System.out.print("NULL <-> ");
+        while (tempNode.previousNode != head) {
+            System.out.print(tempNode.value + " <-> ");
+            tempNode = tempNode.previousNode;
+        }
+        System.out.print("NULL");
+    }
+
     @Override
     public void deleteLinkedList() {
-        head = null;
+        DoubleNode temp = head;
+        while (temp.nextNode != null) {
+            temp.previousNode = null;
+            temp = temp.nextNode;
+        }
         tail = null;
+        head = null;
     }
 
     public DoubleNode<T> getHead() {

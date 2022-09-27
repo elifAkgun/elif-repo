@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class DoubleLinkedListTest {
     private static DoubleLinkedList<Integer> doubleLinkedList;
@@ -11,9 +12,9 @@ class DoubleLinkedListTest {
     @BeforeEach
     public void init() {
         doubleLinkedList = new DoubleLinkedList<>(10);
-        doubleLinkedList.addNode(1,20);
-        doubleLinkedList.addNode(2,30);
-        doubleLinkedList.addNode(3,40);
+        doubleLinkedList.addNode(1, 20);
+        doubleLinkedList.addNode(2, 30);
+        doubleLinkedList.addNode(3, 40);
     }
 
     @Test
@@ -100,4 +101,14 @@ class DoubleLinkedListTest {
         assertEquals(10, doubleLinkedList.getHead().nextNode.previousNode.value);
     }
 
+    @Test
+    void traverseFromLast() {
+        doubleLinkedList.traverseFromLast();
+    }
+
+    @Test
+    void deleteLinkedList(){
+        doubleLinkedList.deleteLinkedList();
+        assertNull(doubleLinkedList.getHead());
+    }
 }

@@ -27,15 +27,15 @@ class CircularSingleLinkedListTest {
     void addNode_asAFirstElement() {
         circularSingleLinkedList.addNode(0,1);
         Assertions.assertEquals(1, circularSingleLinkedList.getHead().value);
-        Assertions.assertEquals(10, circularSingleLinkedList.getHead().nextNode.value);
-        Assertions.assertEquals(1, circularSingleLinkedList.getTail().nextNode.value);
+        Assertions.assertEquals(10, circularSingleLinkedList.getHead().nextSingleNode.value);
+        Assertions.assertEquals(1, circularSingleLinkedList.getTail().nextSingleNode.value);
     }
 
     @Test
     void deleteNode_hasOneNodeListAddAsAFirstElement() {
         circularSingleLinkedList.deleteNode(0);
         Assertions.assertEquals(20, circularSingleLinkedList.getHead().value);
-        Assertions.assertEquals(30, circularSingleLinkedList.getHead().nextNode.value);
+        Assertions.assertEquals(30, circularSingleLinkedList.getHead().nextSingleNode.value);
     }
     @Test
     void deleteNode_whichHasOnlyOneNodeInList() {
@@ -58,14 +58,14 @@ class CircularSingleLinkedListTest {
     void delete_tailNode_thenTailUpdatedWithNewValue() {
         circularSingleLinkedList.deleteNode(2);
         Assertions.assertEquals(20, circularSingleLinkedList.getTail().value);
-        Assertions.assertEquals(10, circularSingleLinkedList.getTail().nextNode.value);
+        Assertions.assertEquals(10, circularSingleLinkedList.getTail().nextSingleNode.value);
     }
 
     @Test
     void delete_HeadNode_thenTailUpdatedWithNewValue() {
         circularSingleLinkedList.deleteNode(0);
         Assertions.assertEquals(30, circularSingleLinkedList.getTail().value);
-        Assertions.assertEquals(20, circularSingleLinkedList.getTail().nextNode.value);
+        Assertions.assertEquals(20, circularSingleLinkedList.getTail().nextSingleNode.value);
     }
 
     @Test

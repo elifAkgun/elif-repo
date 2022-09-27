@@ -1,64 +1,74 @@
 package code.elif.linkedlist;
 
-import code.elif.linkedlist.node.Node;
-
-import java.util.HashSet;
-import java.util.Set;
+import code.elif.linkedlist.node.SingleNode;
 
 public class SingleLinkedList<T> implements LinkedList<T> {
 
-    private Node<T> head;
-    private Node<T> tail;
+    private SingleNode<T> head;
+    private SingleNode<T> tail;
 
     public SingleLinkedList() {
         this.head = null;
         this.tail = null;
     }
 
-    public void addNode(int position,T value) {
+    public void addNode(int position, T value) {
+        SingleNode<T> newSingleNode;
         if (position == 0) {
-            Node<T> newNode = new Node<>(value, head);
-            this.head = newNode;
+            newSingleNode = new SingleNode<>(value, head);
+            this.head = newSingleNode;
         } else if (position == -1) { // last position
-            Node<T> newNode = new Node<>(value, null);
-            tail.nextNode = newNode;
-            tail = newNode;
+            newSingleNode = new SingleNode<>(value, null);
+            tail.nextSingleNode = newSingleNode;
+            tail = newSingleNode;
         } else {
             int location = 0;
-            Node<T> tempNode = head;
-            while (location < position && tempNode.nextNode != null) {
-                tempNode = tempNode.nextNode;
+            SingleNode<T> tempSingleNode = head;
+            while (location < position && tempSingleNode.nextSingleNode != null) {
+                tempSingleNode = tempSingleNode.nextSingleNode;
                 location++;
             }
-            Node<T> newNode = new Node<>(value, tempNode.nextNode);
-            tempNode.nextNode = newNode;
+            newSingleNode = new SingleNode<>(value, tempSingleNode.nextSingleNode);
+            tempSingleNode.nextSingleNode = newSingleNode;
 
-            if (newNode.nextNode == null) {
-                tail = newNode;
-            }
+
+        }
+        if (newSingleNode.nextSingleNode == null) {
+            tail = newSingleNode;
         }
     }
 
     public void deleteNode(int position) {
-        if (position ==0) {
-            head = head.nextNode;
-        } else if (position == -1) { // last position
-            Node<T> tempNode = head;
-            while (tempNode.nextNode.nextNode != null) {
-                tempNode = tempNode.nextNode;
+        SingleNode<T> tempSingleNode;
+        if (position == 0) {
+            head = head.nextSingleNode;
+            if(head==null){
+                tail = null;
             }
-            tempNode.nextNode = null;
-            tail = tempNode;
+        } else if (position == -1) { // last position
+            tempSingleNode = head;
+            while (tempSingleNode.nextSingleNode != null
+                    && tempSingleNode.nextSingleNode.nextSingleNode != null) {
+                tempSingleNode = tempSingleNode.nextSingleNode;
+            }
+            if (tempSingleNode.nextSingleNode == null) {
+                tail = null;
+                head = null;
+            } else {
+                tempSingleNode.nextSingleNode = null;
+                tail = tempSingleNode;
+            }
         } else {
             int location = 0;
-            Node<T> tempNode = head;
-            while (location < position - 1 && tempNode.nextNode != null) {
-                tempNode = tempNode.nextNode;
+            tempSingleNode = head;
+            while (location < position - 1
+                    && tempSingleNode.nextSingleNode != null) {
+                tempSingleNode = tempSingleNode.nextSingleNode;
                 location++;
             }
-            tempNode.nextNode = tempNode.nextNode.nextNode;
-            if (tempNode.nextNode == null) {
-                tail = tempNode;
+            tempSingleNode.nextSingleNode = tempSingleNode.nextSingleNode.nextSingleNode;
+            if (tempSingleNode.nextSingleNode == null) {
+                tail = tempSingleNode;
             }
         }
 
@@ -69,10 +79,10 @@ public class SingleLinkedList<T> implements LinkedList<T> {
         if (head == null) {
             throw new IllegalStateException("LinkedList does not contain any node.");
         }
-        Node<T> tempNode = head;
-        while (tempNode.nextNode != tail) {
-            System.out.println(tempNode);
-            tempNode = tempNode.nextNode;
+        SingleNode<T> tempSingleNode = head;
+        while (tempSingleNode.nextSingleNode != tail) {
+            System.out.println(tempSingleNode);
+            tempSingleNode = tempSingleNode.nextSingleNode;
         }
     }
 
@@ -80,12 +90,12 @@ public class SingleLinkedList<T> implements LinkedList<T> {
         if (head == null) {
             throw new IllegalStateException("LinkedList does not contain any node.");
         }
-        Node<T> tempNode = head;
+        SingleNode<T> tempSingleNode = head;
         int index = 0;
-        while (tempNode.nextNode != null) {
-            tempNode = tempNode.nextNode;
+        while (tempSingleNode.nextSingleNode != null) {
+            tempSingleNode = tempSingleNode.nextSingleNode;
             index++;
-            if (tempNode.value.equals(value)) {
+            if (tempSingleNode.value.equals(value)) {
                 return index;
             }
         }
@@ -99,10 +109,10 @@ public class SingleLinkedList<T> implements LinkedList<T> {
                 .append("head=" + head)
                 .append(", tail=" + tail)
                 .append(", next = {");
-        Node<T> tempNode = head;
-        while (tempNode.nextNode != null) {
-            s.append(tempNode.nextNode);
-            tempNode = tempNode.nextNode;
+        SingleNode<T> tempSingleNode = head;
+        while (tempSingleNode.nextSingleNode != null) {
+            s.append(tempSingleNode.nextSingleNode);
+            tempSingleNode = tempSingleNode.nextSingleNode;
         }
         s.append('}');
         return s.toString();
@@ -113,11 +123,11 @@ public class SingleLinkedList<T> implements LinkedList<T> {
         tail = null;
     }
 
-    public Node<T> getHead() {
+    public SingleNode<T> getHead() {
         return head;
     }
 
-    public Node<T> getTail() {
+    public SingleNode<T> getTail() {
         return tail;
     }
 }
