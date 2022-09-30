@@ -33,7 +33,20 @@ public class LinkedListTree<T> implements Tree<T> {
 
     @Override
     public int searchValue(T value) {
-        return 0;
+        Queue<Node<T>> queue = new LinkedListQueue<>();
+        queue.enQueue(root);
+        int index = 0;
+        while (!queue.isEmpty()) {
+            Node<T> node = queue.deQueue();
+            if (node.value == value) {
+                return index;
+            } else if (node != null) {
+                queue.enQueue(node.leftNode);
+                queue.enQueue(node.rightNode);
+            }
+            index++;
+        }
+        return -1;
     }
 
     @Override
@@ -63,47 +76,63 @@ public class LinkedListTree<T> implements Tree<T> {
         return list;
     }
 
-    private List<T> preOrderTraverse(Node<T> root, List<T> list) {
+    private void preOrderTraverse(Node<T> root, List<T> list) {
         if (root != null) {
             list.add(root.value);
             preOrderTraverse(root.leftNode, list);
             preOrderTraverse(root.rightNode, list);
         }
-        return list;
     }
 
-    private List<T> inOrderTraverse(Node<T> root, List<T> list) {
+    private void inOrderTraverse(Node<T> root, List<T> list) {
         if (root != null) {
             inOrderTraverse(root.leftNode, list);
             list.add(root.value);
             inOrderTraverse(root.rightNode, list);
         }
-        return list;
     }
 
-    private List<T> postOrderTraverse(Node<T> root, List<T> list) {
+    private void postOrderTraverse(Node<T> root, List<T> list) {
         if (root != null) {
             postOrderTraverse(root.leftNode, list);
             postOrderTraverse(root.rightNode, list);
             list.add(root.value);
         }
-        return list;
     }
 
-    private List<T> levelOrder(Node<T> root, List<T> list) {
+    private void levelOrder(Node<T> root, List<T> list) {
         Queue<Node<T>> queue = new LinkedListQueue<>();
         queue.enQueue(root);
         while (!queue.isEmpty()) {
             Node<T> node = queue.deQueue();
-            if(node!= null) {
+            if (node != null) {
                 queue.enQueue(node.leftNode);
                 queue.enQueue(node.rightNode);
                 list.add(node.value);
             }
         }
-        return list;
     }
 
+    public List<List<T>> levelOrderLevel(Node<T> root) {
+        List<List<T>> lists = new ArrayList<>();
+        Queue<Node<T>> queue = new LinkedListQueue<>();
+        queue.enQueue(root);
+        while (!queue.isEmpty()) {
+            int qSize = ((LinkedListQueue) queue).getSize();
+            List<T> list = new ArrayList<>();
+            for (int i = 0; i < qSize; i++) {
+                Node<T> node = queue.deQueue();
+                if (node != null) {
+                    list.add(node.value);
+                    queue.enQueue(node.leftNode);
+                    queue.enQueue(node.rightNode);
+                }
+            }
+            if (!list.isEmpty())
+                lists.add(list);
+        }
+        return lists;
+    }
 
     @Override
     public boolean deleteTree() {

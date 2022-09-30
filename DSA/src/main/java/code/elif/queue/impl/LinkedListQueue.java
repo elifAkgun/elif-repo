@@ -7,14 +7,17 @@ import code.elif.queue.Queue;
 public class LinkedListQueue<T> implements Queue<T> {
 
     LinkedList<T> queue;
+    int size;
 
     public LinkedListQueue() {
         queue = new SingleLinkedList<>();
+        size =0;
     }
 
     @Override
     public boolean enQueue(T value) {
         queue.addNode(0, value);
+        size++;
         return true;
     }
 
@@ -25,7 +28,7 @@ public class LinkedListQueue<T> implements Queue<T> {
 
         T value = queue.getTail().getValue();
         queue.deleteNode(-1);
-
+        size--;
         return value;
     }
 
@@ -51,5 +54,9 @@ public class LinkedListQueue<T> implements Queue<T> {
     public boolean deleteQueue() {
         queue = null;
         return true;
+    }
+
+    public int getSize() {
+        return size;
     }
 }
