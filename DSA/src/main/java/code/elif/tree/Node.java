@@ -11,4 +11,11 @@ public class Node<T> {
         this.value = value;
         this.rightNode = rightNode;
     }
+
+    @Override
+    public String toString() {
+        return "Node{" +
+                "value=" + value +
+                '}';
+    }
 }

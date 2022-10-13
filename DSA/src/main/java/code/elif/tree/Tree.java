@@ -13,9 +13,13 @@ public interface Tree<T> {
 
     boolean insertNode(T value);
 
-    boolean deleteNode(int index);
+    boolean deleteNode(Node<T> root, T value);
 
-    int searchValue(T value);
+    Node<T> search(T value);
+
+    int getIndex(T value);
+
+    Tree<T>  mirrorTree();
 
     List<T> traverseAllNodes(LinkedListTree.Order orderType);
 

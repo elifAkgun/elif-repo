@@ -10,7 +10,6 @@ public class LinkedListTree<T> implements Tree<T> {
 
     Node<T> root;
 
-
     public LinkedListTree(T value) {
         root.leftNode = null;
         root.rightNode = null;
@@ -23,22 +22,77 @@ public class LinkedListTree<T> implements Tree<T> {
 
     @Override
     public boolean insertNode(T value) {
-        return false;
-    }
 
-    @Override
-    public boolean deleteNode(int index) {
-        return false;
-    }
+        if (root == null) {
+            root = new Node<T>(null, value, null);
+            return true;
+        }
 
-    @Override
-    public int searchValue(T value) {
         Queue<Node<T>> queue = new LinkedListQueue<>();
         queue.enQueue(root);
-        int index = 0;
         while (!queue.isEmpty()) {
             Node<T> node = queue.deQueue();
-            if (node.value == value) {
+            if (node != null) {
+                if (node.leftNode == null) {
+                    node.leftNode = new Node<T>(null, value, null);
+                    return true;
+                } else if (node.rightNode == null) {
+                    node.rightNode = new Node<T>(null, value, null);
+                    return true;
+                }
+                queue.enQueue(node.leftNode);
+                queue.enQueue(node.rightNode);
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean deleteNode(Node<T> root, T value) {
+        if (this.root == null) {
+            throw new IllegalStateException("Tree is empty.");
+        }
+        if (value == null) {
+            return false;
+        }
+        Node<T> deletedNode = search(value);
+        if (deletedNode != null) {
+            Node<T> deepestNode = getDeepestNode();
+            deletedNode.value = deepestNode.value;
+            deepestNode.value = null;
+            return true;
+        }
+       return false;
+    }
+
+
+    private Node<T> getDeepestNode() {
+        Node<T> deepestNode = root;
+        Queue<Node<T>> queue = new LinkedListQueue<>();
+        queue.enQueue(root);
+        while (!queue.isEmpty()) {
+            Node<T> node = queue.deQueue();
+            if (node != null) {
+                queue.enQueue(node.leftNode);
+                queue.enQueue(node.rightNode);
+                deepestNode = node;
+            }
+        }
+        return deepestNode;
+    }
+
+    @Override
+    public int getIndex(T value) {
+        if (root == null) {
+            throw new IllegalStateException("Tree is empty.");
+        }
+
+        Queue<Node<T>> queue = new LinkedListQueue<>();
+        queue.enQueue(root);
+        int index = 1;
+        while (!queue.isEmpty()) {
+            Node<T> node = queue.deQueue();
+            if (node != null && node.value == value) {
                 return index;
             } else if (node != null) {
                 queue.enQueue(node.leftNode);
@@ -47,6 +101,48 @@ public class LinkedListTree<T> implements Tree<T> {
             index++;
         }
         return -1;
+    }
+
+    @Override
+    public Node<T> search(T value) {
+        if (root == null) {
+            throw new IllegalStateException("Tree is empty.");
+        }
+        Queue<Node<T>> queue = new LinkedListQueue<>();
+        queue.enQueue(root);
+        while (!queue.isEmpty()) {
+            Node<T> node = queue.deQueue();
+            if (node != null && node.value == value) {
+                return node;
+            } else if (node != null) {
+                queue.enQueue(node.leftNode);
+                queue.enQueue(node.rightNode);
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Tree<T> mirrorTree() {
+        if (root == null) {
+            throw new IllegalStateException("Tree is empty.");
+        }
+        reverseNode(root);
+        return new LinkedListTree<T>(root);
+    }
+
+    public Node<T> reverseNode(Node<T> node) {
+        if (node == null)
+            return null;
+
+        reverseNode(node.leftNode);
+        reverseNode(node.rightNode);
+
+        Node<T> tempNode = node.rightNode;
+        node.rightNode = node.leftNode;
+        node.leftNode = tempNode;
+
+        return node;
     }
 
     @Override
@@ -116,6 +212,7 @@ public class LinkedListTree<T> implements Tree<T> {
     public List<List<T>> levelOrderLevel(Node<T> root) {
         List<List<T>> lists = new ArrayList<>();
         Queue<Node<T>> queue = new LinkedListQueue<>();
+
         queue.enQueue(root);
         while (!queue.isEmpty()) {
             int qSize = ((LinkedListQueue) queue).getSize();
@@ -136,6 +233,7 @@ public class LinkedListTree<T> implements Tree<T> {
 
     @Override
     public boolean deleteTree() {
+        root = null;
         return false;
     }
 }

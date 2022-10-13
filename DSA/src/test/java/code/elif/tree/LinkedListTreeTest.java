@@ -13,12 +13,11 @@ class LinkedListTreeTest {
 
     @BeforeEach
     void init() {
-
-        Node<Integer> childOfLeftNode2 = new Node<Integer>(null, 50, null);
-        Node<Integer> childOfLeftNode = new Node<Integer>(null, 40, null);
-        Node<Integer> leftNode = new Node<Integer>(childOfLeftNode, 20, childOfLeftNode2);
-        Node<Integer> rightNode = new Node<Integer>(null, 30, null);
-        Node<Integer> root = new Node<Integer>(leftNode, 10, rightNode);
+        Node<Integer> childOfLeftNode2 = new Node<>(null, 50, null);
+        Node<Integer> childOfLeftNode = new Node<>(null, 40, null);
+        Node<Integer> leftNode = new Node<>(childOfLeftNode, 20, childOfLeftNode2);
+        Node<Integer> rightNode = new Node<>(null, 30, null);
+        Node<Integer> root = new Node<>(leftNode, 10, rightNode);
         tree = new LinkedListTree<>(root);
     }
 
@@ -63,19 +62,19 @@ class LinkedListTreeTest {
 
     @Test
     void search() {
-        assertEquals(0, tree.searchValue(10));
-        assertEquals(1, tree.searchValue(20));
-        assertEquals(2, tree.searchValue(30));
-        assertEquals(3, tree.searchValue(40));
+        assertEquals(1, tree.getIndex(10));
+        assertEquals(2, tree.getIndex(20));
+        assertEquals(3, tree.getIndex(30));
+        assertEquals(4, tree.getIndex(40));
     }
 
     @Test
     void traverse_levelOrder() {
-        Node<Integer> node4 = new Node<Integer>(null, 50, null);
-        Node<Integer> node3 = new Node<Integer>(null, 40, node4);
-        Node<Integer> node2 = new Node<Integer>(node3, 30, null);
-        Node<Integer> node1 = new Node<Integer>(null, 20, node2);
-        Node<Integer> root = new Node<Integer>(node1, 10, null);
+        Node<Integer> node4 = new Node<>(null, 50, null);
+        Node<Integer> node3 = new Node<>(null, 40, node4);
+        Node<Integer> node2 = new Node<>(node3, 30, null);
+        Node<Integer> node1 = new Node<>(null, 20, node2);
+        Node<Integer> root = new Node<>(node1, 10, null);
         tree = new LinkedListTree<>(root);
 
 
@@ -86,11 +85,11 @@ class LinkedListTreeTest {
 
     @Test
     void traverse_levelOrder2() {
-        Node<Integer> node4 = new Node<Integer>(null, 50, null);
-        Node<Integer> node3 = new Node<Integer>(null, 40, null);
-        Node<Integer> node2 = new Node<Integer>(null, 30, node4);
-        Node<Integer> node1 = new Node<Integer>(node3, 20, null);
-        Node<Integer> root = new Node<Integer>(node1, 10, node2);
+        Node<Integer> node4 = new Node<>(null, 50, null);
+        Node<Integer> node3 = new Node<>(null, 40, null);
+        Node<Integer> node2 = new Node<>(null, 30, node4);
+        Node<Integer> node1 = new Node<>(node3, 20, null);
+        Node<Integer> root = new Node<>(node1, 10, node2);
         tree = new LinkedListTree<>(root);
 
 
@@ -101,16 +100,16 @@ class LinkedListTreeTest {
 
     @Test
     void traverse_levelOrder3() {
-        Node<Integer> node9 = new Node<Integer>(null, 8, null);
-        Node<Integer> node8 = new Node<Integer>(null, 6, null);
-        Node<Integer> node7 = new Node<Integer>(null, 1, null);
-        Node<Integer> node6 = new Node<Integer>(null, 5, null);
-        Node<Integer> node5 = new Node<Integer>(null, -1, node9);
-        Node<Integer> node4 = new Node<Integer>(null, 3, node8);
-        Node<Integer> node3 = new Node<Integer>(node6, 1, node7);
-        Node<Integer> node2 = new Node<Integer>(node4, 4, node5);
-        Node<Integer> node1 = new Node<Integer>(node3, 2, null);
-        Node<Integer> root = new Node<Integer>(node1, 0, node2);
+        Node<Integer> node9 = new Node<>(null, 8, null);
+        Node<Integer> node8 = new Node<>(null, 6, null);
+        Node<Integer> node7 = new Node<>(null, 1, null);
+        Node<Integer> node6 = new Node<>(null, 5, null);
+        Node<Integer> node5 = new Node<>(null, -1, node9);
+        Node<Integer> node4 = new Node<>(null, 3, node8);
+        Node<Integer> node3 = new Node<>(node6, 1, node7);
+        Node<Integer> node2 = new Node<>(node4, 4, node5);
+        Node<Integer> node1 = new Node<>(node3, 2, null);
+        Node<Integer> root = new Node<>(node1, 0, node2);
         tree = new LinkedListTree<>(root);
 
 
@@ -119,4 +118,51 @@ class LinkedListTreeTest {
         assertEquals(4, lists.size());
     }
 
+    @Test
+    void insertNode() {
+        tree.insertNode(60);
+        int index = tree.getIndex(60);
+        assertEquals(6, index);
+    }
+
+    @Test
+    void deleteNode() {
+        int index = tree.getIndex(50);
+        assertEquals(5, index);
+
+        tree.deleteNode(tree.root, 50);
+        index = tree.getIndex(50);
+        assertEquals(-1, index);
+    }
+
+
+    @Test
+    void deleteNode2() {
+        int index = tree.getIndex(40);
+        assertEquals(4, index);
+
+        tree.deleteNode(tree.root, 40);
+        index = tree.getIndex(40);
+        assertEquals(-1, index);
+    }
+
+    @Test
+    void deleteNode3() {
+        int index = tree.getIndex(10);
+        assertEquals(1, index);
+
+        tree.deleteNode(tree.root, 10);
+        index = tree.getIndex(10);
+        assertEquals(-1, index);
+    }
+
+
+    @Test
+    void reverseNode() {
+        System.out.println(tree.traverseAllNodes(Tree.Order.LEVEL_ORDER));
+
+        Tree<Integer> integerTree = tree.mirrorTree();
+
+        System.out.println(integerTree.traverseAllNodes(Tree.Order.LEVEL_ORDER));
+    }
 }
