@@ -1,18 +1,19 @@
 package code.elif.threads.latency;
 
 
+import sun.net.www.content.image.png;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
 public class Main6 {
 
-    public static final String ORIGINAL_IMAGE_DEST = "./resources/many-flowers.jpg";
-    public static final String ORIGINAL_IMAGE_OUT = "./out/many-flowers.jpg";
+    public static final String ORIGINAL_IMAGE_DEST = "./resources/null-object.png";
+    public static final String ORIGINAL_IMAGE_OUT = "./out/s.jpg";
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
@@ -25,7 +26,7 @@ public class Main6 {
         System.out.println("started....");
 
         reColorMultiThread(originalImage, coloredImage, 32);
-       // reColorSingleThread(originalImage, coloredImage, 0, 0);
+        // reColorSingleThread(originalImage, coloredImage, 0, 0);
         System.out.println("image process...." + (System.currentTimeMillis() - startTimeMillis));
 
         File output = new File(ORIGINAL_IMAGE_OUT);
@@ -95,10 +96,10 @@ public class Main6 {
         int newGreen = 0;
         int newBlue = 0;
 
-        if (isShadeOfGray(red, green, blue)) {
-            newRed = Math.min(255, red + 30);
-            newGreen = Math.max(0, green - 80);
-            newBlue = Math.max(0, blue - 20);
+        if (isShadeOfBlack(red, green, blue)) {
+            newRed = 253;
+            newGreen = 253;
+            newBlue = 253;
         } else {
             newRed = red;
             newGreen = green;
@@ -122,6 +123,13 @@ public class Main6 {
         return Math.abs(red - green) < 30 &&
                 Math.abs(green - blue) < 30 &&
                 Math.abs(blue - green) < 30;
+    }
+
+    //returns: if pixel is related with Gray true
+    public static boolean isShadeOfBlack(int red, int green, int blue) {
+        return (red < 90 && red > 45 )&&
+                (green < 90 && green > 45 )&&
+                (blue < 90 && blue > 45 );
     }
 
     //this method returns blue value of rgb

@@ -159,10 +159,15 @@ class LinkedListTreeTest {
 
     @Test
     void reverseNode() {
-        System.out.println(tree.traverseAllNodes(Tree.Order.LEVEL_ORDER));
-
         Tree<Integer> integerTree = tree.mirrorTree();
+        assertEquals(2,integerTree.getIndex(30));
 
-        System.out.println(integerTree.traverseAllNodes(Tree.Order.LEVEL_ORDER));
+    }
+
+    @Test
+    void deleteTree() {
+        tree.deleteTree();
+        assertEquals(null, tree.root);
+
     }
 }

@@ -30,8 +30,6 @@ public class SingleLinkedList<T> implements LinkedList<T> {
             }
             newSingleNode = new SingleNode<>(value, tempSingleNode.nextSingleNode);
             tempSingleNode.nextSingleNode = newSingleNode;
-
-
         }
         if (newSingleNode.nextSingleNode == null) {
             tail = newSingleNode;
@@ -71,7 +69,6 @@ public class SingleLinkedList<T> implements LinkedList<T> {
                 tail = tempSingleNode;
             }
         }
-
     }
 
     @Override

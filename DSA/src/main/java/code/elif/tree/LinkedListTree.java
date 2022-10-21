@@ -22,7 +22,6 @@ public class LinkedListTree<T> implements Tree<T> {
 
     @Override
     public boolean insertNode(T value) {
-
         if (root == null) {
             root = new Node<T>(null, value, null);
             return true;
@@ -62,9 +61,8 @@ public class LinkedListTree<T> implements Tree<T> {
             deepestNode.value = null;
             return true;
         }
-       return false;
+        return false;
     }
-
 
     private Node<T> getDeepestNode() {
         Node<T> deepestNode = root;
@@ -86,7 +84,6 @@ public class LinkedListTree<T> implements Tree<T> {
         if (root == null) {
             throw new IllegalStateException("Tree is empty.");
         }
-
         Queue<Node<T>> queue = new LinkedListQueue<>();
         queue.enQueue(root);
         int index = 1;
@@ -234,6 +231,6 @@ public class LinkedListTree<T> implements Tree<T> {
     @Override
     public boolean deleteTree() {
         root = null;
-        return false;
+        return true;
     }
 }

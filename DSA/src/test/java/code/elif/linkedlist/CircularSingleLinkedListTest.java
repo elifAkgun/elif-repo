@@ -1,9 +1,8 @@
 package code.elif.linkedlist;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
+import static org.junit.jupiter.api.Assertions.*;
 
 class CircularSingleLinkedListTest {
 
@@ -13,19 +12,19 @@ class CircularSingleLinkedListTest {
     @BeforeEach
     void init() {
         circularSingleLinkedList = new CircularSingleLinkedList<>(10);
-        circularSingleLinkedList.addNode(1,20);
-        circularSingleLinkedList.addNode(2,30);
+        circularSingleLinkedList.addNode(1, 20);
+        circularSingleLinkedList.addNode(2, 30);
     }
 
     @Test
     void addNode() {
-        Assertions.assertEquals(10, circularSingleLinkedList.getHead().value);
-        Assertions.assertEquals(30, circularSingleLinkedList.getTail().value);
+        assertEquals(10, circularSingleLinkedList.getHead().value);
+        assertEquals(30, circularSingleLinkedList.getTail().value);
     }
 
     @Test
     void addNode_asAFirstElement() {
-        circularSingleLinkedList.addNode(0,1);
+        circularSingleLinkedList.addNode(0, 1);
         Assertions.assertEquals(1, circularSingleLinkedList.getHead().value);
         Assertions.assertEquals(10, circularSingleLinkedList.getHead().nextSingleNode.value);
         Assertions.assertEquals(1, circularSingleLinkedList.getTail().nextSingleNode.value);
@@ -37,12 +36,13 @@ class CircularSingleLinkedListTest {
         Assertions.assertEquals(20, circularSingleLinkedList.getHead().value);
         Assertions.assertEquals(30, circularSingleLinkedList.getHead().nextSingleNode.value);
     }
+
     @Test
     void deleteNode_whichHasOnlyOneNodeInList() {
         circularSingleLinkedList.deleteNode(2);
         circularSingleLinkedList.deleteNode(1);
         circularSingleLinkedList.deleteNode(0);
-        Assertions.assertNull(circularSingleLinkedList.getHead());
+        assertNull(circularSingleLinkedList.getHead());
     }
 
     @Test
@@ -50,7 +50,7 @@ class CircularSingleLinkedListTest {
         circularSingleLinkedList.deleteNode(2);
         circularSingleLinkedList.deleteNode(1);
         circularSingleLinkedList.deleteNode(0);
-        circularSingleLinkedList.addNode(0,10);
+        circularSingleLinkedList.addNode(0, 10);
         Assertions.assertEquals(10, circularSingleLinkedList.getHead().value);
     }
 
@@ -70,17 +70,18 @@ class CircularSingleLinkedListTest {
 
     @Test
     void search() {
-        circularSingleLinkedList.addNode(2,40);
+        circularSingleLinkedList.addNode(2, 40);
 
         int index = circularSingleLinkedList.search(10);
-        Assertions.assertEquals(0,index);
+        Assertions.assertEquals(0, index);
 
         index = circularSingleLinkedList.search(20);
-        Assertions.assertEquals(1,index);
+        Assertions.assertEquals(1, index);
 
         index = circularSingleLinkedList.search(40);
-        Assertions.assertEquals(2,index);
+        Assertions.assertEquals(2, index);
     }
+
     @Test
     void search_whenDeleteLinkedListThenNodesAreRemovedThrowException() {
         circularSingleLinkedList.deleteLinkedList();
@@ -93,8 +94,8 @@ class CircularSingleLinkedListTest {
     @Test
     void deleteLinkedList_whenDeleteLinkedListThenHeadAndTailWillBeNull() {
         circularSingleLinkedList.deleteLinkedList();
-        Assertions.assertNull(circularSingleLinkedList.getHead());
-        Assertions.assertNull(circularSingleLinkedList.getTail());
+        assertNull(circularSingleLinkedList.getHead());
+        assertNull(circularSingleLinkedList.getTail());
     }
-
 }
+
