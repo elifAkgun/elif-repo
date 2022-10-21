@@ -1,6 +1,6 @@
 package code.elif.powermock;
 
-public class UtilityClass {
+public class UtilityClassStatic {
     static int staticMethod(long value) {
         // Some complex logic is done here...
         throw new RuntimeException(

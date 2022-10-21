@@ -1,5 +1,7 @@
 package code.elif;
 
+import java.util.List;
+
 public class DemoUtils {
 
     String str1 = "Elif";
@@ -32,6 +34,11 @@ public class DemoUtils {
 
     public String[] getFirstThreeLettersOfAlphabet() {
         return firstThreeLettersOfAlphabet;
+    }
+
+    private List<String> academyInList = List.of("luv", "2", "code");
+    public List<String> getAcademyInList() {
+        return academyInList;
     }
 }
 

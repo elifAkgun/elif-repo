@@ -19,7 +19,7 @@ public class SystemUnderTest {
         long sum = 0;
         for (int stat : stats)
             sum += stat;
-        return UtilityClass.staticMethod(sum);
+        return UtilityClassStatic.staticMethod(sum);
     }
 
     private long privateMethodUnderTest() {
