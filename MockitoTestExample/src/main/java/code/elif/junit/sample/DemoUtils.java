@@ -1,12 +1,13 @@
-package code.elif;
+package code.elif.junit.sample;
 
 import java.util.List;
 
 public class DemoUtils {
 
-    String str1 = "Elif";
-    String str2 = str1;
-    String[] firstThreeLettersOfAlphabet = {"A", "B", "C"};
+    private String str1 = "Elif";
+    private String str2 = str1;
+    private String[] firstThreeLettersOfAlphabet = {"A", "B", "C"};
+    private List<String> fruitsInList = List.of("apple", "peach", "orange");
 
 
     public Object checkNull(String str1) {
@@ -36,9 +37,15 @@ public class DemoUtils {
         return firstThreeLettersOfAlphabet;
     }
 
-    private List<String> academyInList = List.of("luv", "2", "code");
-    public List<String> getAcademyInList() {
-        return academyInList;
+    public List<String> getFruitsInList() {
+        return fruitsInList;
+    }
+
+    public String throwException(int a) throws Exception {
+        if (a < 0) {
+            throw new Exception("Value s'ould be greater than or equal to 0");
+        }
+        return "value is greater than or equal to 0";
     }
 }
 
