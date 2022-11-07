@@ -8,12 +8,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDate;
 
-@Entity (name = "cambly")
 @ToString
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
+@Entity (name = "cambly")
 public class CamblyDTO {
 
         @Id

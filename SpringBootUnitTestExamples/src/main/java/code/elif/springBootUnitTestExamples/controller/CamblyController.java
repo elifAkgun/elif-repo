@@ -1,7 +1,7 @@
-package code.elif.bootMySqlDocker.controller;
+package code.elif.springBootUnitTestExamples.controller;
 
-import code.elif.bootMySqlDocker.model.Cambly;
-import code.elif.bootMySqlDocker.service.CamblyService;
+import code.elif.springBootUnitTestExamples.model.CamblyDTO;
+import code.elif.springBootUnitTestExamples.service.CamblyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,7 +19,7 @@ public class CamblyController {
     }
 
     @GetMapping("/cambly")
-    public List<Cambly> index(){
+    public List<CamblyDTO> index(){
         return camblyService.getAll();
     }
 }
