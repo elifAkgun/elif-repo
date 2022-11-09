@@ -1,7 +1,11 @@
 package code.elif.junit.sample;
 
-import code.elif.DemoUtils;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import org.junit.jupiter.api.condition.OS;
+
+import java.time.Duration;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -10,36 +14,38 @@ public class DemoUtilsTest {
     DemoUtils demoUtils;
 
     @BeforeAll
-    public static void setupBeforeEachClass() {
+    static void setupBeforeEachClass() {
         System.out.println("@BeforeAlL executes only once before all test methods execution in the class\n");
     }
 
     @AfterAll
-    public static void tearDownAfterAll() {
+    static void tearDownAfterAll() {
         System.out.println("@AfterAll executes only once after all test methods execution in the class");
     }
 
     @BeforeEach
-    public void setupBeforeEach() {
+    void setupBeforeEach() {
         // set up
         demoUtils = new DemoUtils();
         System.out.println("@BeforeEach executes before the execution of each test method");
     }
 
     @AfterEach
-    public void afterEachTest() {
+    void afterEachTest() {
         System.out.println("@AfterEach executes before the execution of each test method");
     }
 
     @Test
-    public void test_EqualsAndNotEquals() {
+    @EnabledOnOs(OS.MAC)
+    void test_EqualsAndNotEquals() {
         // execute and assert
         assertEquals(6, demoUtils.add(2, 4), "2+4 must be 6");
         assertNotEquals(8, demoUtils.add(1, 9), "1 +9 must not be 8");
     }
 
     @Test
-    public void test_NullAndNotNull() {
+    @EnabledOnOs(OS.WINDOWS)
+    void test_NullAndNotNull() {
         String str1 = null;
         String str2 = "luv2code";
         assertNull(demoUtils.checkNull(str1), "Object should be null");
@@ -48,7 +54,8 @@ public class DemoUtilsTest {
 
     @DisplayName("Same and Not Same")
     @Test
-    public void testSameAndNotSame() {
+    @EnabledOnOs(OS.WINDOWS)
+    void testSameAndNotSame() {
         String str = "Jack";
         assertSame(demoUtils.getName(), demoUtils.getNameDuplicate(), "Objects should refer to same object");
         assertNotSame(str, demoUtils.getName(), "Objects should not refer same object");
@@ -56,7 +63,8 @@ public class DemoUtilsTest {
 
     @DisplayName("True and False")
     @Test
-    public void testTrueFalse() {
+    @EnabledOnOs(OS.MAC)
+    void testTrueFalse() {
         int gradeOne = 10;
         int gradeTwo = 5;
         assertTrue(demoUtils.isGreater(gradeOne, gradeTwo), "This should return true");
@@ -65,9 +73,42 @@ public class DemoUtilsTest {
 
     @DisplayName("Array Equals")
     @Test
-    public void testArrayEquals() {
+    @EnabledOnOs(OS.WINDOWS)
+    void testArrayEquals() {
         String[] stringArray = {"A", "B", "C"};
         assertArrayEquals(stringArray, demoUtils.getFirstThreeLettersOfAlphabet(),
                 "Arrays should be the same");
+    }
+
+
+    @DisplayName("Iterator Equals")
+    @Test
+    void getNameInList() {
+        List<String> fruitsInList = List.of("apple", "peach", "orange");
+        assertIterableEquals(fruitsInList, demoUtils.getFruitsInList());
+    }
+
+    @DisplayName("Line matches")
+    @Test
+    void getStringInList() {
+        List<String> fruitsInList = List.of("apple", "peach", "orange");
+        assertLinesMatch(fruitsInList, demoUtils.getFruitsInList());
+    }
+
+    @DisplayName("Throw exception matches")
+    @Test
+    void throwException() {
+        String message = assertThrows(Exception.class,
+                () -> demoUtils.throwException(-1)).getMessage();
+        assertEquals("Value s'ould be greater than or equal to 0", message);
+
+    }
+
+    @DisplayName("Throw exception matches")
+    @Test
+    void timeOutPreemptively() {
+        assertTimeoutPreemptively(Duration.ofSeconds(3),
+                () -> demoUtils.getFruitsInList(),
+                "Method should execute in 3 seconds ");
     }
 }
