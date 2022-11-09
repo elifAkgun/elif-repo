@@ -1,9 +1,6 @@
 package code.elif.springBootUnitTestExamples.model;
 
-import code.elif.springBootUnitTestExamples.repository.model.Cambly;
 import lombok.*;
-import org.modelmapper.ModelMapper;
-import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDate;
 
@@ -15,6 +12,7 @@ import java.time.LocalDate;
 @Builder
 public class CamblyDTO {
 
+    private Long id;
     @NonNull
     private String mistake;
     @NonNull

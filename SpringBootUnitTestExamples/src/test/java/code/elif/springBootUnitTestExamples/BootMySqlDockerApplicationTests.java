@@ -11,10 +11,4 @@ class BootMySqlDockerApplicationTests {
     @Test
     void contextLoads() {
     }
-
-    @Bean(name = "modelMapper")
-    ModelMapper getModelMapper() {
-        return new ModelMapper();
-    }
-
 }

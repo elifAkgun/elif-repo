@@ -10,9 +10,6 @@ import org.springframework.context.annotation.Scope;
 @SpringBootApplication
 public class SpringBootUnitTestExamples {
 
-	@Bean(name = "modelMapper")
-	ModelMapper getModelMapper() {return new ModelMapper();}
-
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootUnitTestExamples.class, args);
 	}
