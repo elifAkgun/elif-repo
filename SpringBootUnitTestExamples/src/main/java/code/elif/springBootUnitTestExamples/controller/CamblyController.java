@@ -47,8 +47,23 @@ public class CamblyController {
                 .map(savedCambly -> {
                     savedCambly.setMistake(camblyDTO.getMistake());
                     savedCambly.setCorrection(camblyDTO.getCorrection());
+                    savedCambly.setDate(camblyDTO.getDate());
+                    savedCambly.setLessonId(camblyDTO.getLessonId());
+                    camblyService.update(savedCambly);
+
                     return new ResponseEntity<>(savedCambly, HttpStatus.OK);
                 })
                 .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteCambly(@PathVariable("id") Long camblyId) {
+
+        return camblyService.getCamblyById(camblyId)
+                .map((camblyDTO) -> {
+                    camblyService.delete(camblyDTO.getId());
+                    return new ResponseEntity("Cambly deleted successfully", HttpStatus.OK);
+                })
+                .orElseGet(() -> new ResponseEntity("Cambly not found", HttpStatus.NOT_FOUND));
     }
 }

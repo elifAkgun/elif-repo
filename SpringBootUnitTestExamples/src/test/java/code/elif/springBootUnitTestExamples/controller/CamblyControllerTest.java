@@ -22,6 +22,8 @@ import static code.elif.springBootUnitTestExamples.helper.CamblyDataHelper.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 @WebMvcTest
@@ -118,7 +120,7 @@ class CamblyControllerTest {
                 .willReturn(Optional.ofNullable(camblyDTO));
 
         // when - action or the behaviour that we are going test
-        ResultActions response = mockMvc.perform(get("/cambly/" + camblyId));
+        ResultActions response = mockMvc.perform(get("/cambly/{id}", camblyId));
 
         // then - verify the output
         response.andDo(MockMvcResultHandlers.print())
@@ -140,7 +142,7 @@ class CamblyControllerTest {
         given(camblyService.getCamblyById(anyLong())).willReturn(Optional.empty());
 
         // when - action or the behaviour that we are going test
-        ResultActions response = mockMvc.perform(get("/cambly/" + camblyId));
+        ResultActions response = mockMvc.perform(get("/cambly/{id}", camblyId));
 
         // then - verify the output
         response.andDo(MockMvcResultHandlers.print())
@@ -153,14 +155,14 @@ class CamblyControllerTest {
     @Test
     public void givenCambly_whenUpdateCamblyCalled_thenReturnUpdatedCambly() throws Exception {
         // given- precondition or setup
-        Long id = 10L;
+        Long camblyId = 10L;
         CamblyDTO savedCambly = CamblyDTO.builder()
                 .correction(CORRECTION1)
                 .date(DATE)
                 .mistake(MISTAKE1)
                 .lessonId(LESSON_1).build();
 
-        given(camblyService.getCamblyById(id))
+        given(camblyService.getCamblyById(camblyId))
                 .willReturn(Optional.of(savedCambly));
 
         CamblyDTO updatedCambly = CamblyDTO.builder()
@@ -171,19 +173,28 @@ class CamblyControllerTest {
                 .build();
 
         given(camblyService.update(any(CamblyDTO.class)))
-                .willAnswer((invocation -> invocation.getArgument(0)));
+                .willAnswer((invocation -> Optional.of(invocation.getArgument(0))));
 
         // when - action or the behaviour that we are going test
 
-        ResultActions response = mockMvc.perform(put("/cambly/" + id)
+        ResultActions response = mockMvc.perform(put("/cambly/{id}", camblyId)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(updatedCambly)));
 
         // then - verify the output
         response.andDo(MockMvcResultHandlers.print())
-                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.correction", CoreMatchers.is(CORRECTION2)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.mistake", CoreMatchers.is(MISTAKE2)));
+                .andExpect(MockMvcResultMatchers.content()
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.correction",
+                        CoreMatchers.is(CORRECTION2)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.mistake",
+                        CoreMatchers.is(MISTAKE2)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.lessonId",
+                        CoreMatchers.is(LESSON_1)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.date",
+                        CoreMatchers.is(DATE.toString())));
+
+        verify(camblyService, times(1)).update(any(CamblyDTO.class));
     }
 
     // JUnit test for
@@ -198,10 +209,10 @@ class CamblyControllerTest {
                 .lessonId(LESSON_1)
                 .date(DATE)
                 .build();
-        given(camblyService.update(any(CamblyDTO.class))).willReturn(Optional.empty());
+        given(camblyService.getCamblyById(anyLong())).willReturn(Optional.empty());
 
         // when - action or the behaviour that we are going test
-        ResultActions response = mockMvc.perform(put("/cambly/" + camblyId)
+        ResultActions response = mockMvc.perform(put("/cambly/{id}", camblyId)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(updatedCambly)));
 
@@ -209,5 +220,50 @@ class CamblyControllerTest {
         response.andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status()
                         .isNotFound());
+    }
+
+    // JUnit test for
+    @DisplayName("delete cambly - positive scenario")
+    @Test
+    public void givenCamblyId_whenCalledDeleteCambly_thenDeleteCambly() throws Exception {
+        // given- precondition or setup
+        Long camblyId = 10L;
+        CamblyDTO camblyDTO = CamblyDTO.builder()
+                .id(camblyId)
+                .correction(CORRECTION2)
+                .mistake(MISTAKE2)
+                .lessonId(LESSON_1)
+                .date(DATE)
+                .build();
+
+        given(camblyService.getCamblyById(camblyId))
+                .willReturn(Optional.of(camblyDTO));
+
+        // when - action or the behaviour that we are going test
+        ResultActions response = mockMvc.perform(delete("/cambly/{id}", camblyId));
+
+        // then - verify the output
+        response.andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isOk());
+
+        verify(camblyService, times(1)).delete(camblyId);
+    }
+
+    @DisplayName("delete cambly - negative scenario - if cambly not found")
+    @Test
+    public void givenInvalidCamblyId_whenCalledDeleteCambly_thenReturnNotFound() throws Exception {
+        // given- precondition or setup
+        Long camblyId = 10L;
+        given(camblyService.getCamblyById(camblyId))
+                .willReturn(Optional.empty());
+
+        // when - action or the behaviour that we are going test
+        ResultActions response = mockMvc.perform(delete("/cambly/{id}", camblyId));
+
+        // then - verify the output
+        response.andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
+
+        verify(camblyService, times(0)).delete(camblyId);
     }
 }
