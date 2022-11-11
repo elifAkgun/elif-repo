@@ -5,7 +5,6 @@ import code.elif.springBootUnitTestExamples.repository.CamblyRepository;
 import code.elif.springBootUnitTestExamples.repository.model.Cambly;
 import code.elif.springBootUnitTestExamples.service.CamblyService;
 import code.elif.springBootUnitTestExamples.service.exception.DuplicateRecordException;
-import code.elif.springBootUnitTestExamples.service.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -44,19 +43,14 @@ public class CamblyServiceImpl implements CamblyService {
 
         Cambly cambly = modelMapper.map(camblyDTO, Cambly.class);
         Cambly savedCambly = camblyRepository.save(cambly);
-
         return Optional.of(modelMapper.map(savedCambly, CamblyDTO.class));
     }
 
     @Override
     public Optional<CamblyDTO> getCamblyById(Long id) {
-
-        Optional<Cambly> cambly = camblyRepository.findById(id);
-        if (cambly.isEmpty()) {
-            throw new NotFoundException();
-        }
-
-        return Optional.of(modelMapper.map(cambly, CamblyDTO.class));
+        return camblyRepository.findById(id).map(cambly ->
+                        Optional.of(modelMapper.map(cambly, CamblyDTO.class))
+                .orElseGet(() -> CamblyDTO.builder().build()));
     }
 
 

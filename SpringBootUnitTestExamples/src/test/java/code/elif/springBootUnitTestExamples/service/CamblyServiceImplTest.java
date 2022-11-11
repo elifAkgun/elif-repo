@@ -4,7 +4,6 @@ import code.elif.springBootUnitTestExamples.model.CamblyDTO;
 import code.elif.springBootUnitTestExamples.repository.CamblyRepository;
 import code.elif.springBootUnitTestExamples.repository.model.Cambly;
 import code.elif.springBootUnitTestExamples.service.exception.DuplicateRecordException;
-import code.elif.springBootUnitTestExamples.service.exception.NotFoundException;
 import code.elif.springBootUnitTestExamples.service.impl.CamblyServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,7 +14,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 import static code.elif.springBootUnitTestExamples.helper.CamblyDataHelper.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -144,21 +142,6 @@ class CamblyServiceImplTest {
         // then - verify the output
         assertThat(camblyDTO).isNotNull();
         assertThat(camblyDTO.getCorrection()).isEqualTo(CORRECTION1);
-    }
-
-    @DisplayName("Given CamblyId not found then Throw NotFoundException")
-    @Test
-    public void givenCamblyIdNotExist_whenGetCamblyCalled_thenThrowNotFoundException() {
-        // given- precondition or setup
-        given(camblyRepository.findById(anyLong())).
-                willReturn(Optional.empty());
-
-        // when - action or the behaviour that we are going test
-        assertThatThrownBy(() -> camblyService.getCamblyById(anyLong()))
-                .isInstanceOf(NotFoundException.class);
-
-        // then - verify the output
-        verify(camblyRepository, atLeastOnce()).findById(anyLong());
     }
 
     // JUnit test for

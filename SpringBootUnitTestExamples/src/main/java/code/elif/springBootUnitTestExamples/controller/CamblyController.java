@@ -57,7 +57,7 @@ public class CamblyController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteCambly(@PathVariable("id") Long camblyId) {
+    public ResponseEntity deleteCambly(@PathVariable("id") Long camblyId) {
 
         return camblyService.getCamblyById(camblyId)
                 .map((camblyDTO) -> {

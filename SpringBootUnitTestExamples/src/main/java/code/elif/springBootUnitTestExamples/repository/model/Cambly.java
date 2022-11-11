@@ -11,11 +11,11 @@ import java.time.LocalDate;
 @EqualsAndHashCode
 @Builder
 @Entity(name = "camblyDTO")
-@Table(name = "cambly")
+@Table(name = "CAMBLY")
 public class Cambly {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NonNull
     private String mistake;

@@ -1,14 +1,16 @@
-package code.elif.springBootUnitTestExamples.controller;
+package code.elif.springBootUnitTestExamples.integration;
 
 import code.elif.springBootUnitTestExamples.model.CamblyDTO;
-import code.elif.springBootUnitTestExamples.service.CamblyService;
+import code.elif.springBootUnitTestExamples.repository.CamblyRepository;
+import code.elif.springBootUnitTestExamples.repository.model.Cambly;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.CoreMatchers;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -16,43 +18,38 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.List;
-import java.util.Optional;
 
 import static code.elif.springBootUnitTestExamples.helper.CamblyDataHelper.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
-@WebMvcTest
-class CamblyControllerTest {
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@AutoConfigureMockMvc
+public class CamblyControllerIntegrationTests {
 
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
-    private CamblyService camblyService;
+    @Autowired
+    private CamblyRepository camblyRepository;
 
     @Autowired
     private ObjectMapper objectMapper;
 
+    @BeforeEach
+    void setup(){
+        camblyRepository.deleteAll();
+    }
 
     // JUnit test for post cambly
     @DisplayName("given cambly object create cambly and return")
     @Test
     public void givenCamblyObject_whenCreateCamblyCalled_thenReturnSavedCambly() throws Exception {
         // given- precondition or setup
-
         CamblyDTO cambly = CamblyDTO.builder()
                 .correction(CORRECTION1)
                 .date(DATE)
                 .mistake(MISTAKE1)
                 .lessonId(LESSON_1).build();
-
-        given(camblyService.saveCambly(any(CamblyDTO.class)))
-                .willAnswer((invocation) -> Optional.of(invocation.getArgument(0)));
 
         // when - action or the behaviour that we are going test
         ResultActions response = mockMvc.perform(post("/cambly")
@@ -77,21 +74,18 @@ class CamblyControllerTest {
     @Test
     public void givenListOfCamblies_whenCalledGetAllCamblies_thenReturnAllCamblies() throws Exception {
         // given- precondition or setup
-        List<CamblyDTO> camblyDTOList = List.of(CamblyDTO.builder()
-                        .id(10L)
+        List<Cambly> camblyList = List.of(Cambly.builder()
                         .correction(CORRECTION1)
                         .date(DATE)
                         .mistake(MISTAKE1)
                         .lessonId(LESSON_1).build(),
-                CamblyDTO.builder()
-                        .id(10L)
-                        .correction(CORRECTION1)
+                Cambly.builder()
+                        .correction(CORRECTION2)
                         .date(DATE)
-                        .mistake(MISTAKE1)
-                        .lessonId(LESSON_1).build());
+                        .mistake(MISTAKE2)
+                        .lessonId(LESSON_2).build());
 
-        given(camblyService.getAll())
-                .willReturn(camblyDTOList);
+        camblyRepository.saveAll(camblyList);
 
         // when - action or the behaviour that we are going test
         ResultActions response = mockMvc.perform(get("/cambly"));
@@ -100,7 +94,7 @@ class CamblyControllerTest {
         response.andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.size()", CoreMatchers.is(camblyDTOList.size())));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.size()", CoreMatchers.is(camblyList.size())));
     }
 
     // JUnit test for
@@ -108,19 +102,17 @@ class CamblyControllerTest {
     @Test
     public void givenCamblyObject_whenCallGetCamblyById_thenReturnCamblyObject() throws Exception {
         // given- precondition or setup
-        Long camblyId = 10L;
-        CamblyDTO camblyDTO = CamblyDTO.builder()
-                .id(10L)
+
+        Cambly cambly = Cambly.builder()
                 .correction(CORRECTION1)
                 .date(DATE)
                 .mistake(MISTAKE1)
                 .lessonId(LESSON_1).build();
 
-        given(camblyService.getCamblyById(anyLong()))
-                .willReturn(Optional.ofNullable(camblyDTO));
+        Cambly savedCambly = camblyRepository.save(cambly);
 
         // when - action or the behaviour that we are going test
-        ResultActions response = mockMvc.perform(get("/cambly/{id}", camblyId));
+        ResultActions response = mockMvc.perform(get("/cambly/{id}", savedCambly.getId()));
 
         // then - verify the output
         response.andDo(MockMvcResultHandlers.print())
@@ -139,8 +131,6 @@ class CamblyControllerTest {
         // given- precondition or setup
         Long camblyId = 10L;
 
-        given(camblyService.getCamblyById(anyLong())).willReturn(Optional.empty());
-
         // when - action or the behaviour that we are going test
         ResultActions response = mockMvc.perform(get("/cambly/{id}", camblyId));
 
@@ -155,15 +145,13 @@ class CamblyControllerTest {
     @Test
     public void givenCambly_whenUpdateCamblyCalled_thenReturnUpdatedCambly() throws Exception {
         // given- precondition or setup
-        Long camblyId = 10L;
-        CamblyDTO savedCambly = CamblyDTO.builder()
+        Cambly cambly = Cambly.builder()
                 .correction(CORRECTION1)
                 .date(DATE)
                 .mistake(MISTAKE1)
                 .lessonId(LESSON_1).build();
 
-        given(camblyService.getCamblyById(camblyId))
-                .willReturn(Optional.of(savedCambly));
+        Cambly savedCambly = camblyRepository.save(cambly);
 
         CamblyDTO updatedCambly = CamblyDTO.builder()
                 .correction(CORRECTION2)
@@ -172,12 +160,9 @@ class CamblyControllerTest {
                 .date(DATE)
                 .build();
 
-        given(camblyService.update(any(CamblyDTO.class)))
-                .willAnswer((invocation -> Optional.of(invocation.getArgument(0))));
-
         // when - action or the behaviour that we are going test
 
-        ResultActions response = mockMvc.perform(put("/cambly/{id}", camblyId)
+        ResultActions response = mockMvc.perform(put("/cambly/{id}", savedCambly.getId())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(updatedCambly)));
 
@@ -193,23 +178,21 @@ class CamblyControllerTest {
                         CoreMatchers.is(LESSON_1)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.date",
                         CoreMatchers.is(DATE.toString())));
-
-        verify(camblyService, times(1)).update(any(CamblyDTO.class));
     }
 
     // JUnit test for
-    @DisplayName("UpdateCamblyById - negative scenario")
+    @DisplayName("Update Cambly By Id - negative scenario")
     @Test
     public void givenInvalidCamblyId_whenUpdateCamblyCalled_thenReturnNotFound() throws Exception {
         // given- precondition or setup
         Long camblyId = 10L;
+
         CamblyDTO updatedCambly = CamblyDTO.builder()
                 .correction(CORRECTION2)
                 .mistake(MISTAKE2)
                 .lessonId(LESSON_1)
                 .date(DATE)
                 .build();
-        given(camblyService.getCamblyById(anyLong())).willReturn(Optional.empty());
 
         // when - action or the behaviour that we are going test
         ResultActions response = mockMvc.perform(put("/cambly/{id}", camblyId)
@@ -227,26 +210,20 @@ class CamblyControllerTest {
     @Test
     public void givenCamblyId_whenCalledDeleteCambly_thenDeleteCambly() throws Exception {
         // given- precondition or setup
-        Long camblyId = 10L;
-        CamblyDTO camblyDTO = CamblyDTO.builder()
-                .id(camblyId)
-                .correction(CORRECTION2)
-                .mistake(MISTAKE2)
-                .lessonId(LESSON_1)
+        Cambly cambly = Cambly.builder()
+                .correction(CORRECTION1)
                 .date(DATE)
-                .build();
+                .mistake(MISTAKE1)
+                .lessonId(LESSON_1).build();
 
-        given(camblyService.getCamblyById(camblyId))
-                .willReturn(Optional.of(camblyDTO));
+        Cambly savedCambly = camblyRepository.save(cambly);
 
         // when - action or the behaviour that we are going test
-        ResultActions response = mockMvc.perform(delete("/cambly/{id}", camblyId));
+        ResultActions response = mockMvc.perform(delete("/cambly/{id}", savedCambly.getId()));
 
         // then - verify the output
         response.andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk());
-
-        verify(camblyService, times(1)).delete(camblyId);
     }
 
     @DisplayName("delete cambly - negative scenario - if cambly not found")
@@ -254,8 +231,6 @@ class CamblyControllerTest {
     public void givenInvalidCamblyId_whenCalledDeleteCambly_thenReturnNotFound() throws Exception {
         // given- precondition or setup
         Long camblyId = 10L;
-        given(camblyService.getCamblyById(camblyId))
-                .willReturn(Optional.empty());
 
         // when - action or the behaviour that we are going test
         ResultActions response = mockMvc.perform(delete("/cambly/{id}", camblyId));
@@ -264,6 +239,6 @@ class CamblyControllerTest {
         response.andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isNotFound());
 
-        verify(camblyService, times(0)).delete(camblyId);
     }
+
 }
