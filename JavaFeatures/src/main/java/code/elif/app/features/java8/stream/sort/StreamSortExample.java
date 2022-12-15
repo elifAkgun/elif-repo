@@ -31,7 +31,7 @@ public class StreamSortExample {
     private static void sortEmployeeList() {
 
         EmployeeService employeeService = new EmployeeServiceImpl();
-        List<Employee> employeeList = employeeService.getEmployeeList();
+        List<Employee> employeeList = employeeService.getEmployeeListOrderByStartDate();
 
         EmployeeComparator employeeComparator = new EmployeeComparator();
         employeeList.stream().sorted(employeeComparator)
@@ -41,7 +41,7 @@ public class StreamSortExample {
     private static void sortEmployeeMethodUsingReference() {
 
         EmployeeService employeeService = new EmployeeServiceImpl();
-        List<Employee> employeeList = employeeService.getEmployeeList();
+        List<Employee> employeeList = employeeService.getEmployeeListOrderByStartDate();
 
         employeeList.stream().sorted(Comparator.comparingInt(Employee::getId))
                 .forEach(employee -> System.out.println(employee));

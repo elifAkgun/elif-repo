@@ -1,4 +1,4 @@
-package code.elif.springBootUnitTestExamples.integration;
+package code.elif.springBootUnitTestExamples.integration.testcontainer;
 
 import code.elif.springBootUnitTestExamples.model.CamblyDTO;
 import code.elif.springBootUnitTestExamples.repository.CamblyRepository;
@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-public class CamblyControllerIntegrationTests {
+public class CamblyControllerIntegrationTests extends AbstractContainerBaseTest {
 
     @Autowired
     private MockMvc mockMvc;

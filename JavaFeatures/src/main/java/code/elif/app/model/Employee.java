@@ -20,6 +20,5 @@ public class Employee {
         this.id = id;
         this.name = name;
         this.startDate = startDate;
-        System.out.println("Created Employee id: " + id + ", name: " + name + " startDate: " + startDate);
     }
 }

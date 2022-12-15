@@ -14,7 +14,7 @@ public class StreamToArrayExample {
 
     private static void processStreamToArray() {
         EmployeeService employeeService = new EmployeeServiceImpl();
-        List<Employee> employeeList = employeeService.getEmployeeList();
+        List<Employee> employeeList = employeeService.getEmployeeListOrderByStartDate();
 
         Employee[] employees = employeeList.stream().toArray(Employee[]::new);
 

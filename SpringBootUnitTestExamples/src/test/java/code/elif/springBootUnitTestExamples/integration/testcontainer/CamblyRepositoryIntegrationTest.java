@@ -1,4 +1,4 @@
-package code.elif.springBootUnitTestExamples.repository.integration;
+package code.elif.springBootUnitTestExamples.integration.testcontainer;
 
 import code.elif.springBootUnitTestExamples.repository.CamblyRepository;
 import code.elif.springBootUnitTestExamples.repository.model.Cambly;
@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @PropertySource(value ="classpath:application-integration.properties")
-public class CamblyRepositoryIntegrationTest {
+public class CamblyRepositoryIntegrationTest extends AbstractContainerBaseTest {
 
     public static final String MISTAKE = "MISTAKE";
     public static final String CORRECTION = "CORRECTION";

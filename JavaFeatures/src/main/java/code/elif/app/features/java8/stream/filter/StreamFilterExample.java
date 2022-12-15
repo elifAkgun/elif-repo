@@ -1,4 +1,4 @@
-package code.elif.app.features.stream.filter;
+package code.elif.app.features.java8.stream.filter;
 
 import code.elif.app.model.Employee;
 import code.elif.app.model.Shape;
@@ -15,9 +15,20 @@ import java.util.stream.Collectors;
 public class StreamFilterExample {
 
     public static void main(String[] args) {
-        filterExample();
-        filterShapeExample();
-        filterEmployeeList();
+        List<Employee> employees = filterEmployeeList();
+        System.out.println(employees);
+    }
+
+
+    private static List<Employee> filterEmployeeList() {
+        EmployeeService employeeService = new EmployeeServiceImpl();
+        List<Employee> employeeList = employeeService.getEmployeeListOrderByStartDate();
+       return employeeList.stream()
+                .peek(e -> System.out.println( e + " processed employee"))
+                .filter(employee -> employee.getStartDate()
+                        .isBefore(LocalDate.of(2011,1,1)))
+                .peek(e -> System.out.println( e + " filtered employee"))
+               .collect(Collectors.toList());
     }
 
     private static void filterExample() {
@@ -40,12 +51,5 @@ public class StreamFilterExample {
         }
     }
 
-    private static void filterEmployeeList() {
-        EmployeeService employeeService = new EmployeeServiceImpl();
-        List<Employee> employeeList = employeeService.getEmployeeList();
-        employeeList.stream()
-                .filter(employee -> employee.getStartDate()
-                .isAfter(LocalDate.now().minusYears(5)))
-                .forEach(employee -> System.out.println(employee));
-    }
+
 }
