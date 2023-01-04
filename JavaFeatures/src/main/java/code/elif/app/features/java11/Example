@@ -1,0 +1,8 @@
+#!/usr/bin/java --source 11
+package code.elif.app.features.java11;
+
+public class Example {
+    public static void main(String[] args) {
+        System.out.println("Hello");
+    }
+}
