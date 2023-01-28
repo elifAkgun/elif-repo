@@ -1,2 +1,5 @@
-package code.elif.app.features.java15.sealed;public class CashPayment {
+package code.elif.app.features.java15.sealed;
+
+public final class CashPayment extends Payment {
+
 }

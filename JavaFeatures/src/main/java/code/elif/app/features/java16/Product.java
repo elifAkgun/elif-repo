@@ -1,4 +1,4 @@
-package java16;
+package code.elif.app.features.java16;
 
 public record Product(Long id,String name, String description)  {
 

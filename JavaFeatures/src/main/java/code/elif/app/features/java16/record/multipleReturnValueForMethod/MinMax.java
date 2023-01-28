@@ -1,6 +1,5 @@
-package java16;
+package code.elif.app.features.java16.record.multipleReturnValueForMethod;
 
-public record MinMax<Movie>(Movie min, Movie max) {
-
+public record MinMax<T>(T min, T max) {
 
 }

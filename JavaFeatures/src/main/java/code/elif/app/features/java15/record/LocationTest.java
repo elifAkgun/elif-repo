@@ -1,4 +1,4 @@
-package code.elif.app.features.java15;
+package code.elif.app.features.java15.record;
 
 public class LocationTest {
 

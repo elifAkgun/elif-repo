@@ -1,5 +1,5 @@
 
-package code.elif.app.features.java15.record.local;
+package code.elif.app.model;
 
 
 import lombok.*;

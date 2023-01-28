@@ -16,6 +16,6 @@ public class StringToFile {
 
         String readFileContent = Files.readString(path);
         System.out.println(writtenFileContent.equals(readFileContent));
-        Thread.sleep(100000);
+        Thread.sleep(10000);
     }
 }

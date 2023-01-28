@@ -41,12 +41,12 @@ public class StreamOfNullable {
     }
 
     public static void flatMap() {
-        Map<String, Integer> teamGoalsMap = getFruitsStock();
+        Map<String, Integer> fruitsStock = getFruitsStock();
 
         List<Integer> allStock =
                 fruits.stream()
                         .flatMap(fruit -> {
-                            Integer stock = teamGoalsMap.get(fruit);
+                            Integer stock = fruitsStock.get(fruit);
                             return stock != null ? Stream.of(stock) : Stream.empty();
                         })
                         .peek(System.out::println)

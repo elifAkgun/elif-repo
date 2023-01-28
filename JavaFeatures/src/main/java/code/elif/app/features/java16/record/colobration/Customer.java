@@ -1,4 +1,4 @@
-package code.elif.app.features.java16.record;
+package code.elif.app.features.java16.record.colobration;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

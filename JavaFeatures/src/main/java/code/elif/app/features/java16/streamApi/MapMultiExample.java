@@ -1,9 +1,8 @@
-package code.elif.app.features.java15.streamApi;
+package code.elif.app.features.java16.streamApi;
 
 import code.elif.app.model.Movie;
 import code.elif.app.model.MovieUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;

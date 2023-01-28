@@ -10,7 +10,7 @@ public class PredicateStringTest {
 
         Predicate<String> isFirstLetterStartWithP = s -> s.startsWith("P");
 
-        System.out.println("Fruits name start with P");
+        System.out.println("Fruit name start with P");
         for (String fruit : fruits) {
             if (isFirstLetterStartWithP.test(fruit)) {
                 System.out.println(fruit);

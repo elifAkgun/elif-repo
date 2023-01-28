@@ -1,5 +1,8 @@
 package code.elif.app.features.java15.record.local;
 
+import code.elif.app.model.Movie;
+import code.elif.app.model.MovieUtil;
+
 import java.util.*;
 import java.util.stream.Collectors;
 

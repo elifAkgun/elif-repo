@@ -1,4 +1,7 @@
-package java16;
+package code.elif.app.features.java16.record.multipleReturnValueForMethod;
+
+import code.elif.app.model.Movie;
+import code.elif.app.model.MovieUtil;
 
 import java.util.Comparator;
 import java.util.List;
@@ -8,30 +11,29 @@ import static java.util.stream.Collectors.maxBy;
 import static java.util.stream.Collectors.minBy;
 
 public class MovieTest {
-	
-	public static List<Movie> movies = MovieUtil.getMovieData();
-	
-	public static void main(String[] args) {
 
-		MinMax<Movie> minMaxGrossingMovie = findMinMaxGrossingMovie();
+    public static List<Movie> movies = MovieUtil.getMovieData();
 
-		System.out.println("Minimum grossing movie: "+ minMaxGrossingMovie.min());
-		System.out.println("Maximum grossing movie: "+ minMaxGrossingMovie.max());
-	}
+    public static void main(String[] args) {
 
+        MinMax<Movie> minMaxGrossingMovie = findMinMaxGrossingMovie();
 
-	public static MinMax<Movie> findMinMaxGrossingMovie(){
+        System.out.println("Minimum grossing movie: " + minMaxGrossingMovie.min());
+        System.out.println("Maximum grossing movie: " + minMaxGrossingMovie.max());
+    }
 
-		var grossEarningComparator = Comparator.comparing(Movie::getGrossEarning);
+    public static MinMax<Movie> findMinMaxGrossingMovie() {
 
-		return  movies.stream()
-					  .collect(Collectors.teeing
-							  (
-					  			minBy(grossEarningComparator),
-							  	maxBy(grossEarningComparator),
-							  	(min, max) ->
-										new MinMax<>(min.orElse(null), max.orElse(null))
-							  )
-					  );
-	}
+        var grossEarningComparator = Comparator.comparing(Movie::getGrossEarning);
+
+        return movies.stream()
+                .collect(Collectors.teeing(
+                                minBy(grossEarningComparator),
+                                maxBy(grossEarningComparator),
+                                (min, max) ->
+                                        new MinMax<>(min.orElse(null),
+												max.orElse(null))
+                        )
+                );
+    }
 }
