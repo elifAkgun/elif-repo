@@ -5,7 +5,7 @@ import code.elif.ReactiveStreamUtil;
 public class FileServiceTest {
 
     public static void main(String[] args) {
-        FileService fileService = new FileServiceImpl();
+        FileService fileService = new FileServiceAsyncImpl();
 
         fileService.writeContent("Hello.txt", "Hello")
                 .subscribe(fileName -> System.out.println("File is crated : " + fileName),
@@ -18,10 +18,10 @@ public class FileServiceTest {
                         ReactiveStreamUtil.getThrowableConsumer(),
                         ReactiveStreamUtil.getCompleted());
 
-        fileService.deleteFile("Hello.txt").subscribe(
+     /*   fileService.deleteFile("Hello.txt").subscribe(
                 fileName -> System.out.println("File is deleted" + fileName),
                 ReactiveStreamUtil.getThrowableConsumer(),
-                ReactiveStreamUtil.getCompleted());
+                ReactiveStreamUtil.getCompleted());*/
 
     }
 }

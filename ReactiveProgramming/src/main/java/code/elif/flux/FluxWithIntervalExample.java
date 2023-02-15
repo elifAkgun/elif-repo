@@ -1,12 +1,8 @@
 package code.elif.flux;
 
-import code.elif.ReactiveStreamUtil;
 import reactor.core.publisher.Flux;
 
 import java.time.Duration;
-import java.time.Period;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
 import java.util.logging.Logger;
 
 public class FluxWithIntervalExample {
