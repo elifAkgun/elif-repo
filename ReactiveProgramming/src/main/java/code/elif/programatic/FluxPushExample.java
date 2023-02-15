@@ -1,5 +1,6 @@
 package code.elif.programatic;
 
+import code.elif.DefaultSubscriber;
 import reactor.core.publisher.Flux;
 
 public class FluxPushExample {
@@ -12,6 +13,8 @@ public class FluxPushExample {
         for (int i = 0; i < 10; i++) {
             new Thread(runnable).start();
         }
+
+        Thread.sleep(10000);
 
     }
 }

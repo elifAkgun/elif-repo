@@ -1,4 +1,4 @@
-package code.elif.programatic;
+package code.elif;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

@@ -8,6 +8,6 @@ public class FileReaderExample {
 
         fileService.readLines("Hello.txt")
                 .take(2)
-                .subscribe(ReactiveStreamUtil.getConsumer());
+                .subscribe(ReactiveStreamUtil.receiveData());
     }
 }

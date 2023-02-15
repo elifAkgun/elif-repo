@@ -1,5 +1,6 @@
 package code.elif.programatic;
 
+import code.elif.DefaultSubscriber;
 import reactor.core.publisher.Flux;
 
 public class FluxSinkWithMultipleThread {

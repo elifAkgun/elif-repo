@@ -7,8 +7,8 @@ public class FluxExample {
 
     public static void main(String[] args) {
         Flux.just(1,2,3,4,5)
-                .subscribe(ReactiveStreamUtil.getConsumer(),
-                        ReactiveStreamUtil.getThrowableConsumer(),
-                        ReactiveStreamUtil.getCompleted());
+                .subscribe(ReactiveStreamUtil.receiveData(),
+                        ReactiveStreamUtil.handleError(),
+                        ReactiveStreamUtil.complete());
     }
 }

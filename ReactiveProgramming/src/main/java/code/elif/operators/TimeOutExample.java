@@ -15,7 +15,7 @@ public class TimeOutExample {
         getAnimalName()
                 .log()
                 .timeout(ofSeconds(2), fallbackAnimal())
-                .subscribe(ReactiveStreamUtil.getConsumer());
+                .subscribe(ReactiveStreamUtil.receiveData());
 
         Thread.sleep(Duration.ofSeconds(5).toMillis());
     }

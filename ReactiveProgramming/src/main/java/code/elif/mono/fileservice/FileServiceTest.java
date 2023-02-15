@@ -9,19 +9,19 @@ public class FileServiceTest {
 
         fileService.writeContent("Hello.txt", "Hello")
                 .subscribe(fileName -> System.out.println("File is crated : " + fileName),
-                        ReactiveStreamUtil.getThrowableConsumer(),
-                        ReactiveStreamUtil.getCompleted()
+                        ReactiveStreamUtil.handleError(),
+                        ReactiveStreamUtil.complete()
                 );
 
         fileService.readContent("Hello.txt")
                 .subscribe(content -> System.out.println("File is read : " + content),
-                        ReactiveStreamUtil.getThrowableConsumer(),
-                        ReactiveStreamUtil.getCompleted());
+                        ReactiveStreamUtil.handleError(),
+                        ReactiveStreamUtil.complete());
 
      /*   fileService.deleteFile("Hello.txt").subscribe(
                 fileName -> System.out.println("File is deleted" + fileName),
-                ReactiveStreamUtil.getThrowableConsumer(),
-                ReactiveStreamUtil.getCompleted());*/
+                ReactiveStreamUtil.handleError(),
+                ReactiveStreamUtil.complete());*/
 
     }
 }

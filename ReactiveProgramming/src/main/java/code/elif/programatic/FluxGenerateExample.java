@@ -24,7 +24,7 @@ public class FluxGenerateExample {
                     return counter + 1;
                 }
         );
-        flux.subscribe(ReactiveStreamUtil.getConsumer());
+        flux.subscribe(ReactiveStreamUtil.receiveData());
     }
 
     private static void fluxGenerateExample() {
@@ -37,7 +37,7 @@ public class FluxGenerateExample {
                         stringSynchronousSink.complete();
                 });
 
-        fluxCountry.subscribe(ReactiveStreamUtil.getConsumer());
+        fluxCountry.subscribe(ReactiveStreamUtil.receiveData());
     }
 
     private static void counterOutSideOfMethod() {
@@ -52,6 +52,6 @@ public class FluxGenerateExample {
                         stringSynchronousSink.complete();
                 });
 
-        fluxCountry.subscribe(ReactiveStreamUtil.getConsumer());
+        fluxCountry.subscribe(ReactiveStreamUtil.receiveData());
     }
 }

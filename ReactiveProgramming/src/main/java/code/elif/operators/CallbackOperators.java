@@ -3,7 +3,7 @@ package code.elif.operators;
 import code.elif.ReactiveStreamUtil;
 import reactor.core.publisher.Flux;
 
-public class CallbackExample {
+public class CallbackOperators {
     public static void main(String[] args) {
         Flux.create(fluxSink -> {
 
@@ -25,6 +25,6 @@ public class CallbackExample {
                 .doFinally(signal -> System.out.println("doFinally : " + signal))
                 .doOnDiscard(Object.class, o -> System.out.println("doOnDiscard : " + o))
                 .take(2)
-                .subscribe(ReactiveStreamUtil.getConsumer());
+                .subscribe(ReactiveStreamUtil.receiveData());
     }
 }

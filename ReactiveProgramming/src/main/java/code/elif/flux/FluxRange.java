@@ -11,6 +11,6 @@ public class FluxRange {
                 .log()
                 .map(i -> Faker.instance().animal().name())
                 .log()
-                .subscribe(ReactiveStreamUtil.getConsumer());
+                .subscribe(ReactiveStreamUtil.receiveData());
     }
 }

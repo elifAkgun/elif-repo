@@ -13,6 +13,6 @@ public class CountryProviderWithHandle {
                     if ("TURKEY".equals(item.toString().toUpperCase())) {
                         synchronousSink.complete();
                     }
-                }).subscribe(ReactiveStreamUtil.getConsumer());
+                }).subscribe(ReactiveStreamUtil.receiveData());
     }
 }

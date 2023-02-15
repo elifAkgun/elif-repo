@@ -14,7 +14,7 @@ public class OnErrorExample {
                 //   .onErrorReturn(-1)
                 //  .onErrorResume((throwable) -> fallBack())
                 .onErrorContinue((e, o) -> System.out.println("Error happened when emitting : " + o + " -> " + e))
-                .subscribe(ReactiveStreamUtil.getConsumer());
+                .subscribe(ReactiveStreamUtil.receiveData());
     }
 
     public static Mono<Integer> fallBack() {

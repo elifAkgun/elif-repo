@@ -8,7 +8,7 @@ public class FluxCreateWithProducer {
     public static void main(String[] args) {
         CountryProducer countryProducer = new CountryProducer();
         Flux.create(countryProducer)
-                .subscribe(ReactiveStreamUtil.getConsumer());
+                .subscribe(ReactiveStreamUtil.receiveData());
 
         countryProducer.produce();
     }

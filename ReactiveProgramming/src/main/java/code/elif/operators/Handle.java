@@ -2,7 +2,7 @@ package code.elif.operators;
 
 import reactor.core.publisher.Flux;
 
-public class HandleOperatorExample {
+public class Handle {
 
     public static void main(String[] args) {
         Flux.range(0, 10)

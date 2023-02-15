@@ -17,6 +17,6 @@ public class FluxCreateWithLambdaImplementation {
                     fluxSink.complete();
                 })
                 .take(3)
-                .subscribe(ReactiveStreamUtil.getConsumer());
+                .subscribe(ReactiveStreamUtil.receiveData());
     }
 }
