@@ -17,6 +17,7 @@ public class ReactiveStreamUtil {
 
     public static <T> Consumer<T> receiveData() {
         return s -> System.out.println(Thread.currentThread()
-                .getStackTrace()[2].getMethodName() +"-> Received : " + s);
+                .getStackTrace()[2].getMethodName() + "() -> Received : " + s);
     }
+
 }
