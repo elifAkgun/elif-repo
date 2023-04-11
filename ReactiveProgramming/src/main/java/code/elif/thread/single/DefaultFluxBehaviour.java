@@ -1,4 +1,4 @@
-package code.elif.thread;
+package code.elif.thread.single;
 
 import reactor.core.publisher.Flux;
 
@@ -9,6 +9,8 @@ public class DefaultFluxBehaviour {
             printThreadName("Create");
             integerFluxSink.next(1);
         }).doOnNext(i -> printThreadName("Next"));
+
+        flux.subscribe(v -> printThreadName("Sub : " + v));
     }
 
     private static void printThreadName(String msg) {

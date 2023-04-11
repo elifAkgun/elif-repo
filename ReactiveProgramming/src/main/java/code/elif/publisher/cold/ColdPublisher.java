@@ -8,7 +8,9 @@ import java.util.stream.Stream;
 public class ColdPublisher {
     public static void main(String[] args) throws InterruptedException {
 
-        Flux<String> flux = Flux.fromStream(() -> getStream()).delayElements(Duration.ofMillis(1000));
+        Flux<String> flux = Flux.fromStream(
+                        () -> getStream())
+                .delayElements(Duration.ofMillis(1000));
 
         flux.subscribe(s -> System.out.println("-> " + "Carol" + " Received : " + s));
         Thread.sleep(3000);

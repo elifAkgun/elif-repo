@@ -14,7 +14,7 @@ public class PatternMatchingForSwitch {
     public static String getResult(Object value) {
         return switch (value) {
             case String s -> "A string of length : " + s.length();
-            case List list && list.size() > 10000 -> "List is too large";
+            case List list when list.size() > 10000 -> "List is too large";
             case List list -> "List of size : " + list.size();
             case Map map -> "Map of entry size : " + map.size();
             case Set set -> "Set of element size : " + set.size();

@@ -1,4 +1,4 @@
-package code.elif.thread;
+package code.elif.thread.single;
 
 import reactor.core.publisher.Flux;
 

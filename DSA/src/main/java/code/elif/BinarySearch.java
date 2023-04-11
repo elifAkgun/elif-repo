@@ -1,5 +1,8 @@
 package code.elif;
 
+import java.lang.reflect.Field;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -37,3 +40,15 @@ public class BinarySearch {
         }
     }
 }
+
+
+class Example {
+    public static void main(String[] args) throws KeyStoreException, NoSuchFieldException, IllegalAccessException {
+        KeyStore ks = KeyStore.getInstance("jceks");
+        Field f = ks.getClass().getDeclaredField("keyStoreSpi");
+        f.setAccessible(true);
+
+        System.out.println(f.get(ks));
+    }
+}
+

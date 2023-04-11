@@ -20,4 +20,8 @@ public class ReactiveStreamUtil {
                 .getStackTrace()[2].getMethodName() + "() -> Received : " + s);
     }
 
+    public static void printWithThreadName(String msg) {
+        System.out.println(msg + " -> Thread : " + Thread.currentThread().getName());
+    }
+
 }
