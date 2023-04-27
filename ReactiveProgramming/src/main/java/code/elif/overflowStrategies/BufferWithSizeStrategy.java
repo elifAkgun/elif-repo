@@ -5,7 +5,7 @@ import reactor.core.scheduler.Schedulers;
 
 import static code.elif.ReactiveStreamUtil.printWithThreadName;
 
-public class ErrorStrategy {
+public class BufferWithSizeStrategy {
 
     public static void main(String[] args) {
 
@@ -20,7 +20,7 @@ public class ErrorStrategy {
                     }
                     fluxSink.complete();
                 })
-                .onBackpressureError()
+                .onBackpressureBuffer(20)
                 .onErrorReturn("Error occurred!")
                 .publishOn(Schedulers.boundedElastic())
                 .doOnNext(i -> {
