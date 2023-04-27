@@ -2,7 +2,7 @@ package code.elif.combine;
 
 import code.elif.ReactiveStreamUtil;
 
-public class StartWith {
+public class StartWithDemo {
 
     public static void main(String[] args) {
         NameGenerator nameGenerator = new NameGenerator();
