@@ -1,15 +1,19 @@
 package code.elif.domain.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.ToString;
+import lombok.NoArgsConstructor;
+
+import java.math.BigDecimal;
 
 @Builder
-@ToString
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Order {
 
-    private String userId;
-    private String createDate;
     private String itemName;
+    private String category;
+    private BigDecimal price;
 }

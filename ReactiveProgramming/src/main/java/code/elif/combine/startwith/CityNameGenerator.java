@@ -1,4 +1,4 @@
-package code.elif.combine;
+package code.elif.combine.startwith;
 
 import com.github.javafaker.Faker;
 import reactor.core.publisher.Flux;
@@ -7,7 +7,7 @@ import reactor.core.publisher.SynchronousSink;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NameGenerator {
+public class CityNameGenerator {
 
     private List<String> cachedNames = new ArrayList<>();
 
