@@ -25,7 +25,7 @@ public class MathReactiveController {
 
     @GetMapping("/square/{input}")
     public Mono<SquareOutput> square(@PathVariable("input") Integer number) {
-        if (number <= 1 || number >= 20)
+        if (number < 1 || number > 20)
             throw new InputValidationException(number);
 
         return mathReactiveService.square(number);
