@@ -1,4 +1,4 @@
-package code.elif.webfluxdemo;
+package code.elif.webfluxdemo.controller.base;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

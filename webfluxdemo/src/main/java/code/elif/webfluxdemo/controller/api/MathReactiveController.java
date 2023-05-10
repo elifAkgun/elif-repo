@@ -1,20 +1,19 @@
-package code.elif.webfluxdemo.controller;
+package code.elif.webfluxdemo.controller.api;
 
 import code.elif.webfluxdemo.exception.InputValidationException;
 import code.elif.webfluxdemo.service.MathReactiveService;
-import code.elif.webfluxdemo.service.input.MultiplicationInput;
-import code.elif.webfluxdemo.service.output.MultiplicationOutput;
 import code.elif.webfluxdemo.service.output.MultiplicationTableOutput;
 import code.elif.webfluxdemo.service.output.SquareOutput;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
-import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -57,12 +56,5 @@ public class MathReactiveController {
     @GetMapping(value = "/multiplicationTable/{input}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<MultiplicationTableOutput> getMultiplicationTable(@PathVariable("input") Integer number) {
         return mathReactiveService.getMultiplicationTable(number);
-    }
-
-    @PostMapping(value = "/multiplication", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    public Mono<MultiplicationOutput> multiplication(@RequestBody Mono<MultiplicationInput> input,
-                                                     @RequestHeader Map<String, String> headers) {
-        log.info(headers.toString());
-        return mathReactiveService.getMultiplication(input);
     }
 }

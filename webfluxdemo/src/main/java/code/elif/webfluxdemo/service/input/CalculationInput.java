@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class MultiplicationInput {
+public class CalculationInput {
 
     private Integer number1;
     private Integer number2;

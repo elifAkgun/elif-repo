@@ -1,8 +1,8 @@
-package code.elif.webfluxdemo.controller;
+package code.elif.webfluxdemo.controller.api;
 
 
-import code.elif.webfluxdemo.BaseResponse;
-import code.elif.webfluxdemo.controller.base.AbstractController;
+import code.elif.webfluxdemo.controller.AbstractController;
+import code.elif.webfluxdemo.controller.base.BaseResponse;
 import code.elif.webfluxdemo.service.MathService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

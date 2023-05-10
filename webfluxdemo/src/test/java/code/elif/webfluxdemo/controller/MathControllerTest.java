@@ -1,7 +1,8 @@
 package code.elif.webfluxdemo.controller;
 
 
-import code.elif.webfluxdemo.BaseResponse;
+import code.elif.webfluxdemo.controller.api.MathController;
+import code.elif.webfluxdemo.controller.base.BaseResponse;
 import code.elif.webfluxdemo.service.MathService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;

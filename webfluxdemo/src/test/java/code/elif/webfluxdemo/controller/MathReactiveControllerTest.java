@@ -1,23 +1,19 @@
 package code.elif.webfluxdemo.controller;
 
 
+import code.elif.webfluxdemo.controller.api.MathReactiveController;
 import code.elif.webfluxdemo.controller.response.FailedResponse;
 import code.elif.webfluxdemo.service.MathReactiveService;
-import code.elif.webfluxdemo.service.input.MultiplicationInput;
-import code.elif.webfluxdemo.service.output.MultiplicationOutput;
 import code.elif.webfluxdemo.service.output.MultiplicationTableOutput;
 import code.elif.webfluxdemo.service.output.SquareOutput;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.reactive.server.FluxExchangeResult;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import reactor.test.StepVerifier;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -30,9 +26,6 @@ public class MathReactiveControllerTest {
 
     @MockBean
     private MathReactiveService mathReactiveService;
-
-    @Autowired
-    private ObjectMapper objectMapper;
 
     @Test
     public void givenNumber_whenSquareCalled_thenReturnCorrectNumber() {
@@ -93,36 +86,6 @@ public class MathReactiveControllerTest {
                 .hasSize(2);
     }
 
-    @Test
-    public void givenNumbers_whenMultiplicationCalled_thenReturnValue() {
-        // given
-        MultiplicationOutput expected = MultiplicationOutput.builder()
-                .result(6)
-                .build();
 
-        MultiplicationInput input = MultiplicationInput.builder()
-                .number1(2)
-                .number2(3)
-                .build();
-
-        given(mathReactiveService.getMultiplication(any(Mono.class)))
-                .willReturn(Mono.just(expected));
-
-        // when
-        FluxExchangeResult<MultiplicationOutput> result = webTestClient.post()
-                .uri("/math-reactive/multiplication")
-                .contentType(MediaType.APPLICATION_JSON)
-                .bodyValue(input)
-                .accept(MediaType.TEXT_EVENT_STREAM)
-                .exchange()
-                .expectStatus().isOk()
-                .returnResult(MultiplicationOutput.class);
-
-        // then
-        StepVerifier.create(result.getResponseBody())
-                .expectNext(expected)
-                .expectComplete()
-                .verify();
-    }
 
 }

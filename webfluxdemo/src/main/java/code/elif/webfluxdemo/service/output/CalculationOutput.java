@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 @Builder
 @AllArgsConstructor(onConstructor_ = {@JsonCreator(mode = JsonCreator.Mode.PROPERTIES)})
-public class MultiplicationOutput extends BaseOutput{
+public class CalculationOutput extends BaseOutput{
 
     private Integer result;
 }

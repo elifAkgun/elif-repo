@@ -1,9 +1,7 @@
-package code.elif.webfluxdemo.controller.config;
+package code.elif.webfluxdemo.config;
 
 import code.elif.webfluxdemo.exception.InputValidationException;
 import code.elif.webfluxdemo.service.MathReactiveService;
-import code.elif.webfluxdemo.service.input.MultiplicationInput;
-import code.elif.webfluxdemo.service.output.MultiplicationOutput;
 import code.elif.webfluxdemo.service.output.MultiplicationTableOutput;
 import code.elif.webfluxdemo.service.output.SquareOutput;
 import lombok.RequiredArgsConstructor;
@@ -39,12 +37,4 @@ public class RequestHandler {
                 .contentType(MediaType.TEXT_EVENT_STREAM)
                 .body(multiplicationTable, MultiplicationTableOutput.class);
     }
-
-    public Mono<ServerResponse> getMultiplication(ServerRequest serverRequest) {
-        Mono<MultiplicationInput> multiplicationInputMono = serverRequest.bodyToMono(MultiplicationInput.class);
-        Mono<MultiplicationOutput> multiplication = mathReactiveService.getMultiplication(multiplicationInputMono);
-        return ServerResponse.ok()
-                .body(multiplication, MultiplicationOutput.class);
-    }
-
 }

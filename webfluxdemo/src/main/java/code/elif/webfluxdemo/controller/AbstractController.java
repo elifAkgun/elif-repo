@@ -1,6 +1,6 @@
-package code.elif.webfluxdemo.controller.base;
+package code.elif.webfluxdemo.controller;
 
-import code.elif.webfluxdemo.BaseResponse;
+import code.elif.webfluxdemo.controller.base.BaseResponse;
 
 import java.time.LocalDateTime;
 
