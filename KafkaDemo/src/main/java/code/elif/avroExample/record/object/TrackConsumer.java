@@ -1,6 +1,7 @@
-package code.elif.example.custom;
+package code.elif.avroExample;
 
-import code.elif.serialization.GenericDeserializer;
+import code.elif.kafka.avro.TrackInfo;
+import io.confluent.kafka.serializers.KafkaAvroDeserializer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
@@ -15,8 +16,9 @@ public class TrackConsumer {
 
         Properties properties = new Properties();
         properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
-        properties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
-        properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "code.elif.serialization.TrackInfoDeserializer");
+        properties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, KafkaAvroDeserializer.class.getName());
+        properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,  KafkaAvroDeserializer.class.getName());
+        properties.setProperty("schema.registry.url", "http://localhost:8081");
         properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, "firstGroup");
 
         KafkaConsumer<String, TrackInfo> consumer = new KafkaConsumer<>(properties);

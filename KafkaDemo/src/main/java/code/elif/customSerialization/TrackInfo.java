@@ -1,4 +1,4 @@
-package code.elif.example.custom;
+package code.elif.customSerialization;
 
 import lombok.*;
 
@@ -7,7 +7,7 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class TrackInfo {
+public class TrackInfoCustom {
 
     private String id;
     private String latitude;

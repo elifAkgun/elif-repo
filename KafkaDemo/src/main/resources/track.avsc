@@ -1,0 +1,19 @@
+{
+  "namespace": "code.elif.kafka.avro",
+  "type": "record",
+  "name": "TrackInfo",
+  "fields": [
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "latitude",
+      "type": "string"
+    },
+    {
+      "name": "longitude",
+      "type": "string"
+    }
+  ]
+}
