@@ -1,6 +1,6 @@
-package code.elif.avroExample;
+package code.elif.avroExample.record.object;
 
-import code.elif.kafka.avro.TrackInfo;
+import code.elif.kafka.avro.TrackCoordinates;
 import io.confluent.kafka.serializers.KafkaAvroSerializer;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -18,14 +18,14 @@ public class TrackProducer {
         properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, KafkaAvroSerializer.class.getName());
         properties.setProperty("schema.registry.url", "http://localhost:8081");
 
-        TrackInfo trackInfo = new TrackInfo();
+        TrackCoordinates trackInfo = new TrackCoordinates();
         trackInfo.setId(UUID.randomUUID().toString());
         trackInfo.setLatitude("22.2232");
         trackInfo.setLongitude("23.3534");
         trackInfo.setDate(LocalDateTime.now().toString());
 
-        KafkaProducer<CharSequence, TrackInfo> producer = new KafkaProducer<>(properties);
-        ProducerRecord<CharSequence, TrackInfo> record = new ProducerRecord<>("trackTopic", trackInfo.getId(), trackInfo);
+        KafkaProducer<CharSequence, TrackCoordinates> producer = new KafkaProducer<>(properties);
+        ProducerRecord<CharSequence, TrackCoordinates> record = new ProducerRecord<>("trackTopic5", trackInfo.getId(), trackInfo);
         producer.send(record);
         System.out.println("Message send successfully!");
         producer.close();

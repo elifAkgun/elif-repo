@@ -7,7 +7,7 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class TrackInfoCustom {
+public class TrackInfo {
 
     private String id;
     private String latitude;

@@ -3,14 +3,12 @@ package code.elif.basic;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
-import org.apache.kafka.clients.producer.KafkaProducer;
-import org.apache.kafka.clients.producer.ProducerRecord;
 
 import java.time.Duration;
 import java.util.Collections;
 import java.util.Properties;
 
-public class Consumer {
+public class ConsumerClient {
     public static void main(String[] args) {
         Properties properties = new Properties();
         properties.setProperty("bootstrap.servers", "localhost:9092");

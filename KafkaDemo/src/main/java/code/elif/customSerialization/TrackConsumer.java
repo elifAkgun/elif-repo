@@ -1,7 +1,5 @@
-package code.elif.example.custom;
+package code.elif.customSerialization;
 
-import code.elif.example.tracking.TrackInfo;
-import code.elif.serialization.GenericDeserializer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
@@ -20,13 +18,13 @@ public class TrackConsumer {
         properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "code.elif.serialization.TrackInfoDeserializer");
         properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, "firstGroup");
 
-        KafkaConsumer<String, TrackInfoCustom> consumer = new KafkaConsumer<>(properties);
+        KafkaConsumer<String, TrackInfo> consumer = new KafkaConsumer<>(properties);
 
         consumer.subscribe(Collections.singleton("trackTopic"));
 
-        ConsumerRecords<String, TrackInfoCustom> records = consumer.poll(Duration.ofSeconds(20));
+        ConsumerRecords<String, TrackInfo> records = consumer.poll(Duration.ofSeconds(20));
 
-        for (ConsumerRecord<String, TrackInfoCustom> record : records) {
+        for (ConsumerRecord<String, TrackInfo> record : records) {
             System.out.println(record.key() + " " + record.value());
         }
 
