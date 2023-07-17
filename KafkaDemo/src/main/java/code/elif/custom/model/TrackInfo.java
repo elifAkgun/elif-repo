@@ -1,4 +1,4 @@
-package code.elif.customSerialization;
+package code.elif.custom.model;
 
 import lombok.*;
 

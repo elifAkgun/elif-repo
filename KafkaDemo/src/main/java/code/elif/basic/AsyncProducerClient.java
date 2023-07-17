@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 
-public class ProducerClient {
+public class AsyncProducerClient {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         Properties properties = new Properties();
         properties.setProperty("bootstrap.servers", "localhost:9092");
@@ -20,10 +20,15 @@ public class ProducerClient {
                 "message",
                 "Hello Kafka!" + LocalDateTime.now());
 
-        RecordMetadata recordMetadata = producer.send(record).get();
-        System.out.println("Message send successfully!");
-        System.out.println("recordMetadata.offset() : " + recordMetadata.offset());
-        System.out.println("recordMetadata.partition() : " + recordMetadata.partition());
+        producer.send(record, (recordMetadata, e) -> {
+            System.out.println("Message send successfully!");
+            System.out.println("recordMetadata.offset() : " + recordMetadata.offset());
+            System.out.println("recordMetadata.partition() : " + recordMetadata.partition());
+
+            if (e != null) {
+                e.printStackTrace();
+            }
+        });
 
         producer.close();
     }

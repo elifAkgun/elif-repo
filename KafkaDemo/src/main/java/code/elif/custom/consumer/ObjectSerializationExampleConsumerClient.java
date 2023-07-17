@@ -1,5 +1,6 @@
-package code.elif.customSerialization;
+package code.elif.custom.consumer;
 
+import code.elif.custom.model.TrackInfo;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
@@ -9,7 +10,7 @@ import java.time.Duration;
 import java.util.Collections;
 import java.util.Properties;
 
-public class TrackConsumer {
+public class ObjectSerializationExampleConsumerClient {
     public static void main(String[] args) {
 
         Properties properties = new Properties();

@@ -22,7 +22,7 @@ public class GenericRecordExampleProducer {
         properties.setProperty("specific.avro.reader", "true");
         properties.setProperty("group.id", "firstGroup");
 
-        KafkaProducer<CharSequence, GenericRecord> producer = new KafkaProducer<>(properties);
+        KafkaProducer<String, GenericRecord> producer = new KafkaProducer<>(properties);
 
         Schema.Parser parser = new Schema.Parser();
 
@@ -34,7 +34,7 @@ public class GenericRecordExampleProducer {
         coordinate.put("longitude", "53.343");
         coordinate.put("date", "12.03.2023");
 
-        ProducerRecord<CharSequence, GenericRecord> record = new ProducerRecord<>("trackTopic3", coordinate.get("id").toString(), coordinate);
+        ProducerRecord<String, GenericRecord> record = new ProducerRecord<>("trackTopic3", coordinate.get("id").toString(), coordinate);
         producer.send(record);
         System.out.println("Message send successfully!");
         producer.close();
