@@ -1,4 +1,4 @@
-package code.elif.catalog;
+package code.elif.catalogservice.domain;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

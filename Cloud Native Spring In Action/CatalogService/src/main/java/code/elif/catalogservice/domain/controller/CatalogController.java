@@ -1,7 +1,5 @@
-package code.elif.catalog.controller;
+package code.elif.catalogservice.domain.controller;
 
-import lombok.Getter;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
