@@ -68,7 +68,7 @@ class BookControllerTest {
     public void givenBook_whenCrateBookCalled_thenReturn200ForSuccessfulOperation() throws Exception {
         // given- precondition or setup
         Book book = new Book("123", "Asd", "asd", BigDecimal.ONE);
-        when(bookService.createBook(book)).thenReturn(true);
+        when(bookService.createBook(book)).thenReturn(book);
 
         // when - action or the behaviour that we are going test
         ResultActions response = mockMvc.perform(request(HttpMethod.POST, "/books")
@@ -86,7 +86,7 @@ class BookControllerTest {
     public void givenBook_whenCrateBookCalled_thenReturn400ForFailedOperation() throws Exception {
         // given- precondition or setup
         Book book = new Book("123", "Asd", "asd", BigDecimal.ONE);
-        when(bookService.createBook(book)).thenReturn(false);
+        when(bookService.createBook(book)).thenReturn(null);
 
         // when - action or the behaviour that we are going test
         ResultActions response = mockMvc.perform(request(HttpMethod.POST, "/books"));

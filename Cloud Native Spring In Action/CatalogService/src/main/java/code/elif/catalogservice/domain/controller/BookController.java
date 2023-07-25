@@ -2,6 +2,7 @@ package code.elif.catalogservice.domain.controller;
 
 import code.elif.catalogservice.domain.entitiy.Book;
 import code.elif.catalogservice.domain.service.BookService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,15 +22,15 @@ public class BookController {
     private final BookService bookService;
 
     @GetMapping
-    public ResponseEntity<List<Book>> getBooks() {
+    public ResponseEntity<Iterable<Book>> getBooks() {
         var books = bookService.getBooks();
         return ResponseEntity.ok(books);
     }
 
     @PostMapping
-    public ResponseEntity<String> createBook(@RequestBody Book book) {
-        Boolean success = bookService.createBook(book);
-        return success ? ResponseEntity.created(URI.create("/books/" + book.isbn())).build()
+    public ResponseEntity<String> createBook(@Valid @RequestBody Book book) {
+        Book createdBook = bookService.createBook(book);
+        return createdBook != null ? ResponseEntity.created(URI.create("/books/" + book.isbn())).build()
                 : ResponseEntity.badRequest().build();
     }
 
@@ -40,7 +41,7 @@ public class BookController {
     }
 
     @PutMapping(path = "/{isbn}")
-    public ResponseEntity<Book> updateBookByISBN(@PathVariable("isbn") String isbn, @RequestBody Book book) {
+    public ResponseEntity<Book> updateBookByISBN(@PathVariable("isbn") String isbn,@Valid @RequestBody Book book) {
         book = bookService.updateBookByISBN(isbn, book);
         return ResponseEntity.ok(book);
     }
