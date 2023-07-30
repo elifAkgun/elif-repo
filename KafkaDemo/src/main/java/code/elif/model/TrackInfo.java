@@ -1,4 +1,4 @@
-package code.elif.custom.model;
+package code.elif.model;
 
 import lombok.*;
 

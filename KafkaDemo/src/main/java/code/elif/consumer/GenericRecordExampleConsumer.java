@@ -1,7 +1,8 @@
-package code.elif.avroExample.record.object;
+package code.elif.consumer;
 
-import code.elif.kafka.avro.TrackCoordinates;
 import io.confluent.kafka.serializers.KafkaAvroDeserializer;
+
+import org.apache.avro.generic.GenericRecord;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
@@ -11,7 +12,7 @@ import java.time.Duration;
 import java.util.Collections;
 import java.util.Properties;
 
-public class TrackConsumer {
+public class GenericRecordExampleConsumer {
     public static void main(String[] args) {
 
         Properties properties = new Properties();
@@ -21,13 +22,13 @@ public class TrackConsumer {
         properties.setProperty("schema.registry.url", "http://localhost:8081");
         properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, "firstGroup");
 
-        KafkaConsumer<CharSequence, TrackCoordinates> consumer = new KafkaConsumer<>(properties);
+        KafkaConsumer<String, GenericRecord> consumer = new KafkaConsumer<>(properties);
 
-        consumer.subscribe(Collections.singleton("trackTopic5"));
+        consumer.subscribe(Collections.singleton("trackTopic3"));
 
-        ConsumerRecords<CharSequence, TrackCoordinates> records = consumer.poll(Duration.ofSeconds(20));
+        ConsumerRecords<String, GenericRecord> records = consumer.poll(Duration.ofSeconds(20));
 
-        for (ConsumerRecord<CharSequence, TrackCoordinates> record : records) {
+        for (ConsumerRecord<String, GenericRecord> record : records) {
             System.out.println(record.key() + " " + record.value());
         }
 

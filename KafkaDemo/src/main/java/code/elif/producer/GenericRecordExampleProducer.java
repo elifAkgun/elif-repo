@@ -1,4 +1,4 @@
-package code.elif.avroExample.record.generic;
+package code.elif.producer;
 
 import io.confluent.kafka.serializers.KafkaAvroSerializer;
 import org.apache.avro.Schema;

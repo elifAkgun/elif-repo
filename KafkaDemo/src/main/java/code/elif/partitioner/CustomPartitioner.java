@@ -1,6 +1,6 @@
 package code.elif.partitioner;
 
-import code.elif.custom.model.TrackInfo;
+import code.elif.model.TrackInfo;
 import org.apache.kafka.clients.producer.Partitioner;
 import org.apache.kafka.common.Cluster;
 import org.apache.kafka.common.PartitionInfo;

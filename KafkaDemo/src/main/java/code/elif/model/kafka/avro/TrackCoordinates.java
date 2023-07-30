@@ -3,7 +3,7 @@
  *
  * DO NOT EDIT DIRECTLY
  */
-package code.elif.kafka.avro;
+package code.elif.model.kafka.avro;
 
 import org.apache.avro.generic.GenericArray;
 import org.apache.avro.specific.SpecificData;
@@ -14,8 +14,8 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class TrackCoordinates extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 5190695763881944950L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"TrackCoordinates\",\"namespace\":\"code.elif.kafka.avro\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"latitude\",\"type\":\"string\"},{\"name\":\"longitude\",\"type\":\"string\"},{\"name\":\"date\",\"type\":\"string\"}]}");
+  private static final long serialVersionUID = -5202012581489690763L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"TrackCoordinates\",\"namespace\":\"code.elif.model.kafka.avro\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"latitude\",\"type\":\"string\"},{\"name\":\"longitude\",\"type\":\"string\"},{\"name\":\"date\",\"type\":\"string\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -194,8 +194,8 @@ public class TrackCoordinates extends org.apache.avro.specific.SpecificRecordBas
    * Creates a new TrackCoordinates RecordBuilder.
    * @return A new TrackCoordinates RecordBuilder
    */
-  public static code.elif.kafka.avro.TrackCoordinates.Builder newBuilder() {
-    return new code.elif.kafka.avro.TrackCoordinates.Builder();
+  public static code.elif.model.kafka.avro.TrackCoordinates.Builder newBuilder() {
+    return new code.elif.model.kafka.avro.TrackCoordinates.Builder();
   }
 
   /**
@@ -203,11 +203,11 @@ public class TrackCoordinates extends org.apache.avro.specific.SpecificRecordBas
    * @param other The existing builder to copy.
    * @return A new TrackCoordinates RecordBuilder
    */
-  public static code.elif.kafka.avro.TrackCoordinates.Builder newBuilder(code.elif.kafka.avro.TrackCoordinates.Builder other) {
+  public static code.elif.model.kafka.avro.TrackCoordinates.Builder newBuilder(code.elif.model.kafka.avro.TrackCoordinates.Builder other) {
     if (other == null) {
-      return new code.elif.kafka.avro.TrackCoordinates.Builder();
+      return new code.elif.model.kafka.avro.TrackCoordinates.Builder();
     } else {
-      return new code.elif.kafka.avro.TrackCoordinates.Builder(other);
+      return new code.elif.model.kafka.avro.TrackCoordinates.Builder(other);
     }
   }
 
@@ -216,11 +216,11 @@ public class TrackCoordinates extends org.apache.avro.specific.SpecificRecordBas
    * @param other The existing instance to copy.
    * @return A new TrackCoordinates RecordBuilder
    */
-  public static code.elif.kafka.avro.TrackCoordinates.Builder newBuilder(code.elif.kafka.avro.TrackCoordinates other) {
+  public static code.elif.model.kafka.avro.TrackCoordinates.Builder newBuilder(code.elif.model.kafka.avro.TrackCoordinates other) {
     if (other == null) {
-      return new code.elif.kafka.avro.TrackCoordinates.Builder();
+      return new code.elif.model.kafka.avro.TrackCoordinates.Builder();
     } else {
-      return new code.elif.kafka.avro.TrackCoordinates.Builder(other);
+      return new code.elif.model.kafka.avro.TrackCoordinates.Builder(other);
     }
   }
 
@@ -245,7 +245,7 @@ public class TrackCoordinates extends org.apache.avro.specific.SpecificRecordBas
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(code.elif.kafka.avro.TrackCoordinates.Builder other) {
+    private Builder(code.elif.model.kafka.avro.TrackCoordinates.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -269,7 +269,7 @@ public class TrackCoordinates extends org.apache.avro.specific.SpecificRecordBas
      * Creates a Builder by copying an existing TrackCoordinates instance
      * @param other The existing instance to copy.
      */
-    private Builder(code.elif.kafka.avro.TrackCoordinates other) {
+    private Builder(code.elif.model.kafka.avro.TrackCoordinates other) {
       super(SCHEMA$);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -303,7 +303,7 @@ public class TrackCoordinates extends org.apache.avro.specific.SpecificRecordBas
       * @param value The value of 'id'.
       * @return This builder.
       */
-    public code.elif.kafka.avro.TrackCoordinates.Builder setId(java.lang.CharSequence value) {
+    public code.elif.model.kafka.avro.TrackCoordinates.Builder setId(java.lang.CharSequence value) {
       validate(fields()[0], value);
       this.id = value;
       fieldSetFlags()[0] = true;
@@ -323,7 +323,7 @@ public class TrackCoordinates extends org.apache.avro.specific.SpecificRecordBas
       * Clears the value of the 'id' field.
       * @return This builder.
       */
-    public code.elif.kafka.avro.TrackCoordinates.Builder clearId() {
+    public code.elif.model.kafka.avro.TrackCoordinates.Builder clearId() {
       id = null;
       fieldSetFlags()[0] = false;
       return this;
@@ -343,7 +343,7 @@ public class TrackCoordinates extends org.apache.avro.specific.SpecificRecordBas
       * @param value The value of 'latitude'.
       * @return This builder.
       */
-    public code.elif.kafka.avro.TrackCoordinates.Builder setLatitude(java.lang.CharSequence value) {
+    public code.elif.model.kafka.avro.TrackCoordinates.Builder setLatitude(java.lang.CharSequence value) {
       validate(fields()[1], value);
       this.latitude = value;
       fieldSetFlags()[1] = true;
@@ -363,7 +363,7 @@ public class TrackCoordinates extends org.apache.avro.specific.SpecificRecordBas
       * Clears the value of the 'latitude' field.
       * @return This builder.
       */
-    public code.elif.kafka.avro.TrackCoordinates.Builder clearLatitude() {
+    public code.elif.model.kafka.avro.TrackCoordinates.Builder clearLatitude() {
       latitude = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -383,7 +383,7 @@ public class TrackCoordinates extends org.apache.avro.specific.SpecificRecordBas
       * @param value The value of 'longitude'.
       * @return This builder.
       */
-    public code.elif.kafka.avro.TrackCoordinates.Builder setLongitude(java.lang.CharSequence value) {
+    public code.elif.model.kafka.avro.TrackCoordinates.Builder setLongitude(java.lang.CharSequence value) {
       validate(fields()[2], value);
       this.longitude = value;
       fieldSetFlags()[2] = true;
@@ -403,7 +403,7 @@ public class TrackCoordinates extends org.apache.avro.specific.SpecificRecordBas
       * Clears the value of the 'longitude' field.
       * @return This builder.
       */
-    public code.elif.kafka.avro.TrackCoordinates.Builder clearLongitude() {
+    public code.elif.model.kafka.avro.TrackCoordinates.Builder clearLongitude() {
       longitude = null;
       fieldSetFlags()[2] = false;
       return this;
@@ -423,7 +423,7 @@ public class TrackCoordinates extends org.apache.avro.specific.SpecificRecordBas
       * @param value The value of 'date'.
       * @return This builder.
       */
-    public code.elif.kafka.avro.TrackCoordinates.Builder setDate(java.lang.CharSequence value) {
+    public code.elif.model.kafka.avro.TrackCoordinates.Builder setDate(java.lang.CharSequence value) {
       validate(fields()[3], value);
       this.date = value;
       fieldSetFlags()[3] = true;
@@ -443,7 +443,7 @@ public class TrackCoordinates extends org.apache.avro.specific.SpecificRecordBas
       * Clears the value of the 'date' field.
       * @return This builder.
       */
-    public code.elif.kafka.avro.TrackCoordinates.Builder clearDate() {
+    public code.elif.model.kafka.avro.TrackCoordinates.Builder clearDate() {
       date = null;
       fieldSetFlags()[3] = false;
       return this;

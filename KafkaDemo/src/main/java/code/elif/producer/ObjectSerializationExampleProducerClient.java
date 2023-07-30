@@ -1,6 +1,6 @@
-package code.elif.custom.producer;
+package code.elif.producer;
 
-import code.elif.custom.model.TrackInfo;
+import code.elif.model.TrackInfo;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 

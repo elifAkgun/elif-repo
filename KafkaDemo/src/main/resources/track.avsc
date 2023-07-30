@@ -1,5 +1,5 @@
 {
-  "namespace": "code.elif.kafka.avro",
+  "namespace": "code.elif.model.kafka.avro",
   "type": "record",
   "name": "TrackCoordinates",
   "fields": [

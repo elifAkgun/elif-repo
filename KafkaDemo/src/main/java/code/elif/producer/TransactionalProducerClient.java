@@ -1,4 +1,4 @@
-package code.elif.custom.producer;
+package code.elif.producer;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;

@@ -1,6 +1,6 @@
-package code.elif.custom.consumer;
+package code.elif.consumer;
 
-import code.elif.custom.model.TrackInfo;
+import code.elif.model.TrackInfo;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
@@ -10,7 +10,8 @@ import java.time.Duration;
 import java.util.Collections;
 import java.util.Properties;
 
-public class ObjectSerializationExampleConsumerClient {
+public class ManuelSyncCommitConsumerClient {
+
     public static void main(String[] args) {
 
         Properties properties = new Properties();
@@ -18,17 +19,24 @@ public class ObjectSerializationExampleConsumerClient {
         properties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
         properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "code.elif.serialization.TrackInfoDeserializer");
         properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, "firstGroup");
+        properties.setProperty(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "false");
+        //properties.setProperty(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, "6000");
 
         KafkaConsumer<String, TrackInfo> consumer = new KafkaConsumer<>(properties);
 
         consumer.subscribe(Collections.singleton("trackTopic"));
 
-        ConsumerRecords<String, TrackInfo> records = consumer.poll(Duration.ofSeconds(20));
+        try {
+            while (true) {
+                ConsumerRecords<String, TrackInfo> records = consumer.poll(Duration.ofSeconds(20));
 
-        for (ConsumerRecord<String, TrackInfo> record : records) {
-            System.out.println(record.key() + " " + record.value());
+                for (ConsumerRecord<String, TrackInfo> record : records) {
+                    System.out.println(record.key() + " " + record.value());
+                }
+                consumer.commitSync();
+            }
+        } finally {
+            consumer.close();
         }
-
-        consumer.close();
     }
 }

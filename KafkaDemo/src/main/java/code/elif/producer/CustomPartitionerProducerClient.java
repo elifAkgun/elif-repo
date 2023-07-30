@@ -1,12 +1,9 @@
-package code.elif.custom.producer;
+package code.elif.producer;
 
-import code.elif.custom.model.TrackInfo;
+import code.elif.model.TrackInfo;
 import org.apache.kafka.clients.producer.KafkaProducer;
-import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
-import org.apache.kafka.clients.producer.RecordMetadata;
 
-import java.time.LocalDateTime;
 import java.util.Properties;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;

@@ -1,4 +1,4 @@
-package code.elif.basic;
+package code.elif.consumer;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
@@ -8,7 +8,7 @@ import java.time.Duration;
 import java.util.Collections;
 import java.util.Properties;
 
-public class ConsumerClient {
+public class CustomPartitionerConsumerClient {
     public static void main(String[] args) {
         Properties properties = new Properties();
         properties.setProperty("bootstrap.servers", "localhost:9092");
@@ -18,7 +18,7 @@ public class ConsumerClient {
 
         KafkaConsumer<String, String> consumer = new KafkaConsumer<>(properties);
 
-        consumer.subscribe(Collections.singleton("firstTopic"));
+        consumer.subscribe(Collections.singleton("OrderPartitionedTopic"));
 
         ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(10));
 

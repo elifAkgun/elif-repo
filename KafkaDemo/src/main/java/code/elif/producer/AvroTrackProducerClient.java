@@ -1,6 +1,6 @@
-package code.elif.avroExample.record.object;
+package code.elif.producer;
 
-import code.elif.kafka.avro.TrackCoordinates;
+import code.elif.model.kafka.avro.TrackCoordinates;
 import io.confluent.kafka.serializers.KafkaAvroSerializer;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.util.Properties;
 import java.util.UUID;
 
-public class TrackProducer {
+public class AvroTrackProducerClient {
     public static void main(String[] args) {
         Properties properties = new Properties();
         properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
