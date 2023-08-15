@@ -1,10 +1,12 @@
 package code.elif;
 
+import code.elif.stack.impl.StackLinkedList;
+
 import java.util.*;
 
 public class ValidParentheses {
 
-    static HashMap<String, String> parentheses = new HashMap<>();
+    static final HashMap<String, String> parentheses = new HashMap<>();
 
     static {
         parentheses.put("(", ")");
@@ -12,38 +14,34 @@ public class ValidParentheses {
         parentheses.put("[", "]");
     }
 
-    public static void main(String[] args) {
-        String s = "([)]";
-    }
-
     public boolean isValid(String s) {
-        String[] splitedString = s.split("");
-        LinkedList<String> list = new LinkedList<>(Arrays.asList(splitedString));
-        Stack<String> cursorList = new Stack<>();
 
-        if (list.isEmpty() && list.size() == 1) {
+        if (s == null || s.isEmpty()) {
             return false;
         }
 
+        String[] splitedString = s.split("");
+        LinkedList<String> list = new LinkedList<>(Arrays.asList(splitedString));
+        code.elif.stack.Stack<String> cursorList = new StackLinkedList<>();
+
         String cursor = list.pop();
-        cursorList.add(cursor);
+        cursorList.push(cursor);
 
         while (!list.isEmpty()) {
             if (!parentheses.containsKey(cursorList.peek())) {
                 return false;
             } else if (!parentheses.get(cursorList.peek()).equals(list.peek())) {
-                cursorList.add(list.pop());
+                cursorList.push(list.pop());
             } else {
                 cursorList.pop();
                 list.pop();
             }
 
-            if (cursorList.isEmpty() && list.isEmpty()) {
-                return true;
-            }
-
             if (cursorList.isEmpty()) {
-                cursorList.add(list.pop());
+                if (list.isEmpty()) {
+                    return true;
+                }
+                cursorList.push(list.pop());
             }
         }
         return false;
