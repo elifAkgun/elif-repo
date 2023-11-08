@@ -8,6 +8,8 @@ import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 import reactor.core.publisher.Mono;
 
+import java.math.BigDecimal;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MockitoExtension.class)
@@ -21,14 +23,14 @@ class CalculatorServiceImplTest {
     public void givenMultiplicationInput_whenMultiplicationCalled_thenReturnValue() {
         // given- precondition or setup
         CalculationInput input = CalculationInput.builder()
-                .number1(3)
-                .number2(2)
+                .number1(BigDecimal.valueOf(2))
+                .number2(BigDecimal.valueOf(3))
                 .build();
         // when - action or the behaviour that we are going test
         Mono<CalculationOutput> multiplication = calculationService.multiplication(Mono.just(input));
 
         // then - verify the output
-        assertThat(multiplication.block().getResult()).isEqualTo(6);
+        assertThat(multiplication.block().getResult()).isEqualTo(BigDecimal.valueOf(6));
     }
 
 }

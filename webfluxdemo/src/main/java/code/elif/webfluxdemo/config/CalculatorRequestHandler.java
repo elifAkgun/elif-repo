@@ -32,8 +32,10 @@ public class CalculatorRequestHandler {
     public Mono<ServerResponse> getDivision(ServerRequest serverRequest) {
         Mono<CalculationInput> multiplicationInputMono = serverRequest.bodyToMono(CalculationInput.class);
         Mono<CalculationOutput> multiplication = calculationService.division(multiplicationInputMono);
-        return ServerResponse.ok()
-                .body(multiplication, CalculationOutput.class);
+        return multiplication.doOnError(
+                        throwable ->
+                                ServerResponse.badRequest().bodyValue(throwable.getMessage()))
+                .flatMap(calculationOutput -> ServerResponse.ok().bodyValue(calculationOutput));
     }
 
     public Mono<ServerResponse> getSubtraction(ServerRequest serverRequest) {

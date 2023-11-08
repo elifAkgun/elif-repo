@@ -22,7 +22,7 @@ public class RequestHandler {
         int input = Integer.parseInt(serverRequest.pathVariable("input"));
 
         if (input < 1 || input > 20) {
-            return Mono.error(new InputValidationException(input));
+            return Mono.error(new InputValidationException(input, "Number should be between 1-20"));
         }
 
         Mono<SquareOutput> square = mathReactiveService.square(input);

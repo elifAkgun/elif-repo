@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.math.BigDecimal;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/math-reactive")
@@ -26,7 +28,7 @@ public class MathReactiveController {
     @GetMapping("/square/{input}")
     public Mono<SquareOutput> square(@PathVariable("input") Integer number) {
         if (number < 1 || number > 20)
-            throw new InputValidationException(number);
+            throw new InputValidationException(BigDecimal.valueOf(number), "Number should be between 1-20");
 
         return mathReactiveService.square(number);
     }
@@ -38,7 +40,7 @@ public class MathReactiveController {
                     if (integer >= 1 && integer <= 20) {
                         synchronousSink.next(integer);
                     } else {
-                        synchronousSink.error(new InputValidationException(number));
+                        synchronousSink.error(new InputValidationException(number, "Number should be between 1-20"));
                     }
                 }).cast(Integer.class)
                 .flatMap(integer -> mathReactiveService.square(integer));

@@ -16,6 +16,8 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
+import java.math.BigDecimal;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 
@@ -29,18 +31,18 @@ class CalculationReactiveRouterTest {
     private CalculatorRequestHandler  calculatorRequestHandler;
 
     @Test
-    public void givenNumbers_whenMultiplicationCalled_thenReturnValue() {
+    public void givenNumbers_whenOperationStarRequested_thenReturnValue() {
         // given
         CalculationOutput output = CalculationOutput.builder()
-                .result(6)
+                .result(BigDecimal.valueOf(6))
                 .build();
 
         Mono<ServerResponse> expected = ServerResponse.ok()
                 .bodyValue(output);
 
         CalculationInput input = CalculationInput.builder()
-                .number1(2)
-                .number2(3)
+                .number1(BigDecimal.valueOf(2))
+                .number2(BigDecimal.valueOf(3))
                 .build();
 
         given(calculatorRequestHandler.getMultiplication(any(ServerRequest.class)))
@@ -48,7 +50,116 @@ class CalculationReactiveRouterTest {
 
         // when
         FluxExchangeResult<CalculationOutput> result = webTestClient.post()
-                .uri("/router/calculator/multiplication")
+                .uri("/router/calculator")
+                .header("operation","*")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(input)
+                .accept(MediaType.TEXT_EVENT_STREAM)
+                .exchange()
+                .expectStatus().isOk()
+                .returnResult(CalculationOutput.class);
+
+        // then
+        StepVerifier.create(result.getResponseBody())
+                .expectNext(output)
+                .expectComplete()
+                .verify();
+    }
+
+    @Test
+    public void givenNumbers_whenOperationPlusRequested_thenReturnValue() {
+        // given
+        CalculationOutput output = CalculationOutput.builder()
+                .result(BigDecimal.valueOf(5))
+                .build();
+
+        Mono<ServerResponse> expected = ServerResponse.ok()
+                .bodyValue(output);
+
+        CalculationInput input = CalculationInput.builder()
+                .number1(BigDecimal.valueOf(2))
+                .number2(BigDecimal.valueOf(3))
+                .build();
+
+        given(calculatorRequestHandler.getAddition(any(ServerRequest.class)))
+                .willReturn(expected);
+
+        // when
+        FluxExchangeResult<CalculationOutput> result = webTestClient.post()
+                .uri("/router/calculator")
+                .header("operation","+")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(input)
+                .accept(MediaType.TEXT_EVENT_STREAM)
+                .exchange()
+                .expectStatus().isOk()
+                .returnResult(CalculationOutput.class);
+
+        // then
+        StepVerifier.create(result.getResponseBody())
+                .expectNext(output)
+                .expectComplete()
+                .verify();
+    }
+
+    @Test
+    public void givenNumbers_whenOperationMinusRequested_thenReturnValue() {
+        // given
+        CalculationOutput output = CalculationOutput.builder()
+                .result(BigDecimal.valueOf(5))
+                .build();
+
+        Mono<ServerResponse> expected = ServerResponse.ok()
+                .bodyValue(output);
+
+        CalculationInput input = CalculationInput.builder()
+                .number1(BigDecimal.valueOf(2))
+                .number2(BigDecimal.valueOf(3))
+                .build();
+
+        given(calculatorRequestHandler.getSubtraction(any(ServerRequest.class)))
+                .willReturn(expected);
+
+        // when
+        FluxExchangeResult<CalculationOutput> result = webTestClient.post()
+                .uri("/router/calculator")
+                .header("operation","-")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(input)
+                .accept(MediaType.TEXT_EVENT_STREAM)
+                .exchange()
+                .expectStatus().isOk()
+                .returnResult(CalculationOutput.class);
+
+        // then
+        StepVerifier.create(result.getResponseBody())
+                .expectNext(output)
+                .expectComplete()
+                .verify();
+    }
+
+    @Test
+    public void givenNumbers_whenOperationDivisionRequested_thenReturnValue() {
+        // given
+        CalculationOutput output = CalculationOutput.builder()
+                .result(BigDecimal.valueOf(5))
+                .build();
+
+        Mono<ServerResponse> expected = ServerResponse.ok()
+                .bodyValue(output);
+
+        CalculationInput input = CalculationInput.builder()
+                .number1(BigDecimal.valueOf(2))
+                .number2(BigDecimal.valueOf(3))
+                .build();
+
+        given(calculatorRequestHandler.getDivision(any(ServerRequest.class)))
+                .willReturn(expected);
+
+        // when
+        FluxExchangeResult<CalculationOutput> result = webTestClient.post()
+                .uri("/router/calculator")
+                .header("operation","/")
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(input)
                 .accept(MediaType.TEXT_EVENT_STREAM)

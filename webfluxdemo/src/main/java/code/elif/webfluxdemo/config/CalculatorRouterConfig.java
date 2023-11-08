@@ -4,9 +4,7 @@ import code.elif.webfluxdemo.exception.InputValidationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.reactive.function.server.RouterFunction;
-import org.springframework.web.reactive.function.server.RouterFunctions;
-import org.springframework.web.reactive.function.server.ServerResponse;
+import org.springframework.web.reactive.function.server.*;
 
 import static code.elif.webfluxdemo.config.RouterExceptionHelper.exceptionHandler;
 
@@ -30,12 +28,20 @@ public class CalculatorRouterConfig {
 
     private RouterFunction<ServerResponse> serverResponseRouterFunction() {
         return RouterFunctions.route()
-                .POST("calculator/multiplication", requestHandler::getMultiplication)
-                .POST("calculator/division", requestHandler::getDivision)
-                .POST("calculator/subtraction", requestHandler::getSubtraction)
-                .POST("calculator/addition", requestHandler::getAddition)
+                .POST("calculator", isOperation("*"), requestHandler::getMultiplication)
+                .POST("calculator", isOperation("/"), requestHandler::getDivision)
+                .POST("calculator", isOperation("-"), requestHandler::getSubtraction)
+                .POST("calculator", isOperation("+"), requestHandler::getAddition)
+                .POST("calculator", request -> ServerResponse.badRequest().bodyValue("Operation should be set! (*,/,+,-)"))
                 .onError(InputValidationException.class, exceptionHandler())
                 .build();
+    }
+
+    private static RequestPredicate isOperation(String operation) {
+        return RequestPredicates.headers(headers ->
+                operation.equals(headers.asHttpHeaders()
+                        .toSingleValueMap().get("operation")
+                ));
     }
 
 

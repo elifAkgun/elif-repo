@@ -14,6 +14,8 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
+import java.math.BigDecimal;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 
@@ -30,12 +32,12 @@ class CalculationControllerTest {
     public void givenNumbers_whenMultiplicationCalled_thenReturnValue() {
         // given
         CalculationOutput expected = CalculationOutput.builder()
-                .result(6)
+                .result(BigDecimal.valueOf(6))
                 .build();
 
         CalculationInput input = CalculationInput.builder()
-                .number1(2)
-                .number2(3)
+                .number1(BigDecimal.valueOf(2))
+                .number2(BigDecimal.valueOf(3))
                 .build();
 
         given(calculationReactiveService.multiplication(any(Mono.class)))

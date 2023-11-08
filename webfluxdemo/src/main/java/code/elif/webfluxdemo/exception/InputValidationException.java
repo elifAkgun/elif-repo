@@ -1,16 +1,25 @@
 package code.elif.webfluxdemo.exception;
 
-public class InputValidationException extends RuntimeException {
-    private static final String message= "Number should be between 1-20";
-    private static final Integer code= 100;
-    private final Integer input;
+import java.math.BigDecimal;
 
-    public InputValidationException(Integer input) {
+public class InputValidationException extends RuntimeException {
+    private final String message;
+    private static final Integer code= 100;
+    private final Object input;
+
+    public InputValidationException(BigDecimal input, String message) {
         super(message);
         this.input = input;
+        this.message = message;
     }
 
-    public Integer getInput() {
+    public InputValidationException(Integer input, String message) {
+        super(message);
+        this.input = input;
+        this.message = message;
+    }
+
+    public Object getInput() {
         return input;
     }
 
