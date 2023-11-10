@@ -6,7 +6,7 @@ import code.elif.queue.impl.LinkedListQueue;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LinkedListTree<T> implements Tree<T> {
+public class LinkedListTree<T extends Comparable> implements Tree<T> {
 
     Node<T> root;
 
@@ -21,10 +21,10 @@ public class LinkedListTree<T> implements Tree<T> {
     }
 
     @Override
-    public boolean insertNode(T value) {
+    public Node<T> insertNode(T value) {
         if (root == null) {
-            root = new Node<T>(null, value, null);
-            return true;
+            root = new Node<>(null, value, null);
+            return root;
         }
 
         Queue<Node<T>> queue = new LinkedListQueue<>();
@@ -34,16 +34,16 @@ public class LinkedListTree<T> implements Tree<T> {
             if (node != null) {
                 if (node.leftNode == null) {
                     node.leftNode = new Node<T>(null, value, null);
-                    return true;
+                    return root;
                 } else if (node.rightNode == null) {
                     node.rightNode = new Node<T>(null, value, null);
-                    return true;
+                    return root;
                 }
                 queue.enQueue(node.leftNode);
                 queue.enQueue(node.rightNode);
             }
         }
-        return false;
+        return root;
     }
 
     @Override

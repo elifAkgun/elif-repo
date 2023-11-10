@@ -2,7 +2,7 @@ package code.elif.tree;
 
 import java.util.List;
 
-public interface Tree<T> {
+public interface Tree<T extends Comparable> {
 
     enum Order {
         PRE_ORDER,
@@ -11,7 +11,7 @@ public interface Tree<T> {
         LEVEL_ORDER
     }
 
-    boolean insertNode(T value);
+    Node<T> insertNode(T value);
 
     boolean deleteNode(Node<T> root, T value);
 

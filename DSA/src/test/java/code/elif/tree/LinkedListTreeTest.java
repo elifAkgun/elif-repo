@@ -13,12 +13,38 @@ class LinkedListTreeTest {
 
     @BeforeEach
     void init() {
+        Node<Integer> childOfRightNode2 = new Node<>(null, 70, null);
+        Node<Integer> childOfRightNode = new Node<>(null, 60, null);
         Node<Integer> childOfLeftNode2 = new Node<>(null, 50, null);
         Node<Integer> childOfLeftNode = new Node<>(null, 40, null);
         Node<Integer> leftNode = new Node<>(childOfLeftNode, 20, childOfLeftNode2);
-        Node<Integer> rightNode = new Node<>(null, 30, null);
+        Node<Integer> rightNode = new Node<>(childOfRightNode, 30, childOfRightNode2);
         Node<Integer> root = new Node<>(leftNode, 10, rightNode);
         tree = new LinkedListTree<>(root);
+    }
+
+    @Test
+    public void givenValidTreeNodes_whenInsertCalled_thenReturnTrue() {
+        // given- precondition or setup
+        Node<Integer> root = new Node<>(null, 5, null);
+        Tree<Integer> integerTree = new LinkedListTree<>(root);
+
+        // when - action or the behaviour that we are going test
+
+        integerTree.insertNode(10);
+        integerTree.insertNode(1);
+        integerTree.insertNode(2);
+        integerTree.insertNode(3);
+
+        // then - verify the output
+        assertEquals(10, root.leftNode.value);
+        assertEquals(5, root.value);
+        assertEquals(1,root.rightNode.value);
+
+        List<Integer> integerList = integerTree.traverseAllNodes(Tree.Order.LEVEL_ORDER);
+        System.out.println(integerList);
+
+
     }
 
     @Test
@@ -29,6 +55,8 @@ class LinkedListTreeTest {
         assertEquals(40, list.get(2));
         assertEquals(50, list.get(3));
         assertEquals(30, list.get(4));
+        assertEquals(60, list.get(5));
+        assertEquals(70, list.get(6));
     }
 
     @Test
@@ -37,8 +65,10 @@ class LinkedListTreeTest {
         assertEquals(40, list.get(0));
         assertEquals(50, list.get(1));
         assertEquals(20, list.get(2));
-        assertEquals(30, list.get(3));
-        assertEquals(10, list.get(4));
+        assertEquals(60, list.get(3));
+        assertEquals(70, list.get(4));
+        assertEquals(30, list.get(5));
+        assertEquals(10, list.get(6));
     }
 
     @Test
@@ -48,7 +78,9 @@ class LinkedListTreeTest {
         assertEquals(20, list.get(1));
         assertEquals(50, list.get(2));
         assertEquals(10, list.get(3));
-        assertEquals(30, list.get(4));
+        assertEquals(60, list.get(4));
+        assertEquals(30, list.get(5));
+        assertEquals(70, list.get(6));
     }
 
     @Test
@@ -58,6 +90,9 @@ class LinkedListTreeTest {
         assertEquals(20, list.get(1));
         assertEquals(30, list.get(2));
         assertEquals(40, list.get(3));
+        assertEquals(50, list.get(4));
+        assertEquals(60, list.get(5));
+        assertEquals(70, list.get(6));
     }
 
     @Test

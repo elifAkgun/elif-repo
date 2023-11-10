@@ -1,6 +1,13 @@
 package code.elif.tree;
 
-public class Node<T> {
+import code.elif.tree.exception.UnsupportedTreeDataException;
+import org.apache.hadoop.shaded.com.google.common.collect.Comparators;
+
+import javax.activation.UnsupportedDataTypeException;
+import java.util.Comparator;
+
+
+public class Node<T extends Comparable> implements Comparable<T> {
     Node<T> leftNode;
     Node<T> rightNode;
     T value;
@@ -17,5 +24,14 @@ public class Node<T> {
         return "Node{" +
                 "value=" + value +
                 '}';
+    }
+
+
+    @Override
+    public int compareTo(T o) {
+        Comparable<T> thisValue = (Comparable<T>) this.value;
+        Comparable<T> otherValue = (Comparable<T>) o;
+        return thisValue.compareTo((T) otherValue);
+
     }
 }
