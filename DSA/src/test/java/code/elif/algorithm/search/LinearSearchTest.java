@@ -1,6 +1,6 @@
 package code.elif.algorithm.search;
 
-import org.junit.jupiter.api.DisplayName;
+import code.elif.algorithm.search.impl.LinearSearch;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -15,8 +15,8 @@ class LinearSearchTest {
         List<Integer> integerList = List.of(1, 23, 3, 4, 8, 7, 24);
 
         // when - action or the behaviour that we are going test
-        LinearSearch<Integer> integerLinearSearch = new LinearSearch<>(integerList);
-        int actualIndex = integerLinearSearch.find(8);
+        LinearSearch<Integer> integerLinearSearch = new LinearSearch<>();
+        int actualIndex = integerLinearSearch.find(8, integerList);
 
         // then - verify the output
         assertEquals(4, actualIndex);
@@ -28,11 +28,10 @@ class LinearSearchTest {
         List<Integer> integerList = List.of(1, 23, 3, 4, 18, 7, 24);
 
         // when - action or the behaviour that we are going test
-        LinearSearch<Integer> integerLinearSearch = new LinearSearch<>(integerList);
-        int actualIndex = integerLinearSearch.find(8);
+        LinearSearch<Integer> integerLinearSearch = new LinearSearch<>();
+        int actualIndex = integerLinearSearch.find(8, integerList);
 
         // then - verify the output
         assertEquals(-1, actualIndex);
     }
-
 }
