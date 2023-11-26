@@ -1,6 +1,7 @@
 package code.elif;
 
-import code.elif.stack.impl.StackLinkedList;
+import code.elif.datastructure.stack.Stack;
+import code.elif.datastructure.stack.impl.StackLinkedList;
 
 import java.util.*;
 
@@ -22,7 +23,7 @@ public class ValidParentheses {
 
         String[] splitedString = s.split("");
         LinkedList<String> list = new LinkedList<>(Arrays.asList(splitedString));
-        code.elif.stack.Stack<String> cursorList = new StackLinkedList<>();
+        Stack<String> cursorList = new StackLinkedList<>();
 
         String cursor = list.pop();
         cursorList.push(cursor);
