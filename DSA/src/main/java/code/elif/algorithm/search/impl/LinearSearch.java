@@ -8,14 +8,17 @@ public class LinearSearch<T> implements Search<T> {
 
     /**
      * Returns the position of the target if found, else return -1
+     *
      * @param target
      * @return
      */
     @Override
     public int find(T target, List<T> list) {
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i) == target)
-                return i;
+        if (list != null) {
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i).equals(target))
+                    return i;
+            }
         }
         return -1;
     }
