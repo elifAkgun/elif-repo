@@ -1,4 +1,4 @@
-package code.elif.algorithm.sort.impl;
+package code.elif.algorithm.sort.impl.merge;
 
 import code.elif.algorithm.sort.Sortable;
 
@@ -13,28 +13,28 @@ public class MergeSort<T extends Comparable<T>> implements Sortable<T> {
             return list;
         }
 
-        LeftAndRightList leftAndRightList = splitList(list);
+        LeftAndRightList<T> leftAndRightList = splitList(list);
         List<T> left = sort(leftAndRightList.left());
         List<T> right = sort(leftAndRightList.right());
 
         return merge(left, right);
     }
 
-    private LeftAndRightList splitList(List<T> list) {
+    private LeftAndRightList<T> splitList(List<T> list) {
         int midPoint = list.size() / 2;
-        return new LeftAndRightList(list.subList(0, midPoint), list.subList(midPoint, list.size()));
+        return new LeftAndRightList<>(list.subList(0, midPoint), list.subList(midPoint, list.size()));
     }
 
     /**
      * Merges two lists, sorting them in the process
-     *
-     * @param left
-     * @param right
-     * @return merged new list
+     * @param left part of list
+     * @param right part of list
+     * @return merged list
      */
     private List<T> merge(List<T> left, List<T> right) {
         List<T> mergedList = new ArrayList<>();
-        int i = 0, j = 0;
+        int i = 0;
+        int j = 0;
 
         while (i < left.size() && j < right.size()) {
             if (left.get(i).compareTo(right.get(j)) < 0) {

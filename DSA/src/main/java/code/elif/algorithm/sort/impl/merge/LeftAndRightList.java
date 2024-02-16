@@ -1,4 +1,4 @@
-package code.elif.algorithm.sort.impl;
+package code.elif.algorithm.sort.impl.merge;
 
 import java.util.List;
 
