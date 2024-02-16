@@ -1,8 +1,10 @@
 package code.elif.webfluxdemo.config;
 
+import code.elif.webfluxdemo.exception.InputValidationException;
 import code.elif.webfluxdemo.service.CalculationService;
 import code.elif.webfluxdemo.service.input.CalculationInput;
 import code.elif.webfluxdemo.service.output.CalculationOutput;
+import code.elif.webfluxdemo.service.output.SquareOutput;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
@@ -43,5 +45,17 @@ public class CalculatorRequestHandler {
         Mono<CalculationOutput> multiplication = calculationService.subtraction(multiplicationInputMono);
         return ServerResponse.ok()
                 .body(multiplication, CalculationOutput.class);
+    }
+
+    public Mono<ServerResponse> square(ServerRequest serverRequest) {
+        int input = Integer.parseInt(serverRequest.pathVariable("input"));
+
+        if (input < 1 || input > 20) {
+            return Mono.error(new InputValidationException(input, "Number should be between 1-20"));
+        }
+
+        Mono<SquareOutput> square = calculationService.square(input);
+        return ServerResponse.ok()
+                .body(square, SquareOutput.class);
     }
 }

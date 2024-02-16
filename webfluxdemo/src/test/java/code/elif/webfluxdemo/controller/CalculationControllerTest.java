@@ -1,9 +1,11 @@
 package code.elif.webfluxdemo.controller;
 
 import code.elif.webfluxdemo.controller.api.CalculationController;
+import code.elif.webfluxdemo.controller.response.FailedResponse;
 import code.elif.webfluxdemo.service.impl.CalculationReactiveServiceImpl;
 import code.elif.webfluxdemo.service.input.CalculationInput;
 import code.elif.webfluxdemo.service.output.CalculationOutput;
+import code.elif.webfluxdemo.service.output.SquareOutput;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
@@ -26,8 +28,46 @@ class CalculationControllerTest {
     private WebTestClient webTestClient;
 
     @MockBean
-    private CalculationReactiveServiceImpl calculationReactiveService;
+    private CalculationReactiveServiceImpl calculationService;
 
+    @Test
+    public void givenNumber_whenSquareCalled_thenReturnCorrectNumber() {
+        int input = 5;
+        SquareOutput expected = SquareOutput.builder().result(25).build();
+        given(calculationService.square(input))
+                .willReturn(Mono.just(expected));
+
+        // when - action or the behaviour that we are going test
+        webTestClient.get()
+                .uri("/calculator/square/" + input)
+                .accept(MediaType.APPLICATION_JSON)
+                .exchange()
+
+                // then - verify the output
+                .expectStatus().isOk()
+                .expectHeader().contentTypeCompatibleWith(MediaType.APPLICATION_JSON)
+                .expectBody(SquareOutput.class)
+                .isEqualTo(expected);
+    }
+
+    @Test
+    public void givenNumberMoreThan20_whenSquareCalled_thenReturnException() {
+        int input = 21;
+        SquareOutput output = SquareOutput.builder().result(25).build();
+        given(calculationService.square(input))
+                .willReturn(Mono.just(output));
+
+        // when - action or the behaviour that we are going test
+        webTestClient.get()
+                .uri("/calculator/square/" + input)
+                .accept(MediaType.APPLICATION_JSON)
+                .exchange()
+
+                // then - verify the output
+                .expectStatus().isBadRequest()
+                .expectHeader().contentTypeCompatibleWith(MediaType.APPLICATION_JSON)
+                .expectBody(FailedResponse.class);
+    }
     @Test
     public void givenNumbers_whenMultiplicationCalled_thenReturnValue() {
         // given
@@ -40,7 +80,7 @@ class CalculationControllerTest {
                 .number2(BigDecimal.valueOf(3))
                 .build();
 
-        given(calculationReactiveService.multiplication(any(Mono.class)))
+        given(calculationService.multiplication(any(Mono.class)))
                 .willReturn(Mono.just(expected));
 
         // when

@@ -4,6 +4,7 @@ import code.elif.webfluxdemo.exception.InputValidationException;
 import code.elif.webfluxdemo.service.CalculationService;
 import code.elif.webfluxdemo.service.input.CalculationInput;
 import code.elif.webfluxdemo.service.output.CalculationOutput;
+import code.elif.webfluxdemo.service.output.SquareOutput;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
@@ -43,6 +44,12 @@ public class CalculationReactiveServiceImpl implements CalculationService {
                                 CalculationOutput.builder().result(a.divide(b)).build()));
                     }
                 });
+    }
+
+    @Override
+    public Mono<SquareOutput> square(Integer i) {
+        return Mono.fromSupplier(() -> SquareOutput.builder()
+                .result(i * i).build());
     }
 
     private CalculationOutput process(CalculationInput input,

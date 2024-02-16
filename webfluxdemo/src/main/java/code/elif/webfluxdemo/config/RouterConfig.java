@@ -14,7 +14,7 @@ import static code.elif.webfluxdemo.config.RouterExceptionHelper.exceptionHandle
 @RequiredArgsConstructor
 public class RouterConfig {
 
-    private final CalculatorRequestHandler requestHandler;
+    private final RequestHandler requestHandler;
 
     /**
      * May be more than one router function in your project.
@@ -32,7 +32,7 @@ public class RouterConfig {
     @Bean
     public RouterFunction<ServerResponse> calculatorServerResponseRouterFunction() {
         return RouterFunctions.route()
-                .POST("router/multiplication1", requestHandler::getMultiplication)
+                .GET("/multiplicationTable/{input}", requestHandler::getMultiplicationTable)
                 .onError(InputValidationException.class, exceptionHandler())
                 .build();
     }

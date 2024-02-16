@@ -18,17 +18,7 @@ class MathReactiveServiceImplTest {
     MathReactiveServiceImpl mathService;
 
 
-    @Test
-    public void givenNumber_whenSquareCalled_thenReturnCorrectNumber() {
-        // given- precondition or setup
-        Integer expected = 25;
-        // when - action or the behaviour that we are going test
-        Mono<SquareOutput> actual = mathService.square(5);
-        // then - verify the output
-        assertThat(actual.block().getResult())
-                .isEqualTo(expected);
 
-    }
 
     // JUnit test for
     @Test

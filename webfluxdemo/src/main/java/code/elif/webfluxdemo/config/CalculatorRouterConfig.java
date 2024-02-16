@@ -28,6 +28,7 @@ public class CalculatorRouterConfig {
 
     private RouterFunction<ServerResponse> serverResponseRouterFunction() {
         return RouterFunctions.route()
+                .GET("/square/{input}", requestHandler::square)
                 .POST("calculator", isOperation("*"), requestHandler::getMultiplication)
                 .POST("calculator", isOperation("/"), requestHandler::getDivision)
                 .POST("calculator", isOperation("-"), requestHandler::getSubtraction)
