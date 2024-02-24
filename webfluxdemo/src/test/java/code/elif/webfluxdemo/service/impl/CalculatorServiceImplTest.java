@@ -10,6 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import reactor.core.publisher.Mono;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -21,7 +22,7 @@ class CalculatorServiceImplTest {
 
 
     @Test
-    public void givenMultiplicationInput_whenMultiplicationCalled_thenReturnValue() {
+    void givenMultiplicationInput_whenMultiplicationCalled_thenReturnValue() {
         // given- precondition or setup
         CalculationInput input = CalculationInput.builder()
                 .number1(BigDecimal.valueOf(2))
@@ -31,16 +32,18 @@ class CalculatorServiceImplTest {
         Mono<CalculationOutput> multiplication = calculationService.multiplication(Mono.just(input));
 
         // then - verify the output
-        assertThat(multiplication.block().getResult()).isEqualTo(BigDecimal.valueOf(6));
+        assertThat(Objects.requireNonNull(multiplication.block()).getResult()).isEqualTo(BigDecimal.valueOf(6));
     }
+
     @Test
-    public void givenNumber_whenSquareCalled_thenReturnCorrectNumber() {
+    void givenNumber_whenSquareCalled_thenReturnCorrectNumber() {
         // given- precondition or setup
         Integer expected = 25;
         // when - action or the behaviour that we are going test
-        Mono<SquareOutput> actual = calculationService.square(5);
+        Integer input = 5;
+        Mono<SquareOutput> actual = calculationService.square(input);
         // then - verify the output
-        assertThat(actual.block().getResult())
+        assertThat(Objects.requireNonNull(actual.block()).getResult())
                 .isEqualTo(expected);
 
     }

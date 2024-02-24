@@ -31,11 +31,13 @@ class CalculationControllerTest {
     private CalculationReactiveServiceImpl calculationService;
 
     @Test
-    public void givenNumber_whenSquareCalled_thenReturnCorrectNumber() {
+    void givenNumber_whenSquareCalled_thenReturnCorrectNumber() {
         int input = 5;
-        SquareOutput expected = SquareOutput.builder().result(25).build();
-        given(calculationService.square(input))
-                .willReturn(Mono.just(expected));
+
+        SquareOutput squareOutput = SquareOutput.builder().result(25).build();
+        Mono<SquareOutput> expectedOutput = Mono.just(squareOutput); // Example output
+        given(calculationService.square(input)).willReturn(expectedOutput);
+
 
         // when - action or the behaviour that we are going test
         webTestClient.get()
@@ -47,11 +49,12 @@ class CalculationControllerTest {
                 .expectStatus().isOk()
                 .expectHeader().contentTypeCompatibleWith(MediaType.APPLICATION_JSON)
                 .expectBody(SquareOutput.class)
-                .isEqualTo(expected);
+                .isEqualTo(squareOutput);
     }
 
+
     @Test
-    public void givenNumberMoreThan20_whenSquareCalled_thenReturnException() {
+    void givenNumberMoreThan20_whenSquareCalled_thenReturnException() {
         int input = 21;
         SquareOutput output = SquareOutput.builder().result(25).build();
         given(calculationService.square(input))
@@ -69,7 +72,7 @@ class CalculationControllerTest {
                 .expectBody(FailedResponse.class);
     }
     @Test
-    public void givenNumbers_whenMultiplicationCalled_thenReturnValue() {
+    void givenNumbers_whenMultiplicationCalled_thenReturnValue() {
         // given
         CalculationOutput expected = CalculationOutput.builder()
                 .result(BigDecimal.valueOf(6))
@@ -80,8 +83,9 @@ class CalculationControllerTest {
                 .number2(BigDecimal.valueOf(3))
                 .build();
 
-        given(calculationService.multiplication(any(Mono.class)))
+        given(calculationService.multiplication(any()))
                 .willReturn(Mono.just(expected));
+
 
         // when
         FluxExchangeResult<CalculationOutput> result = webTestClient.post()

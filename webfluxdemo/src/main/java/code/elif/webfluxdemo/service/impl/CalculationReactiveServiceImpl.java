@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.function.BiFunction;
 
 @Service
@@ -36,20 +37,19 @@ public class CalculationReactiveServiceImpl implements CalculationService {
     public Mono<CalculationOutput> division(Mono<CalculationInput> input) {
         return input
                 .handle((numbers, sink) -> {
-                    if(BigDecimal.ZERO.equals(numbers.getNumber1())){
+                    if (BigDecimal.ZERO.equals(numbers.getNumber1())) {
                         sink.error(new InputValidationException(numbers.getNumber1(), "Illegal number1 parameter"));
-                    }
-                    else {
+                    } else {
                         sink.next(process(numbers, (a, b) ->
-                                CalculationOutput.builder().result(a.divide(b)).build()));
+                                CalculationOutput.builder().result(a.divide(b, RoundingMode.DOWN)).build()));
                     }
                 });
     }
 
     @Override
-    public Mono<SquareOutput> square(Integer i) {
-        return Mono.fromSupplier(() -> SquareOutput.builder()
-                .result(i * i).build());
+    public Mono<SquareOutput> square(Integer number) {
+        return Mono.just(SquareOutput.builder()
+                .result(number * number).build());
     }
 
     private CalculationOutput process(CalculationInput input,

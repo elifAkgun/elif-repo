@@ -69,14 +69,15 @@ public class CalculationController {
                         synchronousSink.error(new InputValidationException(number, "Number should be between 1-20"));
                     }
                 }).cast(Integer.class)
-                .flatMap(integer -> calculationService.square(integer));
+                .flatMap(calculationService::square);
     }
 
     @GetMapping("/square3/{input}")
-    public Mono<ResponseEntity<SquareOutput>> squareReactivePipelineBadRequest(@PathVariable("input") Integer number) {
-        return Mono.just(number)
+    public Mono<ResponseEntity<Mono<SquareOutput>>> squareReactivePipelineBadRequest(@PathVariable("input") Integer number) {
+        return Mono
+                .just(number)
                 .filter(i -> i >= 10 && i <= 20)
-                .flatMap(i -> calculationService.square(i))
+                .map(calculationService::square)
                 .map(ResponseEntity::ok)
                 .defaultIfEmpty(ResponseEntity.badRequest().build());
     }

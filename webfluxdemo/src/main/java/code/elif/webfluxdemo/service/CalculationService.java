@@ -11,6 +11,5 @@ public interface CalculationService {
     Mono<CalculationOutput> subtraction(Mono<CalculationInput> input);
     Mono<CalculationOutput> multiplication(Mono<CalculationInput> input);
     Mono<CalculationOutput> division(Mono<CalculationInput> input);
-    Mono<SquareOutput> square(Integer i);
-
+    Mono<SquareOutput> square(Integer number);
 }
