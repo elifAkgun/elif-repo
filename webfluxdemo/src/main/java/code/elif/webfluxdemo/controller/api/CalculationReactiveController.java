@@ -1,7 +1,7 @@
 package code.elif.webfluxdemo.controller.api;
 
 import code.elif.webfluxdemo.exception.InputValidationException;
-import code.elif.webfluxdemo.service.CalculationService;
+import code.elif.webfluxdemo.service.CalculationReactiveService;
 import code.elif.webfluxdemo.service.input.CalculationInput;
 import code.elif.webfluxdemo.service.output.CalculationOutput;
 import code.elif.webfluxdemo.service.output.SquareOutput;
@@ -17,49 +17,49 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/calculator")
+@RequestMapping("/reactive-calculator")
 @Slf4j
-public class CalculationController {
+public class CalculationReactiveController {
 
-    private final CalculationService calculationService;
+    private final CalculationReactiveService calculationReactiveService;
 
     @PostMapping(value = "/multiplication", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Mono<CalculationOutput> multiplication(@RequestBody Mono<CalculationInput> input,
                                                   @RequestHeader Map<String, String> headers) {
         log.info(headers.toString());
-        return calculationService.multiplication(input);
+        return calculationReactiveService.multiplication(input);
     }
 
     @PostMapping(value = "/addition", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Mono<CalculationOutput> addition(@RequestBody Mono<CalculationInput> input,
-                                                  @RequestHeader Map<String, String> headers) {
+                                            @RequestHeader Map<String, String> headers) {
         log.info(headers.toString());
-        return calculationService.addition(input);
+        return calculationReactiveService.addition(input);
     }
 
     @PostMapping(value = "/division", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Mono<CalculationOutput> division(@RequestBody Mono<CalculationInput> input,
-                                                  @RequestHeader Map<String, String> headers) {
+                                            @RequestHeader Map<String, String> headers) {
         log.info(headers.toString());
-        return calculationService.division(input);
+        return calculationReactiveService.division(input);
     }
 
     @PostMapping(value = "/subtraction", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Mono<CalculationOutput> subtraction(@RequestBody Mono<CalculationInput> input,
-                                                  @RequestHeader Map<String, String> headers) {
+                                               @RequestHeader Map<String, String> headers) {
         log.info(headers.toString());
-        return calculationService.subtraction(input);
+        return calculationReactiveService.subtraction(input);
     }
 
-    @GetMapping("/square/{input}")
+    @GetMapping(value = "/square/{input}")
     public Mono<SquareOutput> square(@PathVariable("input") Integer number) {
         if (number < 1 || number > 20)
             throw new InputValidationException(BigDecimal.valueOf(number), "Number should be between 1-20");
 
-        return calculationService.square(number);
+        return calculationReactiveService.square(number);
     }
 
-    @GetMapping("/square2/{input}")
+    @GetMapping("/pipeline/square/{input}")
     public Mono<SquareOutput> squareReactivePipelineErrorHandling(@PathVariable("input") Integer number) {
         return Mono.just(number)
                 .handle((integer, synchronousSink) -> {
@@ -69,16 +69,17 @@ public class CalculationController {
                         synchronousSink.error(new InputValidationException(number, "Number should be between 1-20"));
                     }
                 }).cast(Integer.class)
-                .flatMap(calculationService::square);
+                .flatMap(calculationReactiveService::square);
     }
 
-    @GetMapping("/square3/{input}")
-    public Mono<ResponseEntity<Mono<SquareOutput>>> squareReactivePipelineBadRequest(@PathVariable("input") Integer number) {
+    @GetMapping("/filter/square/{input}")
+    public Mono<ResponseEntity<SquareOutput>> squareReactivePipelineBadRequest(@PathVariable("input") Integer number) {
+
         return Mono
                 .just(number)
                 .filter(i -> i >= 10 && i <= 20)
-                .map(calculationService::square)
-                .map(ResponseEntity::ok)
-                .defaultIfEmpty(ResponseEntity.badRequest().build());
+                .flatMap(i -> calculationReactiveService.square(i)
+                        .map(ResponseEntity::ok))
+                .switchIfEmpty(Mono.just(ResponseEntity.badRequest().build()));
     }
 }

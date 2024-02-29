@@ -1,8 +1,8 @@
 package code.elif.webfluxdemo.controller;
 
-import code.elif.webfluxdemo.controller.api.CalculationController;
+import code.elif.webfluxdemo.controller.api.CalculationReactiveController;
 import code.elif.webfluxdemo.controller.response.FailedResponse;
-import code.elif.webfluxdemo.service.impl.CalculationReactiveServiceImpl;
+import code.elif.webfluxdemo.service.impl.CalculationReactiveReactiveServiceImpl;
 import code.elif.webfluxdemo.service.input.CalculationInput;
 import code.elif.webfluxdemo.service.output.CalculationOutput;
 import code.elif.webfluxdemo.service.output.SquareOutput;
@@ -21,14 +21,14 @@ import java.math.BigDecimal;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 
-@WebFluxTest(CalculationController.class)
-class CalculationControllerTest {
+@WebFluxTest(CalculationReactiveController.class)
+class CalculationReactiveControllerTest {
 
     @Autowired
     private WebTestClient webTestClient;
 
     @MockBean
-    private CalculationReactiveServiceImpl calculationService;
+    private CalculationReactiveReactiveServiceImpl calculationService;
 
     @Test
     void givenNumber_whenSquareCalled_thenReturnCorrectNumber() {
@@ -41,7 +41,7 @@ class CalculationControllerTest {
 
         // when - action or the behaviour that we are going test
         webTestClient.get()
-                .uri("/calculator/square/" + input)
+                .uri("/reactive-calculator/square/" + input)
                 .accept(MediaType.APPLICATION_JSON)
                 .exchange()
 
@@ -62,7 +62,7 @@ class CalculationControllerTest {
 
         // when - action or the behaviour that we are going test
         webTestClient.get()
-                .uri("/calculator/square/" + input)
+                .uri("/reactive-calculator/square/" + input)
                 .accept(MediaType.APPLICATION_JSON)
                 .exchange()
 
@@ -89,7 +89,7 @@ class CalculationControllerTest {
 
         // when
         FluxExchangeResult<CalculationOutput> result = webTestClient.post()
-                .uri("/calculator/multiplication")
+                .uri("/reactive-calculator/multiplication")
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(input)
                 .accept(MediaType.TEXT_EVENT_STREAM)

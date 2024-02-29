@@ -1,7 +1,7 @@
 package code.elif.webfluxdemo.service.impl;
 
 import code.elif.webfluxdemo.exception.InputValidationException;
-import code.elif.webfluxdemo.service.CalculationService;
+import code.elif.webfluxdemo.service.CalculationReactiveService;
 import code.elif.webfluxdemo.service.input.CalculationInput;
 import code.elif.webfluxdemo.service.output.CalculationOutput;
 import code.elif.webfluxdemo.service.output.SquareOutput;
@@ -13,7 +13,7 @@ import java.math.RoundingMode;
 import java.util.function.BiFunction;
 
 @Service
-public class CalculationReactiveServiceImpl implements CalculationService {
+public class CalculationReactiveReactiveServiceImpl implements CalculationReactiveService {
 
     @Override
     public Mono<CalculationOutput> addition(Mono<CalculationInput> input) {

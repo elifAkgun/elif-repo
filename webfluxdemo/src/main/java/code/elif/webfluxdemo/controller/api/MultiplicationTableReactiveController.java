@@ -1,6 +1,6 @@
 package code.elif.webfluxdemo.controller.api;
 
-import code.elif.webfluxdemo.service.MathReactiveService;
+import code.elif.webfluxdemo.service.MultiplicationTableReactiveService;
 import code.elif.webfluxdemo.service.output.MultiplicationTableOutput;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,18 +13,18 @@ import reactor.core.publisher.Flux;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/math-reactive")
+@RequestMapping("/multiplication-table-reactive")
 @Slf4j
-public class MathReactiveController {
+public class MultiplicationTableReactiveController {
 
-    private final MathReactiveService mathReactiveService;
+    private final MultiplicationTableReactiveService mathReactiveService;
 
-    @GetMapping(value = "/multiplicationTable/stream/{input}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    @GetMapping(value = "/stream/{input}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<MultiplicationTableOutput> getMultiplicationTableWithEventStream(@PathVariable("input") Integer number) {
         return mathReactiveService.getMultiplicationTable(number);
     }
 
-    @GetMapping(value = "/multiplicationTable/{input}")
+    @GetMapping(value = "/{input}")
     public Flux<MultiplicationTableOutput> getMultiplicationTable(@PathVariable("input") Integer number) {
         return mathReactiveService.getMultiplicationTable(number);
     }

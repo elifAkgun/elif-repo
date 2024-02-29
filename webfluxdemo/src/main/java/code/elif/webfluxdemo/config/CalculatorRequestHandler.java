@@ -1,7 +1,7 @@
 package code.elif.webfluxdemo.config;
 
 import code.elif.webfluxdemo.exception.InputValidationException;
-import code.elif.webfluxdemo.service.CalculationService;
+import code.elif.webfluxdemo.service.CalculationReactiveService;
 import code.elif.webfluxdemo.service.input.CalculationInput;
 import code.elif.webfluxdemo.service.output.CalculationOutput;
 import code.elif.webfluxdemo.service.output.SquareOutput;
@@ -15,25 +15,25 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class CalculatorRequestHandler {
 
-    private final CalculationService calculationService;
+    private final CalculationReactiveService calculationReactiveService;
 
     public Mono<ServerResponse> getMultiplication(ServerRequest serverRequest) {
         Mono<CalculationInput> multiplicationInputMono = serverRequest.bodyToMono(CalculationInput.class);
-        Mono<CalculationOutput> multiplication = calculationService.multiplication(multiplicationInputMono);
+        Mono<CalculationOutput> multiplication = calculationReactiveService.multiplication(multiplicationInputMono);
         return ServerResponse.ok()
                 .body(multiplication, CalculationOutput.class);
     }
 
     public Mono<ServerResponse> getAddition(ServerRequest serverRequest) {
         Mono<CalculationInput> multiplicationInputMono = serverRequest.bodyToMono(CalculationInput.class);
-        Mono<CalculationOutput> multiplication = calculationService.addition(multiplicationInputMono);
+        Mono<CalculationOutput> multiplication = calculationReactiveService.addition(multiplicationInputMono);
         return ServerResponse.ok()
                 .body(multiplication, CalculationOutput.class);
     }
 
     public Mono<ServerResponse> getDivision(ServerRequest serverRequest) {
         Mono<CalculationInput> multiplicationInputMono = serverRequest.bodyToMono(CalculationInput.class);
-        Mono<CalculationOutput> multiplication = calculationService.division(multiplicationInputMono);
+        Mono<CalculationOutput> multiplication = calculationReactiveService.division(multiplicationInputMono);
         return multiplication.doOnError(
                         throwable ->
                                 ServerResponse.badRequest().bodyValue(throwable.getMessage()))
@@ -42,7 +42,7 @@ public class CalculatorRequestHandler {
 
     public Mono<ServerResponse> getSubtraction(ServerRequest serverRequest) {
         Mono<CalculationInput> multiplicationInputMono = serverRequest.bodyToMono(CalculationInput.class);
-        Mono<CalculationOutput> multiplication = calculationService.subtraction(multiplicationInputMono);
+        Mono<CalculationOutput> multiplication = calculationReactiveService.subtraction(multiplicationInputMono);
         return ServerResponse.ok()
                 .body(multiplication, CalculationOutput.class);
     }
@@ -54,7 +54,7 @@ public class CalculatorRequestHandler {
             return Mono.error(new InputValidationException(input, "Number should be between 1-20"));
         }
 
-        Mono<SquareOutput> square = calculationService.square(input);
+        Mono<SquareOutput> square = calculationReactiveService.square(input);
         return ServerResponse.ok()
                 .body(square, SquareOutput.class);
     }

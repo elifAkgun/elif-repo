@@ -1,6 +1,6 @@
 package code.elif.webfluxdemo.config;
 
-import code.elif.webfluxdemo.service.MathReactiveService;
+import code.elif.webfluxdemo.service.MultiplicationTableReactiveService;
 import code.elif.webfluxdemo.service.output.MultiplicationTableOutput;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -14,11 +14,11 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class RequestHandler {
 
-    private final MathReactiveService mathReactiveService;
+    private final MultiplicationTableReactiveService multiplicationTableReactiveService;
 
     public Mono<ServerResponse> getMultiplicationTable(ServerRequest serverRequest) {
         String input = serverRequest.pathVariable("input");
-        Flux<MultiplicationTableOutput> multiplicationTable = mathReactiveService.getMultiplicationTable(Integer.parseInt(input));
+        Flux<MultiplicationTableOutput> multiplicationTable = multiplicationTableReactiveService.getMultiplicationTable(Integer.parseInt(input));
         return ServerResponse.ok()
                 .contentType(MediaType.TEXT_EVENT_STREAM)
                 .body(multiplicationTable, MultiplicationTableOutput.class);

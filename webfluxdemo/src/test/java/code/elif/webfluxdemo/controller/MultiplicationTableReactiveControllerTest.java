@@ -1,8 +1,8 @@
 package code.elif.webfluxdemo.controller;
 
 
-import code.elif.webfluxdemo.controller.api.MathReactiveController;
-import code.elif.webfluxdemo.service.MathReactiveService;
+import code.elif.webfluxdemo.controller.api.MultiplicationTableReactiveController;
+import code.elif.webfluxdemo.service.MultiplicationTableReactiveService;
 import code.elif.webfluxdemo.service.output.MultiplicationTableOutput;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,26 +15,26 @@ import reactor.core.publisher.Flux;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 
-@WebFluxTest(MathReactiveController.class)
-public class MathReactiveControllerTest {
+@WebFluxTest(MultiplicationTableReactiveController.class)
+class MultiplicationTableReactiveControllerTest {
 
     @Autowired
     private WebTestClient webTestClient;
 
     @MockBean
-    private MathReactiveService mathReactiveService;
+    private MultiplicationTableReactiveService multiplicationTableReactiveService;
 
 
     @Test
-    public void givenNumber_whenGetMultiplicationTableCalled_thenReturnMultiplicationTable() {
+    void givenNumber_whenGetMultiplicationTableCalled_thenReturnMultiplicationTable() {
         // given- precondition or setup
-        given(mathReactiveService.getMultiplicationTable(any(Integer.class)))
+        given(multiplicationTableReactiveService.getMultiplicationTable(any(Integer.class)))
                 .willReturn(Flux.just(MultiplicationTableOutput.builder().multiplicationTableItem("1 x 1 = 1").build(),
                         MultiplicationTableOutput.builder().multiplicationTableItem("1 x 2 = 2").build()));
 
         // when - action or the behaviour that we are going test
         webTestClient.get()
-                .uri("/math-reactive/multiplicationTable/1")
+                .uri("/multiplication-table-reactive/1")
                 .accept(MediaType.TEXT_EVENT_STREAM)
                 .exchange()
 

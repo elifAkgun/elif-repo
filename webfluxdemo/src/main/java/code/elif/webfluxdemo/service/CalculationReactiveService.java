@@ -5,7 +5,7 @@ import code.elif.webfluxdemo.service.output.CalculationOutput;
 import code.elif.webfluxdemo.service.output.SquareOutput;
 import reactor.core.publisher.Mono;
 
-public interface CalculationService {
+public interface CalculationReactiveService {
 
     Mono<CalculationOutput> addition(Mono<CalculationInput> input);
     Mono<CalculationOutput> subtraction(Mono<CalculationInput> input);
