@@ -1,8 +1,8 @@
 package code.elif.datastructure.stack.impl;
 
 import code.elif.datastructure.linkedlist.LinkedList;
-import code.elif.datastructure.stack.Stack;
 import code.elif.datastructure.linkedlist.SingleLinkedList;
+import code.elif.datastructure.stack.Stack;
 
 public class StackLinkedList<T> implements Stack<T> {
 

@@ -2,19 +2,24 @@ package code.elif.service.impl;
 
 import code.elif.model.TodoData;
 import code.elif.model.TodoItem;
+import code.elif.service.DemoService;
 import code.elif.service.TodoService;
+import lombok.AllArgsConstructor;
 import lombok.NonNull;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
+@AllArgsConstructor
 public class TodoServiceImpl implements TodoService {
 
     private final TodoData todoData = new TodoData();
 
+    private  final BackendAdapter backendAdapter;
+
     @Override
     public void addItem(@NonNull TodoItem todoItem) {
+        String apiResponse = backendAdapter.getBackendResponse(todoItem.getTitle()
+                , todoItem.getDetail());
         todoData.addItem(todoItem);
     }
 

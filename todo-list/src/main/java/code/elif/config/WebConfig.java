@@ -4,7 +4,7 @@ import code.elif.util.Views;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
+import org.springframework.retry.annotation.EnableRetry;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -14,6 +14,7 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
 @EnableWebMvc
 @ComponentScan(basePackages = "code.elif")
+@EnableRetry
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
     // == constants ==

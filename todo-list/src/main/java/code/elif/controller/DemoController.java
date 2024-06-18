@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class DemoController {
 
-    private DemoService demoService;
+    private final DemoService demoService;
 
     @Autowired
     public DemoController(DemoService demoService) {

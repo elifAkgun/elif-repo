@@ -1,7 +1,5 @@
 package code.elif.algorithm.search.impl;
 
-import code.elif.algorithm.search.Search;
-
 import java.util.List;
 
 public class RecursiveBinarySearch<T extends Comparable<T>> {
