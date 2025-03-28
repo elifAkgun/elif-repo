@@ -5,9 +5,9 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * Unit test for simple PlatformThreadsDemoApp.
+ * Unit test for simple PlatformThreadsCreationApp.
  */
-public class PlatformThreadsDemoAppTest
+public class PlatformThreadsCreationAppTest
     extends TestCase
 {
     /**
@@ -15,7 +15,7 @@ public class PlatformThreadsDemoAppTest
      *
      * @param testName name of the test case
      */
-    public PlatformThreadsDemoAppTest(String testName )
+    public PlatformThreadsCreationAppTest(String testName )
     {
         super( testName );
     }
@@ -25,7 +25,7 @@ public class PlatformThreadsDemoAppTest
      */
     public static Test suite()
     {
-        return new TestSuite( PlatformThreadsDemoAppTest.class );
+        return new TestSuite( PlatformThreadsCreationAppTest.class );
     }
 
     /**

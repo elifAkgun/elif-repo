@@ -11,10 +11,10 @@ public class Tasks {
 
     private static final Logger logger = LoggerFactory.getLogger(Tasks.class);
 
-    public static void ioIntensive(long intensive) {
-        logger.info("ioIntensive is started {}", intensive);
+    public static void ioIntensive(long intensive, String description) {
+        logger.info("ioIntensive is started {}", description);
         CommonUtils.sleep(Duration.of(intensive, ChronoUnit.MILLIS));
-        logger.info("ioIntensive is finished {}", intensive);
+        logger.info("ioIntensive is finished {}", description);
     }
 
     public static void cpuIntensive(long intensive) {

@@ -1,4 +1,4 @@
-package code.elif;
+package code.elif.thread.virtual;
 
 import code.elif.util.Tasks;
 
@@ -9,7 +9,6 @@ public class CPUTaskDemo {
     public static final int TASK_COUNT = 1;
 
     public static void main(String[] args) {
-
         demo(Thread.ofVirtual());
     }
 

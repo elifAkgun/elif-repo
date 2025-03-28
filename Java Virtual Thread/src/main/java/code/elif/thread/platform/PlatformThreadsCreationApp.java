@@ -1,4 +1,4 @@
-package code.elif;
+package code.elif.thread.platform;
 
 import code.elif.util.Tasks;
 
@@ -7,8 +7,9 @@ import java.util.concurrent.CountDownLatch;
 /**
  * Hello world!
  */
-public class PlatformThreadsDemoApp {
+public class PlatformThreadsCreationApp {
     private static final int MAX_PLATFORM = 10;
+    public static final String THREAD = "Thread ";
 
     public static void main(String[] args) throws InterruptedException {
         platformThreadCreation3();
@@ -17,7 +18,7 @@ public class PlatformThreadsDemoApp {
     private static void platformThreadCreation() {
         for (int i = 0; i < MAX_PLATFORM; i++) {
             int j = i;
-            Thread thread = new Thread(() -> Tasks.ioIntensive(j));
+            Thread thread = new Thread(() -> Tasks.ioIntensive(j, THREAD + j));
             thread.start();
         }
     }
@@ -26,7 +27,7 @@ public class PlatformThreadsDemoApp {
         for (int i = 0; i < MAX_PLATFORM; i++) {
             int j = i;
             Thread.Builder.OfPlatform ofPlatform = Thread.ofPlatform().name("Platform " + j, i);
-            Thread thread = ofPlatform.unstarted(() -> Tasks.ioIntensive(j));
+            Thread thread = ofPlatform.unstarted(() -> Tasks.ioIntensive(j, THREAD + j));
             thread.start();
         }
     }
@@ -40,7 +41,7 @@ public class PlatformThreadsDemoApp {
             Thread.Builder.OfVirtual platform = Thread.ofVirtual()
                     .name("Platform", i);
             Thread thread = platform.unstarted(() -> {
-                Tasks.ioIntensive(j);
+                Tasks.ioIntensive(j, THREAD + j);
                 countDownLatch.countDown();
             });
             thread.start();

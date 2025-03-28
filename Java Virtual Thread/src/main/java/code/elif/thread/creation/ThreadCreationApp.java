@@ -1,4 +1,4 @@
-package code.elif;
+package code.elif.thread.creation;
 
 import com.sun.tools.javac.Main;
 import org.slf4j.Logger;
@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import java.util.concurrent.ThreadFactory;
 
 public class ThreadCreationApp {
-    private static final Logger logger = LoggerFactory.getLogger(Main.class);
+    private static final Logger logger = LoggerFactory.getLogger(ThreadCreationApp.class);
 
     public static void main(String[] args) throws InterruptedException {
 
