@@ -12,15 +12,17 @@ public class Tasks {
     private static final Logger logger = LoggerFactory.getLogger(Tasks.class);
 
     public static void ioIntensive(long intensive) {
-        logger.info("ioIntensive is started {}" , intensive);
+        logger.info("ioIntensive is started {}", intensive);
         CommonUtils.sleep(Duration.of(intensive, ChronoUnit.MILLIS));
-        logger.info("ioIntensive is finished {}" , intensive);
+        logger.info("ioIntensive is finished {}", intensive);
     }
 
     public static void cpuIntensive(long intensive) {
-        logger.info("ioIntensive is started {}" , intensive);
+        long currented = System.currentTimeMillis();
+        logger.info("ioIntensive is started {} tasks", intensive);
         CommonUtils.timer(() -> findFibonacci(intensive));
-        logger.info("ioIntensive is finished {}" , intensive);
+        long l = (System.currentTimeMillis() - currented) / 1000;
+        logger.info("ioIntensive is finished {} tasks with in {} seconds", intensive, l);
     }
 
     private static long findFibonacci(long input) {
