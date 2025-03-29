@@ -1,6 +1,5 @@
 package code.elif.thread.creation;
 
-import com.sun.tools.javac.Main;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,6 +17,8 @@ public class ThreadCreationApp {
                 return new Thread(r, "worker-thread-with-factory");
             }
         };
+
+        //lamda ile daha okunaklı olur
         Thread thread = factory.newThread(() ->
                 logger.info("Hello, platorm thread!"));
         thread.start();
@@ -26,11 +27,12 @@ public class ThreadCreationApp {
         Thread.ofPlatform().name("worker-thread-virtual").start(() ->
                 logger.info("Hello, virtual thread!"));
 
-        Thread.ofVirtual().start(() -> logger.info("Simple virtual thread"));
+        Thread.ofVirtual()
+                .start(() -> logger.info("Simple virtual thread creation"));
 
         Thread.ofVirtual()
                 .name("custom-thread", 0)
-                .start(() -> logger.info("Customized virtual thread"));
+                .start(() -> logger.info("Customized name creation for virtual thread"));
 
         Thread.sleep(2000);
 

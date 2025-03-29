@@ -18,11 +18,7 @@ public class Tasks {
     }
 
     public static void cpuIntensive(long intensive) {
-        long currented = System.currentTimeMillis();
-        logger.info("ioIntensive is started {} tasks", intensive);
-        CommonUtils.timer(() -> findFibonacci(intensive));
-        long l = (System.currentTimeMillis() - currented) / 1000;
-        logger.info("ioIntensive is finished {} tasks with in {} seconds", intensive, l);
+        findFibonacci(intensive);
     }
 
     private static long findFibonacci(long input) {
