@@ -4,7 +4,7 @@ import code.elif.util.Tasks;
 
 import java.util.concurrent.CountDownLatch;
 
-public class CPUTaskDemo {
+public class CPUTaskApp {
 
     public static final int TASK_COUNT = 1;
 
