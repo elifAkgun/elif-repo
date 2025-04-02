@@ -22,18 +22,21 @@ public class CooperativeSchedulingApp {
         unstartedThread.start();
         Thread unstartedThread2 = builder.unstarted(() -> cooperativeSchedulingApp(2));
         unstartedThread2.start();
-
+        Thread unstartedThread3 = builder.unstarted(() -> cooperativeSchedulingApp(3));
+        unstartedThread3.start();
 
         CommonUtils.sleep(Duration.ofSeconds(2));
     }
 
-    public static void cooperativeSchedulingApp(int threadCount) {
-        logger.info("Starting cooperative scheduling app with thread count {}", threadCount);
+    public static void cooperativeSchedulingApp(int threadNumber) {
+        logger.info("Starting cooperative scheduling app with thread count {}", threadNumber);
         for (int i = 0; i < 10; i++) {
-            logger.info("thread - {} is printing {}. Thread name : {}", threadCount, i, Thread.currentThread());
-            Thread.yield();
+            logger.info("thread - {} is printing {}. Thread name : {}", threadNumber, i, Thread.currentThread());
+            if (threadNumber < 3) {
+                Thread.yield();
+            }
         }
 
-        logger.info("Finished cooperative scheduling app with thread count {}", threadCount);
+        logger.info("Finished cooperative scheduling app with thread count {}", threadNumber);
     }
 }
