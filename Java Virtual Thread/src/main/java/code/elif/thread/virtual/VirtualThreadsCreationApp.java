@@ -14,7 +14,7 @@ public class VirtualThreadsCreationApp {
         for (int i = 0; i < THREAD_COUNT; i++) {
             Thread.ofVirtual().name("VirtualThreadsDemoApp", i).start(
                     () -> {
-                        Tasks.ioIntensive(3,"VirtualThreadsDemoApp");
+                        Tasks.ioIntensive(3, "VirtualThreadsDemoApp");
                         countDownLatch.countDown();
                     }
 

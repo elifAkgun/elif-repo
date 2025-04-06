@@ -8,8 +8,8 @@ import java.util.concurrent.CountDownLatch;
  * Hello world!
  */
 public class PlatformThreadsCreationApp {
-    private static final int MAX_PLATFORM = 10;
     public static final String THREAD = "Thread ";
+    private static final int MAX_PLATFORM = 10;
 
     public static void main(String[] args) throws InterruptedException {
         platformThreadCreation3();
