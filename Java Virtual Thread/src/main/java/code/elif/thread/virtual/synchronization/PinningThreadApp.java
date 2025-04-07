@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory;
 import java.time.Duration;
 
 
-public class PinningThraadApp {
+public class PinningThreadApp {
 
-    private static final Logger logger = LoggerFactory.getLogger(PinningThraadApp.class);
+    private static final Logger logger = LoggerFactory.getLogger(PinningThreadApp.class);
 
     static {
         System.setProperty("jdk.tracePinnedThreads", "full");
@@ -20,7 +20,6 @@ public class PinningThraadApp {
         Runnable runnable = () -> logger.info("Pinned Thread is blocking me!!");
         demo(Thread.ofVirtual());
         Thread.ofVirtual().start(runnable);
-
         CommonUtils.sleep(Duration.ofSeconds(20));
     }
 
