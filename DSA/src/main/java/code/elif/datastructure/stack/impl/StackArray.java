@@ -23,17 +23,17 @@ public class StackArray<T> implements Stack<T> {
 
     @Override
     public T pop() {
-        if(stackSize==0){
-            throw  new IllegalStateException("There is no element in the stack");
+        if (stackSize == 0) {
+            throw new IllegalStateException("There is no element in the stack");
         }
-        T t = stack[stackSize-1];
+        T t = stack[stackSize - 1];
         stackSize--;
         return t;
     }
 
     @Override
     public T peek() {
-        return stack[stackSize-1];
+        return stack[stackSize - 1];
     }
 
     @Override

@@ -2,7 +2,8 @@ package code.elif.recursion;
 
 public class HanoiTower {
 
-    static int movementCount =0;
+    static int movementCount = 0;
+
     public static void main(String[] args) {
         move(4, 'a', 'b', 'c');
     }

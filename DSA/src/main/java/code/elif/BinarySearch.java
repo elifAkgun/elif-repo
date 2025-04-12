@@ -18,7 +18,7 @@ public class BinarySearch {
 
         ArrayList<Integer> integers = new ArrayList<>();
 
-        System.out.println(  integers.toArray().length);
+        System.out.println(integers.toArray().length);
 
 
         int first = 0;

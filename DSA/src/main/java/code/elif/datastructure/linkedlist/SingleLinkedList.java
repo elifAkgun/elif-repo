@@ -40,7 +40,7 @@ public class SingleLinkedList<T> implements LinkedList<T> {
         SingleNode<T> tempSingleNode;
         if (position == 0) {
             head = head.nextSingleNode;
-            if(head==null){
+            if (head == null) {
                 tail = null;
             }
         } else if (position == -1) { // last position

@@ -2,7 +2,7 @@ package code.elif.datastructure.linkedlist.node;
 
 import java.util.Objects;
 
-public class DoubleNode<T> implements Node<T>{
+public class DoubleNode<T> implements Node<T> {
 
     public DoubleNode<T> previousNode;
     public T value;

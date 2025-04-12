@@ -19,7 +19,7 @@ class CountingBitsTest {
     void countBitsN5() {
         CountingBits countingBits = new CountingBits();
         int[] actual = countingBits.countBits(5);
-        int[] expected = {0,1,1,2,1,2};
+        int[] expected = {0, 1, 1, 2, 1, 2};
         Assertions.assertArrayEquals(expected, actual);
     }
 }

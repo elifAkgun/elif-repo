@@ -25,7 +25,7 @@ class NewTreeTest {
         // then - verify the output
         assertEquals(1, root.leftNode.value);
         assertEquals(5, root.value);
-        assertEquals(2,root.leftNode.rightNode.value);
+        assertEquals(2, root.leftNode.rightNode.value);
         assertEquals(3, root.leftNode.rightNode.rightNode.value);
         assertEquals(10, root.rightNode.value);
 

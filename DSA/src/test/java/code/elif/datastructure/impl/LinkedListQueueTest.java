@@ -36,7 +36,7 @@ class LinkedListQueueTest {
     }
 
     @Test
-    void deleteQueue(){
+    void deleteQueue() {
         assertTrue(queue.isEmpty());
         queue.enQueue(10);
         queue.deleteQueue();

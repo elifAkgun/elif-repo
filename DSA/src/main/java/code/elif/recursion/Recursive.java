@@ -12,19 +12,17 @@ public class Recursive {
 
     private static int fibonacci(int x) {
         if (x <= 2) {
-            return x-1;
-        }
-        else {
-           return fibonacci(x-1) + fibonacci(x-2);
+            return x - 1;
+        } else {
+            return fibonacci(x - 1) + fibonacci(x - 2);
         }
     }
 
     private static int factorial(int x) {
         if (x == 1) {
             return x;
-        }
-        else {
-            return x * factorial(x-1);
+        } else {
+            return x * factorial(x - 1);
         }
     }
 }

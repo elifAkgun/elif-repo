@@ -2,7 +2,7 @@ package code.elif.datastructure.linkedlist.node;
 
 import java.util.Objects;
 
-public class SingleNode<T> implements Node<T>{
+public class SingleNode<T> implements Node<T> {
 
     public T value;
     public SingleNode<T> nextSingleNode;

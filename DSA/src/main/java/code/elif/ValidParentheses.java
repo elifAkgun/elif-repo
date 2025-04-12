@@ -18,6 +18,17 @@ public class ValidParentheses {
         parentheses.put("[", "]");
     }
 
+    public static ArrayList<Integer> findEvenNumbers(int[] numbers) {
+        ArrayList<Integer> evenNumbers = new ArrayList<>();
+        for (int number : numbers) {
+            if (number % 2 == 0) {
+                evenNumbers.add(number);
+            }
+        }
+
+        return evenNumbers;
+    }
+
     public boolean isValid(String s) {
 
         if (s == null || s.isEmpty()) {
@@ -49,17 +60,6 @@ public class ValidParentheses {
             }
         }
         return false;
-    }
-
-    public static ArrayList<Integer> findEvenNumbers(int[] numbers) {
-        ArrayList<Integer> evenNumbers= new ArrayList<>();
-        for (int number : numbers) {
-            if (number % 2 == 0) {
-                evenNumbers.add(number);
-            }
-        }
-
-        return evenNumbers;
     }
 
 }

@@ -4,13 +4,6 @@ import java.util.List;
 
 public interface Tree<T extends Comparable> {
 
-    enum Order {
-        PRE_ORDER,
-        IN_ORDER,
-        POST_ORDER,
-        LEVEL_ORDER
-    }
-
     Node<T> insertNode(T value);
 
     boolean deleteNode(Node<T> root, T value);
@@ -19,10 +12,17 @@ public interface Tree<T extends Comparable> {
 
     int getIndex(T value);
 
-    Tree<T>  mirrorTree();
+    Tree<T> mirrorTree();
 
     List<T> traverseAllNodes(LinkedListTree.Order orderType);
 
     boolean deleteTree();
+
+    enum Order {
+        PRE_ORDER,
+        IN_ORDER,
+        POST_ORDER,
+        LEVEL_ORDER
+    }
 
 }

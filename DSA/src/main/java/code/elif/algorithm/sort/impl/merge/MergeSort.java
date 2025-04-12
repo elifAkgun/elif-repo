@@ -27,7 +27,8 @@ public class MergeSort<T extends Comparable<T>> implements Sortable<T> {
 
     /**
      * Merges two lists, sorting them in the process
-     * @param left part of list
+     *
+     * @param left  part of list
      * @param right part of list
      * @return merged list
      */

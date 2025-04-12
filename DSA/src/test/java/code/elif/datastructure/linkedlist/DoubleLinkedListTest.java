@@ -108,7 +108,7 @@ class DoubleLinkedListTest {
     }
 
     @Test
-    void deleteLinkedList(){
+    void deleteLinkedList() {
         doubleLinkedList.deleteLinkedList();
         assertNull(doubleLinkedList.getHead());
     }

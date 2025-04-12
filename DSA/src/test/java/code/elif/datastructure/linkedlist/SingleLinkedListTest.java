@@ -29,7 +29,7 @@ class SingleLinkedListTest {
         singleLinkedList.addNode(0, 10);
         singleLinkedList.addNode(1, 20);
         singleLinkedList.addNode(2, 30);
-        singleLinkedList.addNode(0,1);
+        singleLinkedList.addNode(0, 1);
         Assertions.assertEquals(1, singleLinkedList.getHead().value);
         Assertions.assertEquals(10, singleLinkedList.getHead().nextSingleNode.value);
     }
@@ -40,7 +40,7 @@ class SingleLinkedListTest {
         singleLinkedList.addNode(1, 20);
         singleLinkedList.addNode(2, 30);
         singleLinkedList.deleteNode(0);
-        singleLinkedList.addNode(0,1);
+        singleLinkedList.addNode(0, 1);
         Assertions.assertEquals(1, singleLinkedList.getHead().value);
         Assertions.assertEquals(20, singleLinkedList.getHead().nextSingleNode.value);
     }
@@ -79,6 +79,7 @@ class SingleLinkedListTest {
         singleLinkedList.deleteNode(2);
         Assertions.assertEquals(-1, singleLinkedList.search(30));
     }
+
     @Test
     void delete_firstNodeHasOnlySingleNode() {
         singleLinkedList.addNode(0, 10);

@@ -38,7 +38,7 @@ public class Subsequence {
             return true;
         int j = 0;
         for (int i = 0; i < t.length(); i++) {
-            int index = t.indexOf(s.charAt(j),i);
+            int index = t.indexOf(s.charAt(j), i);
             if (index > i - 1) {
                 i = index;
                 j++;

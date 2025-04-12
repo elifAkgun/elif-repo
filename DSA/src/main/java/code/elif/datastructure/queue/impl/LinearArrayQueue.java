@@ -65,8 +65,8 @@ public class LinearArrayQueue<T> implements Queue<T> {
     @Override
     public boolean deleteQueue() {
         queue = null;
-        beginningOfQueue =-1;
-        topOfQueue =-1;
+        beginningOfQueue = -1;
+        topOfQueue = -1;
         return true;
     }
 }

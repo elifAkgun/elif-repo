@@ -12,7 +12,7 @@ class StackArrayTest {
 
     @BeforeEach
     public void init() {
-        stack = new StackArray<>(Integer.class,10);
+        stack = new StackArray<>(Integer.class, 10);
     }
 
     @Test

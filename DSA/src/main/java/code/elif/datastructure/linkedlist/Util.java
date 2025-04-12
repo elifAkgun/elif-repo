@@ -7,6 +7,10 @@ import java.util.Set;
 
 public class Util<T extends Comparable> {
 
+    public static void main(String[] args) {
+
+    }
+
     public SingleNode<T> reverseList(SingleNode<T> head) {
 
         SingleNode<T> cursor;
@@ -14,7 +18,7 @@ public class Util<T extends Comparable> {
         SingleNode<T> listSingleNode = head.nextSingleNode;
         tail.nextSingleNode = null;
 
-        while(listSingleNode.nextSingleNode !=null ){
+        while (listSingleNode.nextSingleNode != null) {
             cursor = listSingleNode;
             listSingleNode = listSingleNode.nextSingleNode;
             cursor.nextSingleNode = tail;
@@ -52,7 +56,7 @@ public class Util<T extends Comparable> {
                 list1 = list1.nextSingleNode;
                 list2 = list2.nextSingleNode;
                 tail = tail.nextSingleNode.nextSingleNode;
-            } else if (list1.value.compareTo(list2.value)<0) {
+            } else if (list1.value.compareTo(list2.value) < 0) {
                 tail.nextSingleNode = new SingleNode<>(list1.value);
                 tail = tail.nextSingleNode;
                 list1 = list1.nextSingleNode;
@@ -67,14 +71,10 @@ public class Util<T extends Comparable> {
 
     public SingleNode<T> detectCycle(SingleNode<T> head) {
         Set<T> set = new HashSet<>();
-        while(!set.contains(head.value)){
+        while (!set.contains(head.value)) {
             set.add(head.value);
             head = head.nextSingleNode;
         }
         return head;
-    }
-
-    public static void main(String[] args) {
-
     }
 }

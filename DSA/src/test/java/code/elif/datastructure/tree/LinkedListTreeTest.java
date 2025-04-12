@@ -42,7 +42,7 @@ class LinkedListTreeTest {
         // then - verify the output
         assertEquals(10, root.leftNode.value);
         assertEquals(5, root.value);
-        assertEquals(1,root.rightNode.value);
+        assertEquals(1, root.rightNode.value);
 
         List<Integer> integerList = integerTree.traverseAllNodes(Tree.Order.LEVEL_ORDER);
         System.out.println(integerList);
@@ -198,7 +198,7 @@ class LinkedListTreeTest {
     @Test
     void reverseNode() {
         Tree<Integer> integerTree = tree.mirrorTree();
-        assertEquals(2,integerTree.getIndex(30));
+        assertEquals(2, integerTree.getIndex(30));
 
     }
 

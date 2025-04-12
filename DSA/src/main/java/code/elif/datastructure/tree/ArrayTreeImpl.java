@@ -94,7 +94,7 @@ public class ArrayTreeImpl<T extends Comparable> implements ArrayTree<T> {
                 return list;
             }
             case IN_ORDER: {
-                inOrderTraverse(1,list);
+                inOrderTraverse(1, list);
                 return list;
             }
             case POST_ORDER: {

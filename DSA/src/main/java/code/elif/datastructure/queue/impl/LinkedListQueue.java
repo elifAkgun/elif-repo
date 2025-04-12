@@ -11,7 +11,7 @@ public class LinkedListQueue<T> implements Queue<T> {
 
     public LinkedListQueue() {
         queue = new SingleLinkedList<>();
-        size =0;
+        size = 0;
     }
 
     @Override
