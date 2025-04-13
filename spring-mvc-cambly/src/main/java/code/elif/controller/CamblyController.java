@@ -34,7 +34,7 @@ public class CamblyController {
 
     @PostMapping("/saveCambly")
     public String saveCambly(@ModelAttribute("cambly") Cambly cambly) {
-        if(cambly.getId()==null) {
+        if (cambly.getId() == null) {
             camblyService.createCambly(cambly);
         } else {
             camblyService.updateCambly(cambly);

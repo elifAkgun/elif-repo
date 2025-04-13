@@ -21,6 +21,20 @@ public class CamblyServiceImpl implements CamblyService {
         this.camblyDaoImpl = camblyDaoImpl;
     }
 
+    public static void main(String[] args) {
+        File file = new File("/Volumes/Elements/elif");
+        String[] directories = file.list(new FilenameFilter() {
+            @Override
+            public boolean accept(File current, String name) {
+                return new File(current, name).isDirectory();
+            }
+        });
+
+        Stream.of(directories).forEach((dir) -> {
+            if (dir.contains("ocker")) System.out.println(dir);
+        });
+    }
+
     @Override
     public List<Cambly> getAllCamblys() {
         return camblyDaoImpl.getAllCamblys();
@@ -49,19 +63,6 @@ public class CamblyServiceImpl implements CamblyService {
     @Override
     public List<Cambly> searchCamblys(String theSearchName) {
         return camblyDaoImpl.searchCamblys(theSearchName);
-    }
-
-
-    public static void main(String[] args) {
-        File file = new File("/Volumes/Elements/elif");
-        String[] directories = file.list(new FilenameFilter() {
-            @Override
-            public boolean accept(File current, String name) {
-                return new File(current, name).isDirectory();
-            }
-        });
-
-        Stream.of(directories).forEach((dir) -> {if(dir.contains("ocker")) System.out.println(dir);});
     }
 
 

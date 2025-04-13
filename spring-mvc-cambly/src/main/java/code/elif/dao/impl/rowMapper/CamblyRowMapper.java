@@ -10,7 +10,7 @@ public class CamblyRowMapper implements RowMapper<Cambly> {
 
     @Override
     public Cambly mapRow(ResultSet resultSet, int i) throws SQLException {
-        Cambly cambly= new Cambly();
+        Cambly cambly = new Cambly();
         cambly.setId(resultSet.getInt("id"));
         cambly.setLessonId(resultSet.getInt("lesson_id"));
         cambly.setCorrection(resultSet.getString("correction"));

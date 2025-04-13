@@ -14,16 +14,16 @@ import javax.sql.DataSource;
 @ToString
 public class DataSourceConfig {
 
-    @Value( "${jdbc.url}" )
+    @Value("${jdbc.url}")
     private String jdbcUrl;
 
-    @Value( "${jdbc.username}" )
+    @Value("${jdbc.username}")
     private String username;
 
-    @Value( "${jdbc.password}" )
+    @Value("${jdbc.password}")
     private String password;
 
-    @Value( "${jdbc.classname}" )
+    @Value("${jdbc.classname}")
     private String classname;
 
     @Bean(name = "dataSource")

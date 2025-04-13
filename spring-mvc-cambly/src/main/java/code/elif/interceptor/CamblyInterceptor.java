@@ -1,7 +1,6 @@
 package code.elif.interceptor;
 
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -12,11 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 
 public class CamblyInterceptor implements HandlerInterceptor {
 
-    private  static Logger logger = LoggerFactory.getLogger(CamblyInterceptor.class);
+    private static Logger logger = LoggerFactory.getLogger(CamblyInterceptor.class);
 
-    long preHandleTime =0;
-    long postHandleTime =0;
-    long afterCompletionTime =0;
+    long preHandleTime = 0;
+    long postHandleTime = 0;
+    long afterCompletionTime = 0;
 
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {

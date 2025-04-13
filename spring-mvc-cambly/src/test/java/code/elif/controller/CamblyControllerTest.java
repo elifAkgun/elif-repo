@@ -67,7 +67,7 @@ public class CamblyControllerTest {
         MvcResult mvcResult = mockMvc.perform(get("/cambly/list")
                 .accept(APPLICATION_JSON)).andReturn();
 
-        Assertions.assertEquals(true,mvcResult.getModelAndView().getModel().containsKey("camblyList"));
+        Assertions.assertEquals(true, mvcResult.getModelAndView().getModel().containsKey("camblyList"));
     }
 
 
@@ -82,7 +82,7 @@ public class CamblyControllerTest {
         MvcResult mvcResult = mockMvc.perform(get("/cambly/list")
                 .accept(APPLICATION_JSON)).andReturn();
 
-        Assertions.assertEquals(camblies,mvcResult.getModelAndView().getModel().get("camblyList"));
+        Assertions.assertEquals(camblies, mvcResult.getModelAndView().getModel().get("camblyList"));
 
         verify(camblyService).getAllCamblys();
 
