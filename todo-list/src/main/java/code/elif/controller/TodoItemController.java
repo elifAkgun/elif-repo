@@ -71,7 +71,7 @@ public class TodoItemController {
     }
 
     @GetMapping(Mappings.DELETE_ITEM)
-    public String deleteItem(@RequestParam int id){
+    public String deleteItem(@RequestParam int id) {
         todoService.removeItem(id);
         return "redirect:/" + Mappings.ITEMS;
     }

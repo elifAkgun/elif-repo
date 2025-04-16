@@ -2,7 +2,6 @@ package code.elif.service.impl;
 
 import code.elif.model.TodoData;
 import code.elif.model.TodoItem;
-import code.elif.service.DemoService;
 import code.elif.service.TodoService;
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
@@ -14,7 +13,7 @@ public class TodoServiceImpl implements TodoService {
 
     private final TodoData todoData = new TodoData();
 
-    private  final BackendAdapter backendAdapter;
+    private final BackendAdapter backendAdapter;
 
     @Override
     public void addItem(@NonNull TodoItem todoItem) {

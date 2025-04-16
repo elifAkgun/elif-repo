@@ -2,7 +2,6 @@ package code.elif.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.WebApplicationInitializer;
-import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 

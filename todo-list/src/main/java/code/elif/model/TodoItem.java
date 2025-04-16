@@ -2,10 +2,11 @@ package code.elif.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
 import java.time.LocalDate;
 
 @Data
-@EqualsAndHashCode(of="id")
+@EqualsAndHashCode(of = "id")
 public class TodoItem {
 
     private int id;

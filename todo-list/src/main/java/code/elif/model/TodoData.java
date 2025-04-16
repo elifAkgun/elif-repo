@@ -3,7 +3,10 @@ package code.elif.model;
 import lombok.NonNull;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.ListIterator;
 
 public class TodoData {
 
@@ -11,7 +14,7 @@ public class TodoData {
 
     private final List<TodoItem> items = new ArrayList<>();
 
-    public TodoData(){
+    public TodoData() {
         addItem(new TodoItem("first", "first details", LocalDate.now()));
         addItem(new TodoItem("second", "second details", LocalDate.now()));
         addItem(new TodoItem("third", "third details", LocalDate.now()));
@@ -19,43 +22,43 @@ public class TodoData {
 
     }
 
-    public List<TodoItem> getItems(){
+    public List<TodoItem> getItems() {
         return Collections.unmodifiableList(items);
     }
 
-    public void addItem(@NonNull TodoItem todoItem){
+    public void addItem(@NonNull TodoItem todoItem) {
         todoItem.setId(idValue);
         items.add(todoItem);
         idValue++;
     }
 
-    public void removeItem(int id){
+    public void removeItem(int id) {
         ListIterator<TodoItem> itemListIterator = items.listIterator();
-        while (itemListIterator.hasNext()){
+        while (itemListIterator.hasNext()) {
             TodoItem todoItem = itemListIterator.next();
 
-            if (todoItem.getId() == id){
+            if (todoItem.getId() == id) {
                 itemListIterator.remove();
                 break;
             }
         }
     }
-    
-    public TodoItem getTodoItem(int id){
-        for (TodoItem item:items) {
-            if(item.getId()== id){
+
+    public TodoItem getTodoItem(int id) {
+        for (TodoItem item : items) {
+            if (item.getId() == id) {
                 return item;
             }
         }
         return null;
     }
 
-    public void updateItem(@NonNull TodoItem toUpdateItem){
+    public void updateItem(@NonNull TodoItem toUpdateItem) {
         ListIterator<TodoItem> itemListIterator = items.listIterator();
-        while (itemListIterator.hasNext()){
+        while (itemListIterator.hasNext()) {
             TodoItem todoItem = itemListIterator.next();
 
-            if (todoItem.equals(toUpdateItem)){
+            if (todoItem.equals(toUpdateItem)) {
                 itemListIterator.set(toUpdateItem);
                 break;
             }

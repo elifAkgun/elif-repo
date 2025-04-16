@@ -21,15 +21,15 @@ public class DemoController {
     }
 
     @GetMapping("/hello")
-    public String hello(Model model, @RequestParam String user,@RequestParam int age){
+    public String hello(Model model, @RequestParam String user, @RequestParam int age) {
         model.addAttribute("helloMessage", demoService.getHelloMessage(user));
-        model.addAttribute("age",age);
-        log.info("model : {}",model);
+        model.addAttribute("age", age);
+        log.info("model : {}", model);
         return "hello";
     }
 
     @ModelAttribute("welcomeMessage")
-    public String welcomeMessage(){
+    public String welcomeMessage() {
         log.info("welcomeMessage() is called.");
         return demoService.getWelcomeMessage();
     }

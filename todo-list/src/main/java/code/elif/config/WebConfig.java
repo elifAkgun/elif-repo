@@ -19,7 +19,7 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 public class WebConfig implements WebMvcConfigurer {
     // == constants ==
     public static final String RESOLVER_PREFIX = "/WEB-INF/view/";
-    public static final String RESOLVER_SUFFIX =".jsp";
+    public static final String RESOLVER_SUFFIX = ".jsp";
 
     // == bean methods
     @Bean
