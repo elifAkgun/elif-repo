@@ -71,10 +71,10 @@ public class RebalancedConsumerClient {
         properties.setProperty(ConsumerConfig.FETCH_MIN_BYTES_CONFIG, "1024");
         properties.setProperty(ConsumerConfig.FETCH_MAX_WAIT_MS_CONFIG, "200");
 
-        properties.setProperty (ConsumerConfig.MAX_PARTITION_FETCH_BYTES_CONFIG, "1MB");
-        properties.setProperty (ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
-        properties.setProperty (ConsumerConfig.CLIENT_ID_CONFIG, "OrderConsumer");
-        properties.setProperty (ConsumerConfig.MAX_POLL_RECORDS_CONFIG, "100");
+        properties.setProperty(ConsumerConfig.MAX_PARTITION_FETCH_BYTES_CONFIG, "1MB");
+        properties.setProperty(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+        properties.setProperty(ConsumerConfig.CLIENT_ID_CONFIG, "OrderConsumer");
+        properties.setProperty(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, "100");
         return properties;
     }
 }

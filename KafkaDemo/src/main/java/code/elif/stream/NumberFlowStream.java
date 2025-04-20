@@ -18,7 +18,7 @@ public class NumberFlowStream {
         KStream<String, String> stream = builder.stream("streams-dataflow-input");
         stream.foreach((key, value) -> System.out.println("Key : " + key + " and Value : " + value));
         stream.filter((s, s2) -> Integer.parseInt(s2) % 2 == 0)
-                .map((key, value) -> KeyValue.pair(key,Integer.parseInt(value)*3 + ""))
+                .map((key, value) -> KeyValue.pair(key, Integer.parseInt(value) * 3 + ""))
                 .to("streams-dataflow-output");
         Topology topology = builder.build();
         System.out.println(topology.describe());
