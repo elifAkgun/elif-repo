@@ -29,22 +29,22 @@ public class UserController {
 
 
     @GetMapping("/user")
-    public String showUser(Model model, @AuthenticationPrincipal OidcUser principal){
+    public String showUser(Model model, @AuthenticationPrincipal OidcUser principal) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        OAuth2AuthenticationToken oAuth2Token = (OAuth2AuthenticationToken)authentication;
+        OAuth2AuthenticationToken oAuth2Token = (OAuth2AuthenticationToken) authentication;
 
         OAuth2AuthorizedClient oAuth2AuthorizedClient =
                 oAuth2AuthorizedClientService.loadAuthorizedClient
                         (oAuth2Token.getAuthorizedClientRegistrationId(),
-                       oAuth2Token.getName() );
+                                oAuth2Token.getName());
 
         String jwtToken = oAuth2AuthorizedClient.getAccessToken().getTokenValue();
 
         String url = "http://localhost:8082/users/status/check";
 
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add("Authorization","Bearer " + jwtToken);
+        httpHeaders.add("Authorization", "Bearer " + jwtToken);
 
         HttpEntity httpEntity = new HttpEntity<>(httpHeaders);
 
@@ -55,7 +55,7 @@ public class UserController {
 
         String status = responseEntity.getBody();
 
-        model.addAttribute("authenticationName",authentication.getName());
+        model.addAttribute("authenticationName", authentication.getName());
 
         model.addAttribute("status", status);
         return "user";

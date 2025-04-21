@@ -23,7 +23,7 @@ public class TokenController {
 
     @RequestMapping("/jwt/map")
     public Map<String, Object> getTokenWithMap(@AuthenticationPrincipal Jwt jwt) {
-        return Collections.singletonMap("token",jwt);
+        return Collections.singletonMap("token", jwt);
     }
 
     @RequestMapping("/jwt/object")

@@ -17,19 +17,19 @@ public class WebClientApplication {
         SpringApplication.run(WebClientApplication.class, args);
     }
 
-	@Bean
-	public WebClient webClient(ClientRegistrationRepository clientRegistrationrepository,
-							   OAuth2AuthorizedClientRepository oAuth2AuthorizedClientRepository
-	) {
+    @Bean
+    public WebClient webClient(ClientRegistrationRepository clientRegistrationrepository,
+                               OAuth2AuthorizedClientRepository oAuth2AuthorizedClientRepository
+    ) {
 
-		ServletOAuth2AuthorizedClientExchangeFilterFunction oauth2 =
-				new ServletOAuth2AuthorizedClientExchangeFilterFunction(clientRegistrationrepository,
-						oAuth2AuthorizedClientRepository);
+        ServletOAuth2AuthorizedClientExchangeFilterFunction oauth2 =
+                new ServletOAuth2AuthorizedClientExchangeFilterFunction(clientRegistrationrepository,
+                        oAuth2AuthorizedClientRepository);
 
-		oauth2.setDefaultOAuth2AuthorizedClient(true);
+        oauth2.setDefaultOAuth2AuthorizedClient(true);
 
-		return WebClient.builder().apply(oauth2.oauth2Configuration()).build();
-	}
+        return WebClient.builder().apply(oauth2.oauth2Configuration()).build();
+    }
 
     @Bean
     public RestTemplate restTemplate() {

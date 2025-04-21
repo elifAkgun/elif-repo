@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomePageController {
 
     @RequestMapping("/home")
-    public String displayHomePage(Model model,@AuthenticationPrincipal OAuth2User oAuth2User){
-        if(oAuth2User!= null){
+    public String displayHomePage(Model model, @AuthenticationPrincipal OAuth2User oAuth2User) {
+        if (oAuth2User != null) {
             String name = oAuth2User.getAttribute("name");
-            model.addAttribute("name",name);
+            model.addAttribute("name", name);
 
         }
         return "home";
