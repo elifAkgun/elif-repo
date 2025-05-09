@@ -13,7 +13,7 @@ public class ClientForOneItemApp {
         try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
 
             var aggregatorService = new AggregatorService(executor);
-            ProductDto productDto = aggregatorService.getProductDto(1);
+            ProductDTO productDto = aggregatorService.getProduct(1);
 
             logger.info("Product: {}", productDto);
         }

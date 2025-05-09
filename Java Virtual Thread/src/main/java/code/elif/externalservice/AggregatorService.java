@@ -1,6 +1,8 @@
 package code.elif.externalservice;
 
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 public class AggregatorService {
 
@@ -10,10 +12,13 @@ public class AggregatorService {
         this.executor = executor;
     }
 
-    public ProductDto getProductDto(int id) throws Exception {
-        var product = executor.submit(() -> Client.getProduct(id));
-        var rating = executor.submit(() -> Client.getRating(id));
+    public ProductDTO getProduct(int id) throws Exception {
+        Future<String> productFuture = executor.submit(() -> Client.callProductService(id));
+        Future<Integer> ratingFuture = executor.submit(() -> Client.callRatingService(id));
 
-        return new ProductDto(id, product.get(), rating.get());
+        String productDescription = productFuture.get(2, TimeUnit.SECONDS);
+        int rating = ratingFuture.get(2, TimeUnit.SECONDS);
+
+        return new ProductDTO(id, productDescription, rating);
     }
 }
