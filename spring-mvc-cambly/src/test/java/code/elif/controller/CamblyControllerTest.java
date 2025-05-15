@@ -14,8 +14,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import java.time.LocalDate;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -33,13 +34,12 @@ class CamblyControllerTest {
     @InjectMocks
     CamblyController controller;
 
-    private Cambly cambly;
     private List<Cambly> camblies;
 
     @BeforeEach
      void initVariable() {
-        cambly = new Cambly("Helo", "Hello", 1, LocalDate.now());
-        camblies = Arrays.asList(cambly);
+        Cambly cambly = new Cambly("Helo", "Hello", 1, LocalDate.now());
+        camblies = Collections.singletonList(cambly);
     }
 
     @Test
@@ -52,7 +52,7 @@ class CamblyControllerTest {
                 .accept(APPLICATION_JSON)).andReturn();
 
         Assertions.assertEquals("list-cambly",
-                mvcResult.getModelAndView().getViewName());
+                Objects.requireNonNull(mvcResult.getModelAndView()).getViewName());
 
     }
 
@@ -64,7 +64,7 @@ class CamblyControllerTest {
         MvcResult mvcResult = mockMvc.perform(get("/cambly/list")
                 .accept(APPLICATION_JSON)).andReturn();
 
-        Assertions.assertEquals(true, mvcResult.getModelAndView().getModel().containsKey("camblyList"));
+        Assertions.assertTrue(Objects.requireNonNull(mvcResult.getModelAndView()).getModel().containsKey("camblyList"));
     }
 
 
@@ -79,7 +79,7 @@ class CamblyControllerTest {
         MvcResult mvcResult = mockMvc.perform(get("/cambly/list")
                 .accept(APPLICATION_JSON)).andReturn();
 
-        Assertions.assertEquals(camblies, mvcResult.getModelAndView().getModel().get("camblyList"));
+        Assertions.assertEquals(camblies, Objects.requireNonNull(mvcResult.getModelAndView()).getModel().get("camblyList"));
 
         verify(camblyService).getAllCamblys();
 
