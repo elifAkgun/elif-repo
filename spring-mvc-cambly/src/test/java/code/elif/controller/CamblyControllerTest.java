@@ -10,11 +10,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.skyscreamer.jsonassert.JSONAssert;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.ResultActions;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -27,7 +24,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 
 @ExtendWith(MockitoExtension.class)
-public class CamblyControllerTest {
+class CamblyControllerTest {
 
 
     @Mock
@@ -40,13 +37,13 @@ public class CamblyControllerTest {
     private List<Cambly> camblies;
 
     @BeforeEach
-    public void initVariable() {
+     void initVariable() {
         cambly = new Cambly("Helo", "Hello", 1, LocalDate.now());
         camblies = Arrays.asList(cambly);
     }
 
     @Test
-    public void listCambly_checkViewName() throws Exception {
+     void listCambly_checkViewName() throws Exception {
 
         MockMvc mockMvc = standaloneSetup(controller)
                 .build();
@@ -60,7 +57,7 @@ public class CamblyControllerTest {
     }
 
     @Test
-    public void listCambly_checkModelAttribute_hasCamblyList() throws Exception {
+     void listCambly_checkModelAttribute_hasCamblyList() throws Exception {
         MockMvc mockMvc = standaloneSetup(controller)
                 .build();
 
@@ -72,7 +69,7 @@ public class CamblyControllerTest {
 
 
     @Test
-    public void listCambly_checkModel_camblyList() throws Exception {
+     void listCambly_checkModel_camblyList() throws Exception {
         when(camblyService.getAllCamblys())
                 .thenReturn(camblies);
 
@@ -86,25 +83,5 @@ public class CamblyControllerTest {
 
         verify(camblyService).getAllCamblys();
 
-    }
-
-    @Test
-    public void addCambly() {
-    }
-
-    @Test
-    public void saveCambly() {
-    }
-
-    @Test
-    public void testSaveCambly() {
-    }
-
-    @Test
-    public void deleteCambly() {
-    }
-
-    @Test
-    public void searchCamblys() {
     }
 }

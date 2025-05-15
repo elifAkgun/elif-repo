@@ -3,36 +3,34 @@ package code.elif.service.impl;
 import code.elif.dao.impl.CamblyDaoImpl;
 import code.elif.model.Cambly;
 import code.elif.service.CamblyService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
-import java.io.FilenameFilter;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Stream;
 
 
 @Service
 public class CamblyServiceImpl implements CamblyService {
 
+    public static final String FILE_PATH = "/Volumes/Elements/elif";
     private final CamblyDaoImpl camblyDaoImpl;
+
+    private static final Logger logger = LoggerFactory.getLogger(CamblyServiceImpl.class);
 
     public CamblyServiceImpl(CamblyDaoImpl camblyDaoImpl) {
         this.camblyDaoImpl = camblyDaoImpl;
     }
 
     public static void main(String[] args) {
-        File file = new File("/Volumes/Elements/elif");
-        String[] directories = file.list(new FilenameFilter() {
-            @Override
-            public boolean accept(File current, String name) {
-                return new File(current, name).isDirectory();
-            }
-        });
+        File file = new File(FILE_PATH);
+        String[] directories = file.list((current, name) -> new File(current, name).isDirectory());
 
-        Stream.of(directories).forEach((dir) -> {
-            if (dir.contains("ocker")) System.out.println(dir);
-        });
+        assert directories != null;
+        for (String dir : directories) {
+            if (dir.contains("ocker")) logger.info(dir);
+        }
     }
 
     @Override
