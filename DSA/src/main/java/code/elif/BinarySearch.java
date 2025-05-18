@@ -1,31 +1,25 @@
 package code.elif;
 
-import java.lang.reflect.Field;
-import java.security.KeyStore;
-import java.security.KeyStoreException;
-import java.util.ArrayList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Random;
 
 public class BinarySearch {
 
     private static final int N = 10000000;
+    private static final Logger logger = LoggerFactory.getLogger(BinarySearch.class);
 
     public static void main(String[] args) {
 
         Random random = new Random();
         int number = random.nextInt(N);
 
-
-        ArrayList<Integer> integers = new ArrayList<>();
-
-        System.out.println(integers.toArray().length);
-
-
         int first = 0;
         int last = N;
         int guess;
 
-        System.out.println("number is " + number);
+        logger.info("number is {}", number);
         while (first < last) {
             guess = (first + last) / 2;
             if (number > guess) {
@@ -33,22 +27,11 @@ public class BinarySearch {
             } else {
                 last = guess;
             }
-            System.out.println("Guess is " + guess);
+            logger.info("Guess is {}", guess);
             if (number == guess) {
                 return;
             }
         }
-    }
-}
-
-
-class Example {
-    public static void main(String[] args) throws KeyStoreException, NoSuchFieldException, IllegalAccessException {
-        KeyStore ks = KeyStore.getInstance("jceks");
-        Field f = ks.getClass().getDeclaredField("keyStoreSpi");
-        f.setAccessible(true);
-
-        System.out.println(f.get(ks));
     }
 }
 

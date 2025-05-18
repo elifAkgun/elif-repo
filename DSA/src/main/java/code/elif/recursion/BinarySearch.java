@@ -1,10 +1,15 @@
 package code.elif.recursion;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class BinarySearch {
+
+    private static final Logger logger = LoggerFactory.getLogger(BinarySearch.class);
 
     public static void main(String[] args) {
         int[] a = {10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110};
-        System.out.println(findIndex(120, a, 0, a.length));
+        logger.info(String.valueOf(findIndex(120, a, 0, a.length)));
     }
 
     private static int findIndex(int number, int[] a, int left, int right) {

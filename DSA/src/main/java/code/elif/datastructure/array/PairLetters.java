@@ -1,16 +1,23 @@
 package code.elif.datastructure.array;
 
+import code.elif.recursion.Recursive;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class PairLetters {
+
+    private static final Logger logger = LoggerFactory.getLogger(PairLetters.class);
+
     public static void main(String[] args) {
 
         List<String> words = List.of("ANT", "TIGER", "RABBIT", "TEA");
         boolean cycled = isCycled(words);
 
-        System.out.println(cycled);
+        logger.info(String.valueOf(cycled));
     }
 
     private static boolean isCycled(List<String> words) {

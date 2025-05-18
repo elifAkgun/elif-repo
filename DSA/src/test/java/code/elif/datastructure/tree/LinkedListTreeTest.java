@@ -27,7 +27,7 @@ class LinkedListTreeTest {
     }
 
     @Test
-    public void givenValidTreeNodes_whenInsertCalled_thenReturnTrue() {
+    void givenValidTreeNodes_whenInsertCalled_thenReturnTrue() {
         // given- precondition or setup
         Node<Integer> root = new Node<>(null, 5, null);
         Tree<Integer> integerTree = new LinkedListTree<>(root);
@@ -43,11 +43,6 @@ class LinkedListTreeTest {
         assertEquals(10, root.leftNode.value);
         assertEquals(5, root.value);
         assertEquals(1, root.rightNode.value);
-
-        List<Integer> integerList = integerTree.traverseAllNodes(Tree.Order.LEVEL_ORDER);
-        System.out.println(integerList);
-
-
     }
 
     @Test

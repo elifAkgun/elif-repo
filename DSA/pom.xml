@@ -27,12 +27,9 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-core_2.13</artifactId>
-            <version>3.5.0</version>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.5.13</version>
         </dependency>
-
     </dependencies>
-
-
 </project>

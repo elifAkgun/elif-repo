@@ -1,8 +1,12 @@
 package code.elif.datastructure.linkedlist;
 
 import code.elif.datastructure.linkedlist.node.DoubleNode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class DoubleLinkedList<T> implements LinkedList<T> {
+
+    private static final Logger logger = LoggerFactory.getLogger(DoubleLinkedList.class);
 
     private DoubleNode<T> head;
     private DoubleNode<T> tail;
@@ -77,7 +81,7 @@ public class DoubleLinkedList<T> implements LinkedList<T> {
         }
         DoubleNode<T> tempNode = head;
         while (tempNode.nextNode != tail) {
-            System.out.println(tempNode.value);
+            logger.info((String) tempNode.value);
             tempNode = tempNode.nextNode;
         }
     }

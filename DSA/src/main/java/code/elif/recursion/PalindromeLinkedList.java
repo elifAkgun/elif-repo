@@ -1,6 +1,9 @@
 package code.elif.recursion;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 class ListNode {
     int val;
     ListNode next;
@@ -21,6 +24,7 @@ class ListNode {
 //        Output: true
 
 public class PalindromeLinkedList {
+    private static final Logger logger = LoggerFactory.getLogger(PalindromeLinkedList.class);
 
     public static void main(String[] args) {
         ListNode head = new ListNode(1);
@@ -28,7 +32,7 @@ public class PalindromeLinkedList {
         head.next.next = new ListNode(2);
         head.next.next.next = new ListNode(1);
 
-        System.out.println(isPalindrome(head));
+        logger.info(String.valueOf(isPalindrome(head)));
     }
 
     public static boolean isPalindrome(ListNode head) {

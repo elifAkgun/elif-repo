@@ -1,11 +1,15 @@
 package code.elif.datastructure.linkedlist;
 
 import code.elif.datastructure.linkedlist.node.SingleNode;
+import code.elif.recursion.SumOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SingleLinkedList<T> implements LinkedList<T> {
 
     private SingleNode<T> head;
     private SingleNode<T> tail;
+    private static final Logger logger = LoggerFactory.getLogger(SingleLinkedList.class);
 
     public SingleLinkedList() {
         this.head = null;
@@ -78,7 +82,7 @@ public class SingleLinkedList<T> implements LinkedList<T> {
         }
         SingleNode<T> tempSingleNode = head;
         while (tempSingleNode.nextSingleNode != tail) {
-            System.out.println(tempSingleNode);
+            logger.info(String.valueOf(tempSingleNode));
             tempSingleNode = tempSingleNode.nextSingleNode;
         }
     }

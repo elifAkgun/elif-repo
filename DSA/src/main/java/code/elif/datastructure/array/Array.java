@@ -1,6 +1,11 @@
 package code.elif.datastructure.array;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Array {
+
+    private static final Logger logger = LoggerFactory.getLogger(Array.class);
 
     public static void main(String[] args) {
 
@@ -9,11 +14,9 @@ public class Array {
         for (int i = 0; i < threeDimArray.length; i++) {
             for (int j = 0; j < threeDimArray[i].length; j++) {
                 for (int k = 0; k < threeDimArray[i][j].length; k++) {
-                    System.out.print(threeDimArray[i][j][k] + " ");
+                    logger.info(threeDimArray[i][j][k] + " ");
                 }
-                System.out.println();
             }
-            System.out.println();
         }
     }
 }

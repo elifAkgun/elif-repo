@@ -1,7 +1,13 @@
 package code.elif.datastructure.linkedlist;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class LinkedListDemo {
+
+
+    private static final Logger logger = LoggerFactory.getLogger(LinkedListDemo.class);
 
     public static void main(String[] args) {
         SingleLinkedList<Integer> singleLinkedList = new SingleLinkedList<>();
@@ -12,11 +18,11 @@ public class LinkedListDemo {
         singleLinkedList.addNode(50, 4);
         singleLinkedList.addNode(31, -1);
 
-        System.out.println(singleLinkedList.search(31));
+        logger.info(String.valueOf(singleLinkedList.search(31)));
 
         singleLinkedList.deleteNode(2);
 
-        System.out.println(singleLinkedList);
+        logger.info(String.valueOf(singleLinkedList));
 
     }
 }

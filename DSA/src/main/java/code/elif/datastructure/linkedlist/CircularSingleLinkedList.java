@@ -1,8 +1,13 @@
 package code.elif.datastructure.linkedlist;
 
 import code.elif.datastructure.linkedlist.node.SingleNode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CircularSingleLinkedList<T> implements LinkedList<T> {
+
+    private static final Logger logger = LoggerFactory.getLogger(CircularSingleLinkedList.class);
+
     private SingleNode<T> head;
     private SingleNode<T> tail;
 
@@ -84,7 +89,7 @@ public class CircularSingleLinkedList<T> implements LinkedList<T> {
         }
         SingleNode<T> tempSingleNode = head;
         while (tempSingleNode.nextSingleNode != head) {
-            System.out.println(tempSingleNode);
+            logger.info(String.valueOf(tempSingleNode));
             tempSingleNode = tempSingleNode.nextSingleNode;
         }
     }
