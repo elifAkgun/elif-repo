@@ -8,15 +8,13 @@ import java.util.Random;
 
 public class Client {
 
-    private Client() {
-    }
-
     private static final Logger logger = LoggerFactory.getLogger(Client.class);
     private static final String PRODUCT_REQ = "http://localhost:7070/sec01/product/%d";
     private static final String RATING_REQ = "http://localhost:7070/sec01/rating/%d";
-
     private static final Random random = new Random();
 
+    private Client() {
+    }
 
     public static String callProductService(int id) {
         // Simulated external call - could be replaced with real HTTP call
@@ -36,7 +34,7 @@ public class Client {
         return externalService(String.format(RATING_REQ, ratingId));
     }
 
-    private static String externalService(String url)  {
+    private static String externalService(String url) {
         logger.info("External Service URL: {}", url);
         try (var stream = URI.create(url).toURL().openStream()) {
             return new String(stream.readAllBytes());
@@ -44,7 +42,6 @@ public class Client {
             throw new RuntimeException(e);
         }
     }
-
 
 
 }

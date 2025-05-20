@@ -26,7 +26,7 @@ public class InMemoryReentrantLockApp {
 
     public static void demo(Thread.Builder threadBuilder) {
         for (int i = 0; i < 50; i++) {
-            threadBuilder.start(()-> {
+            threadBuilder.start(() -> {
                 logger.info("InMemory tasks are started...");
                 for (int j = 0; j < 20; j++) {
                     inMemoryTask();

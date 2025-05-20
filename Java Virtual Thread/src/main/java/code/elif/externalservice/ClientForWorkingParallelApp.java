@@ -4,27 +4,31 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
 public class ClientForWorkingParallelApp {
 
     private static final Logger logger = LoggerFactory.getLogger(ClientForWorkingParallelApp.class);
 
-        public static void main(String[] args) throws Exception {
-            ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor();
-            AggregatorService aggregator = new AggregatorService(executor);
+    public static void main(String[] args) throws Exception {
+        ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor();
+        AggregatorService aggregator = new AggregatorService(executor);
 
-            List<Future<ProductDTO>> futures = IntStream.rangeClosed(1, 50)
-                    .mapToObj(id -> executor.submit(() -> aggregator.getProduct(id)))
-                    .toList();
+        List<Future<ProductDTO>> futures = IntStream.rangeClosed(1, 50)
+                .mapToObj(id -> executor.submit(() -> aggregator.getProduct(id)))
+                .toList();
 
-            List<ProductDTO> products = futures.stream()
-                    .map(ClientForWorkingParallelApp::toProduct)
-                    .toList();
+        List<ProductDTO> products = futures.stream()
+                .map(ClientForWorkingParallelApp::toProduct)
+                .toList();
 
-            products.forEach(productDTO-> logger.info(productDTO.toString()));
-        }
+        products.forEach(productDTO -> logger.info(productDTO.toString()));
+    }
+
     private static ProductDTO toProduct(Future<ProductDTO> future) {
         try {
             return future.get(2, TimeUnit.SECONDS);
