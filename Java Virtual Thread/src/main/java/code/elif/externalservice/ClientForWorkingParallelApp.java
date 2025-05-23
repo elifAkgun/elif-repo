@@ -4,17 +4,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 import java.util.stream.IntStream;
 
 public class ClientForWorkingParallelApp {
 
     private static final Logger logger = LoggerFactory.getLogger(ClientForWorkingParallelApp.class);
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor();
         AggregatorService aggregator = new AggregatorService(executor);
 
@@ -32,8 +29,9 @@ public class ClientForWorkingParallelApp {
     private static ProductDTO toProduct(Future<ProductDTO> future) {
         try {
             return future.get(2, TimeUnit.SECONDS);
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to get product", e);
+        } catch (InterruptedException | ExecutionException | TimeoutException e) {
+            logger.error(e.getMessage(), e);
+            return null;
         }
     }
 

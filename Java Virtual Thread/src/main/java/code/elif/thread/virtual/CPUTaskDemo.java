@@ -36,9 +36,7 @@ public class CPUTaskDemo {
         try {
             countDownLatch.await();
         } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+            logger.error(e.getMessage(), e);
         }
-
     }
-
 }

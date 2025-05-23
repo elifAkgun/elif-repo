@@ -39,9 +39,8 @@ public class Client {
         try (var stream = URI.create(url).toURL().openStream()) {
             return new String(stream.readAllBytes());
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            logger.error(e.getMessage(), e);
+            return "";
         }
     }
-
-
 }

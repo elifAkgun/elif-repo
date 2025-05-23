@@ -8,22 +8,15 @@ import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.concurrent.Executors;
 
-public class AutoCloseableApp {
+public class AutoCloseable2App {
 
-    private static final Logger logger = LoggerFactory.getLogger(AutoCloseableApp.class);
+    private static final Logger logger = LoggerFactory.getLogger(AutoCloseable2App.class);
 
     public static void main(String[] args) {
         try (var executorService = Executors.newSingleThreadExecutor()) {
-
-            executorService.submit(AutoCloseableApp::task);
+            executorService.submit(AutoCloseable2App::task);
             logger.info("Waiting for tasks to finish");
-
-            //cause to wait until executor service has no task anymore
-            executorService.shutdown();
         }
-        // shut down executor service immediately
-        //executorService.shutdownNow();
-
     }
 
     private static void task() {
