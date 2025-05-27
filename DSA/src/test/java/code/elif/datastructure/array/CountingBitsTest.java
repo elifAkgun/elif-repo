@@ -1,6 +1,5 @@
 package code.elif.datastructure.array;
 
-import code.elif.datastructure.array.CountingBits;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

@@ -1,14 +1,12 @@
 package code.elif.datastructure.tree;
 
-import code.elif.datastructure.tree.ArrayTree;
-import code.elif.datastructure.tree.ArrayTreeImpl;
-import code.elif.datastructure.tree.Tree;
 import code.elif.datastructure.tree.exception.TreeNodeNotFoundException;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
 class ArrayTreeImplTest {
     @Test

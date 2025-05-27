@@ -1,6 +1,5 @@
 package code.elif.datastructure.linkedlist;
 
-import code.elif.datastructure.linkedlist.CircularDoubleLinkedList;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
