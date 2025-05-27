@@ -1,11 +1,8 @@
 package code.elif.datastructure.tree;
 
-import code.elif.datastructure.tree.NewTree;
-import code.elif.datastructure.tree.Node;
-import code.elif.datastructure.tree.Tree;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class NewTreeTest {
 

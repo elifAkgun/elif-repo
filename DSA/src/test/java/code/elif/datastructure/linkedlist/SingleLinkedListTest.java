@@ -1,6 +1,5 @@
 package code.elif.datastructure.linkedlist;
 
-import code.elif.datastructure.linkedlist.SingleLinkedList;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
