@@ -1,6 +1,5 @@
 package code.elif.datastructure.array;
 
-import code.elif.datastructure.linkedlist.DoubleLinkedList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

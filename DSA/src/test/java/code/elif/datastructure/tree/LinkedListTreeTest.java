@@ -1,8 +1,5 @@
 package code.elif.datastructure.tree;
 
-import code.elif.datastructure.tree.LinkedListTree;
-import code.elif.datastructure.tree.Node;
-import code.elif.datastructure.tree.Tree;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

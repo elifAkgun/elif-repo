@@ -5,8 +5,8 @@ import org.slf4j.LoggerFactory;
 
 public class HanoiTower {
 
-    static int movementCount = 0;
     private static final Logger logger = LoggerFactory.getLogger(HanoiTower.class);
+    static int movementCount = 0;
 
     public static void main(String[] args) {
         move(4, 'a', 'b', 'c');
