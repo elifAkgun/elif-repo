@@ -30,6 +30,6 @@ public class SinkThreadSafe {
 
         Thread.sleep(2000);
 
-        System.out.println("Item size: "+ list.size());
+        System.out.println("Item size: " + list.size());
     }
 }

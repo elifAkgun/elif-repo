@@ -9,6 +9,13 @@ import reactor.util.context.Context;
 
 public class ContextTest {
 
+    private static Mono<String> getWelcomeMessage() {
+        return Mono.deferContextual(contextView ->
+                contextView.hasKey("userId") ? Mono.just("Hello " + contextView.get("userId"))
+                        : Mono.error(new RuntimeException("UnAuthentication user!"))
+        );
+    }
+
     // JUnit test for
     @DisplayName("Test Context UserId")
     @Test
@@ -23,13 +30,5 @@ public class ContextTest {
         // then - verify the output
         helloSasha.expectNext("Hello sasha")
                 .verifyComplete();
-    }
-
-
-    private static Mono<String> getWelcomeMessage() {
-        return Mono.deferContextual(contextView ->
-                contextView.hasKey("userId") ? Mono.just("Hello " + contextView.get("userId"))
-                        : Mono.error(new RuntimeException("UnAuthentication user!"))
-        );
     }
 }

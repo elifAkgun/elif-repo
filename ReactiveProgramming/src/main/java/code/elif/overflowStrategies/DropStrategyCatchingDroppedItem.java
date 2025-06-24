@@ -12,7 +12,7 @@ public class DropStrategyCatchingDroppedItem {
 
     public static void main(String[] args) {
 
-        System.setProperty("reactor.bufferSize.small","16");
+        System.setProperty("reactor.bufferSize.small", "16");
 
         List<Integer> droppedItems = new ArrayList<>();
 
@@ -24,7 +24,7 @@ public class DropStrategyCatchingDroppedItem {
                     }
                     fluxSink.complete();
                 })
-                .onBackpressureDrop(item-> droppedItems.add((Integer) item))
+                .onBackpressureDrop(item -> droppedItems.add((Integer) item))
                 .publishOn(Schedulers.boundedElastic())
                 .doOnNext(i -> {
                     threadSleep(5);

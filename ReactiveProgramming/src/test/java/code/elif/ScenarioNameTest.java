@@ -13,15 +13,15 @@ public class ScenarioNameTest {
     @Test
     public void givenScenarioName_whenStepVerifierRun_thenShowScenarioName() {
         // given- precondition or setup
-        Flux<String> flux = Flux.just("a","b","c","d");
+        Flux<String> flux = Flux.just("a", "b", "c", "d");
 
 
         // when - action or the behaviour that we are going test
         StepVerifierOptions sampleScenario = StepVerifierOptions.create().scenarioName("sample scenario");
 
         // then - verify the output
-        StepVerifier.create(flux,sampleScenario)
-                .expectNext("a","b","c")
+        StepVerifier.create(flux, sampleScenario)
+                .expectNext("a", "b", "c")
                 .verifyComplete();
     }
 
@@ -30,14 +30,14 @@ public class ScenarioNameTest {
     @Test
     public void givenScenarioName_whenStepVerifierRun_thenShowTestName() {
         // given- precondition or setup
-        Flux<String> flux = Flux.just("a","b","c1");
+        Flux<String> flux = Flux.just("a", "b", "c1");
 
 
         // when - action or the behaviour that we are going test
         StepVerifierOptions sampleScenario = StepVerifierOptions.create().scenarioName("sample scenario");
 
         // then - verify the output
-        StepVerifier.create(flux,sampleScenario)
+        StepVerifier.create(flux, sampleScenario)
                 .expectNext("a")
                 .as("a-test")
                 .expectNext("b")

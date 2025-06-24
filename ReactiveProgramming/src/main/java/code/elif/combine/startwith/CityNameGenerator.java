@@ -11,6 +11,14 @@ public class CityNameGenerator {
 
     private List<String> cachedNames = new ArrayList<>();
 
+    private static void createLatency(SynchronousSink<Object> fluxSink) {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            fluxSink.error(new RuntimeException(e));
+        }
+    }
+
     public Flux<String> getCityName(String subscriberName) {
 
         System.out.println(subscriberName + " wants to data...");
@@ -27,14 +35,6 @@ public class CityNameGenerator {
         String cityName = Faker.instance().address().cityName();
         cachedNames.add(cityName);
         return cityName;
-    }
-
-    private static void createLatency(SynchronousSink<Object> fluxSink) {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            fluxSink.error(new RuntimeException(e));
-        }
     }
 
     private Flux<String> getFromCache() {

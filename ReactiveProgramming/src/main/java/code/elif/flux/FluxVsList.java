@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 public class FluxVsList {
 
     private static Logger logger = Logger.getLogger(FluxVsList.class.getName());
+
     public static void main(String[] args) throws InterruptedException {
 //        logger.info("getAnimalsNameList started");
 //        List<String> animalsName = getAnimalsNameList(3);

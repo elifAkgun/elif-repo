@@ -9,6 +9,11 @@ import java.time.Duration;
 
 public class VirtualTimeTests {
 
+    private static Flux<Integer> timeConsumingFlux() {
+        return Flux.range(1, 3)
+                .delayElements(Duration.ofSeconds(4));
+    }
+
     @DisplayName("test time consuming flux")
     @Test
     public void givenTimeConsumingFlux_whenStepVerifierCreateWithAwait_thenExpectElements() {
@@ -25,12 +30,7 @@ public class VirtualTimeTests {
                 .expectSubscription()
                 .expectNoEvent(Duration.ofSeconds(3))
                 .thenAwait(Duration.ofSeconds(15))
-                .expectNext(1,2,3)
+                .expectNext(1, 2, 3)
                 .verifyComplete();
-    }
-
-    private static Flux<Integer> timeConsumingFlux() {
-        return Flux.range(1, 3)
-                .delayElements(Duration.ofSeconds(4));
     }
 }

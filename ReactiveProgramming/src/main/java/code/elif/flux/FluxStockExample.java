@@ -52,6 +52,6 @@ public class FluxStockExample {
     }
 
     private static Integer calculateStockChange() {
-        return Faker.instance().random().nextInt(-5,5);
+        return Faker.instance().random().nextInt(-5, 5);
     }
 }

@@ -32,11 +32,9 @@ public class SinkWithError {
     private static Object getValue() {
         try {
             return 1 / 0;
-        }
-        catch (ArithmeticException ex) {
+        } catch (ArithmeticException ex) {
             System.err.println("Error happened!");
-        }
-        finally {
+        } finally {
             return 0;
         }
     }

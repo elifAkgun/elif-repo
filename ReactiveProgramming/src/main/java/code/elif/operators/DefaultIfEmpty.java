@@ -9,7 +9,7 @@ public class DefaultIfEmpty {
                 .filter(number -> number > 10)
                 .defaultIfEmpty(-1)
                 .subscribe(s -> System.out.println(Thread.currentThread()
-                        .getStackTrace()[2].getMethodName() +"() -> Received : " + s));
+                        .getStackTrace()[2].getMethodName() + "() -> Received : " + s));
     }
 
     private static Flux<Integer> getNumbers() {

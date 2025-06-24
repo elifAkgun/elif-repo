@@ -6,7 +6,7 @@ import reactor.core.publisher.Flux;
 public class MergeDemo {
 
     public static void main(String[] args) throws InterruptedException {
-          Flux<String> merge =
+        Flux<String> merge =
                 Flux.merge(FruitGenerator.getFruitsName(),
                         VegetableGenerator.getVegetableNames());
 

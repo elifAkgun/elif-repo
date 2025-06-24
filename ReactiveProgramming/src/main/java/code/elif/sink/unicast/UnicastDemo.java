@@ -12,7 +12,7 @@ public class UnicastDemo {
         Flux<Object> flux = unicastSink.asFlux();
 
         flux.subscribe(s -> ReactiveStreamUtil.printWithThreadName("sam: " + s));
-      //  flux.subscribe(s -> ReactiveStreamUtil.printWithThreadName("mike: " + s));
+        //  flux.subscribe(s -> ReactiveStreamUtil.printWithThreadName("mike: " + s));
 
         for (int i = 0; i < 4; i++) {
             unicastSink.tryEmitNext(i);

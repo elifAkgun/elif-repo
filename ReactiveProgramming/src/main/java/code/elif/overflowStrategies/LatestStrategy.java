@@ -9,7 +9,7 @@ public class LatestStrategy {
 
     public static void main(String[] args) {
 
-        System.setProperty("reactor.bufferSize.small","16");
+        System.setProperty("reactor.bufferSize.small", "16");
 
         Flux.create(fluxSink -> {
                     for (int i = 0; i < 501; i++) {

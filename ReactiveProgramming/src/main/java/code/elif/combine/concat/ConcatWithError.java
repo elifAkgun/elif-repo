@@ -9,7 +9,7 @@ public class ConcatWithError {
         Flux<Integer> integerFlux2 = Flux.error(new RuntimeException("OPS!!"));
         Flux<Integer> integerFlux3 = Flux.just(4, 5);
 
-        Flux<Integer> concatWithFlux = Flux.concat(integerFlux1,integerFlux2,integerFlux3);
+        Flux<Integer> concatWithFlux = Flux.concat(integerFlux1, integerFlux2, integerFlux3);
         concatWithFlux.onErrorReturn(-1)
                 .subscribe(data -> ReactiveStreamUtil.printWithThreadName(data.toString()));
     }
